@@ -1,10 +1,7 @@
 from django.shortcuts import render
-
-# Create your views here.
 from django.http import HttpResponse
- 
+
 # Create your views here.
 def index(request):
-    return HttpResponse("Main Screen!!!")
-
-
+    #return HttpResponse("<h1>이 곳은 myprofile의 페이지입니다</h1>")
+    return render(request, 'myprofile/myprofile.html')

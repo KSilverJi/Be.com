@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% block title %}Django Web Programming{% endblock %}</title>
+    <title>{% block title %}Be.com{% endblock %}</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
@@ -15,27 +15,28 @@
 <body style="padding-top:90px;">
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #f99b0d;">
-    <span class="navbar-brand mx-5 mb-0 font-weight-bold font-italic">Be.com</span>
+    <a class="navbar-brand mx-5 mb-0 font-weight-bold font-italic" href="{% url 'home' %}">Be.com</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item mx-1 btn" style="background-color: #f99b0d;">
-                <a class="nav-link text-white" href="{% url 'home' %}">Home</a></li>
+            <!--<li class="nav-item mx-1 btn" style="background-color: #f99b0d;">
+                <a class="nav-link text-white" href="{% url 'home' %}">Home</a></li>-->
             <!--<li class="nav-item mx-1 btn btn-primary">
                 <a class="nav-link text-white" href="{% url 'bookmark:index' %}">Bookmark</a></li>-->
             <li class="nav-item mx-1 btn" style="background-color: #f99b0d;">
-                <a class="nav-link text-white" href="{% url 'home' %}">프로필</a></li>
+                <a class="nav-link text-white" href="#">프로필</a></li>
             <li class="nav-item mx-1 btn" style="background-color: #f99b0d;">
                 <a class="nav-link text-white" href="{% url 'blog:index' %}">감정 일기</a></li>
             <li class="nav-item mx-1 btn" style="background-color: #f99b0d;">
-                <a class="nav-link text-white" href="{% url 'photo:index' %}">짝꿍</a></li>
+                <a class="nav-link text-white" href="#">짝꿍</a></li>
+                <!--<a class="nav-link text-white" href="{% url 'photo:index' %}">짝꿍</a></li>-->
             <li class="nav-item mx-1 btn" style="background-color: #f99b0d;">
-                <a class="nav-link text-white" href="{% url 'home' %}">게시판</a></li>
+                <a class="nav-link text-white" href="#">게시판</a></li>
 
-            <li class="nav-item dropdown mx-1 btn" style="background-color: #f99b0d;">
+            <!--<li class="nav-item dropdown mx-1 btn" style="background-color: #f99b0d;">
                 <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">Add</a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{% url 'bookmark:add' %}">Bookmark</a>
@@ -44,20 +45,20 @@
                     <a class="dropdown-item" href="{% url 'photo:album_add' %}">Album</a>
                     <a class="dropdown-item" href="{% url 'photo:photo_add' %}">Photo</a>
                 </div>
-            </li>
+            </li>-->
 
-            <li class="nav-item dropdown mx-1 btn" style="background-color: #f99b0d;">
+            <!--<li class="nav-item dropdown mx-1 btn" style="background-color: #f99b0d;">
                 <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">Change</a>
                 <div class="dropdown-menu">
-                    <!--<a class="dropdown-item" href="{% url 'bookmark:change' %}">Bookmark</a>-->
+                    <a class="dropdown-item" href="{% url 'bookmark:change' %}">Bookmark</a>
                     <a class="dropdown-item" href="{% url 'blog:change' %}">Post</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{% url 'photo:album_change' %}">Album</a>
                     <a class="dropdown-item" href="{% url 'photo:photo_change' %}">Photo</a>
                 </div>
-            </li>
+            </li>-->
 
-            <li class="nav-item dropdown mx-1 btn " style="background-color: #f99b0d;">
+            <!--<li class="nav-item dropdown mx-1 btn " style="background-color: #f99b0d;">
                 <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">Util</a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
@@ -65,7 +66,7 @@
                     <a class="dropdown-item" href="{% url 'blog:post_archive' %}">Archive</a>
                     <a class="dropdown-item" href="{% url 'blog:search' %}">Search</a>
                 </div>
-            </li>
+            </li>-->
         </ul>
 
         <form class="form-inline my-2" action="" method="post"> {% csrf_token %}

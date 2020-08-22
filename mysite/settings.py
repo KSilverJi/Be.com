@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # shkim
+    
     'taggit.apps.TaggitAppConfig',
     'taggit_templatetags2',
     'widget_tweaks',
@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'bookmark.apps.BookmarkConfig',
     'blog.apps.BlogConfig',
     'photo.apps.PhotoConfig',
+    'mate.apps.MateConfig',
     'myprofile.apps.MyprofileConfig',
+    'forum.apps.ForumConfig',
 ]
 
 MIDDLEWARE = [
