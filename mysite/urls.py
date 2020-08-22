@@ -37,6 +37,7 @@ urlpatterns = [
     path('mate/',include('mate.urls')),
     path('myprofile/',include('myprofile.urls')),
     path('forum/',include('forum.urls')),
-
+    #path('moodtracker/', include('moodtracker.urls')),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
