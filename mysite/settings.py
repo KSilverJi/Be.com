@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'mate.apps.MateConfig',
     'myprofile.apps.MyprofileConfig',
     'forum.apps.ForumConfig',
+    'moodtracker.apps.MoodtrackerConfig'
 ]
 
 MIDDLEWARE = [
