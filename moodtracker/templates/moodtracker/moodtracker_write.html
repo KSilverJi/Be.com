@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}moodtracker_analysis.html{% endblock %}
+
+{% block content %}
+    <!-- 작성 -->
+    MoodTracker - Write
+
+    <div class="container">
+        <div class="mood_input"> 
+            감정 : 
+            <span class="mood_happy">
+                <input type="radio" id="happy" name="mood" value="happy" checked="checked"><label for="happy">&nbsp;</label>
+            </span>
+            <span class="mood_sad">
+                <input type="radio" id="sad" name="mood" value="sad"><label for="sad">&nbsp;</label>
+            </span>
+            <span class="mood_calm">
+                <input type="radio" id="calm" name="mood" value="calm"><label for="calm">&nbsp;</label>
+            </span>
+            <span class="mood_angry">
+                <input type="radio" id="angry" name="mood" value="angry"><label for="angry">&nbsp;</label>
+            </span>
+            <span class="mood_soso">
+                <input type="radio" id="soso" name="mood" value="soso"><label for="soso">&nbsp;</label>
+            </span>
+        </div>
+        <div class="content_input">
+            <form action="{% url 'moodtracker:create_record' %}">
+                <textarea placeholder="일기 내용" onkeyup="autoTextarea(this,2000)" id="text" name="content" rows="4" style="word-wrap: break-word; resize: none; height: 100px; "></textarea>  
+                <br>
+                <div class="diary_submit_button_wrap">
+                    <input type="submit" class="diary_submit_button" value="일기 저장" name="submit/>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
