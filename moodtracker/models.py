@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class MoodTracker(models.Model):
-    username = models.ForeignKey(User, on_delete=models.CASCADE) # User 모델과 연결
+    username = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='USERNAME', blank=True, null=True) # User 모델과 연결
     content = models.CharField(max_length=800) # 최대 800자
     pub_date = models.DateTimeField(auto_now=True)
     mood = models.CharField(max_length=15)
@@ -13,7 +13,7 @@ class MoodTracker(models.Model):
         return "%s - %s" % (self.username, self.pub_date) # 유저와 날짜로 구분
 
 class Wordcloud(models.Model):
-    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='USERNAME', blank=True, null=True)
     wc_image = models.ImageField(upload_to='')
 
 

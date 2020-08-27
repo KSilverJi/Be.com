@@ -31,7 +31,7 @@
     padding: 20px 0 0 20px;
 }
 .word_cloud {
-    height: 500px;
+    height: auto;
     border-top: 10px solid #ccc;
     border-bottom: 10px solid #ccc;
     padding: 20px 0 0 20px;
@@ -46,8 +46,14 @@
     color: #cc0;
     font-style: italic;
 }
+
 </style>
 {% endblock %}
+
+{% block script %}
+    
+{% endblock %}
+
 
 {% block content %}
 <div class="container">
@@ -63,8 +69,33 @@
                 부정: 2
                 <br>
                 비율: {{pos_per}}% : {{neg_per}}
-                
             </p>
+            <div>
+                <canvas id="pos_neg_barChart" width="300"></canvas>
+                <script>
+                    var ctx = document.getElementById('pos_neg_barChart');
+                    var pos_neg_barChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['', ''],
+                            datasets: [{
+                                label: '',
+                                data: ["{{neg_per}}", "{{pos_per}}"],
+                                backgroundColor: [
+                                    'rgba(255, 123, 85, 1)',
+                                    'rgba(57, 215, 208, 1)'
+                                ],
+                            }]
+                        },
+                        options: {
+                            legend:{
+                                display: false
+                            },
+                            responsive: false
+                        }
+                    });
+                </script>
+            </div>
         </div>
     </div>
     <!--
@@ -77,11 +108,47 @@
     -->
     <div class="row">
         <div class="mood_freqent col-md-7">
-            HAPPY : {{happy}} <br>
-            SAD : {{sad}} <br>
-            CALM : {{calm}} <br>
-            ANGRY : {{angry}} <br>
-            SOSO : {{soso}}
+            <div>
+                HAPPY : {{happy}}, SAD : {{sad}}, CALM : {{calm}}, ANGRY : {{angry}}, SOSO : {{soso}}
+            </div>
+            <div>
+                <canvas id="mood_barChart" height="300"></canvas>
+                <script>
+                    var ctx = document.getElementById('mood_barChart');
+                    var mood_barChart = new Chart(ctx, {
+                        type: 'horizontalBar',
+                        data: {
+                            labels: ['', '', '', '', ''],
+                            datasets: [{
+                                label: '',
+                                data: ["{{happy}}", "{{sad}}", 2, "{{angry}}", "{{soso}}"],
+                                backgroundColor: [
+                                    'rgba(57, 215, 208, 1)',
+                                    'rgba(13, 207, 249, 1)',
+                                    'rgba(249, 155, 13, 1)',
+                                    'rgba(255, 123, 85, 1)',
+                                    'rgba(211, 145, 255, 1)'
+                                ]
+                            }]
+                        },
+                        options: {
+                            legend:{
+                                display: false 
+                            },
+                            indexAxis: 'y',
+                            responsive: false, 
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        beginAtZero: true,
+                                        stepSize: 1
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script>
+            </div>
         </div>
         <div class="word_cloud col-md-5">
             <h3>강미나님이 자주 쓰는 단어</h3>

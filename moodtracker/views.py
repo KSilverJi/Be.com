@@ -27,7 +27,7 @@ def analysis(request):
     pos_per, neg_per = pos_neg_percent(moodtrackers) # 긍정 부정 개수 구하기 (날짜 조건 걸어야 함)
     happy, sad, calm, angry, soso = mood_num(moodtrackers) # 감정 개수 구하기
     create_wordcloud(moodtrackers) # 워드 클라우드 생성
-    wc = Wordcloud.objects.get(wc_image='wc_test.png')
+    wc = Wordcloud.objects.get(wc_image='wc_test.png') # 워드 클라우드 객체 가져오기 (username으로 받아와야 함)
 
     item = {
         'pos_per' : pos_per,
@@ -82,7 +82,7 @@ def mood_num(moodtrackers):
 # Analysis - 워드 클라우드 생성
 def create_wordcloud(moodtrackers):
     # 이전 워드클라우드 모델에서 삭제
-    instance = Wordcloud.objects.filter(username=moodtrackers[0].username)
+    instance = Wordcloud.objects.filter(username=moodtrackers[0].username) # 현재 사용자 받아오기로 변경해야 함
     instance.delete()
     
     content_text = ''
@@ -91,7 +91,6 @@ def create_wordcloud(moodtrackers):
 
     stopwords = ['나는', '나를', '내가', '너무', '없다', '정말', '것은', '있다.', '자꾸', '싶지', '않다', '같다', '싶다', '했다', '나왔다']
 
-    #wordcloud = WordCloud(font_path='fonts/AppleSDGothicNeoSB.ttf', background_color='white', stopwords=stopwords, width=800, height=800).generate_from_text(content_text)
     wordcloud = WordCloud(font_path='moodtracker/static/fonts/AppleSDGothicNeoSB.ttf', background_color='white', stopwords=stopwords, width=800, height=800).generate_from_text(content_text)
     wordcloud.to_file('media/wc_test.png') # 변수로 바꿔야 함
     '''
