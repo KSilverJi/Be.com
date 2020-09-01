@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
 import forum.views
+import moodtracker.views
 
 from mysite.views import HomeView, UserCreateView, UserCreateDoneTV
 
@@ -37,7 +38,7 @@ urlpatterns = [
     path('mate/',include('mate.urls')),
     path('myprofile/',include('myprofile.urls')),
     path('forum/',include('forum.urls')),
-    path('moodtracker/', include('moodtracker.urls')),
+    path('moodtracker/', include('moodtracker.urls'), name='moodtracker'),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
