@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css?family=Cabin');
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+/*----------------------------------new_main------------------------------*/
+
+.main_wrap{
+  width: 100%;
+}
+
+.calendar{
+  background: #FFFFFF;
+  border: 0.5px solid #D1CCC6;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  width: 560px;
+  float: left;
+  padding: 24px;
+}
+.calendar-content{
+  
+}
+.calendar_prev{
+  text-align: center;
+  background-color: white;
+}
+.calendar_year_month{
+  text-align: center;
+  height: 150px;
+  background-color: white;
+  font-size: 18px;
+}
+.calendar_next{
+  text-align: center;
+  background-color: white;
+}
+.main_calendar {
+  border-collapse: collapse;
+  width:100%;
+}
+.calendar_weekday{
+  text-align: center;
+}
+.main_calendar tr:nth-child(1){
+
+}
+.main_calendar tr:nth-child(2){
+  height: 60px;
+  font-size: 18px;
+}
+.main_calendar tr:nth-child(3){
+  text-align: center;
+  font-size: 18px;
+  height: 60px;
+  vertical-align: top;
+}
+.main_calendar tr:nth-child(4){
+  text-align: center;
+  font-size: 18px;
+  height: 60px;
+  vertical-align: top;
+}
+.main_calendar tr:nth-child(5){
+  text-align: center;
+  font-size: 18px;
+  height: 60px;
+  vertical-align: top;
+}
+.main_calendar tr:nth-child(6){
+  text-align: center;
+  font-size: 18px;
+  height: 60px;
+  vertical-align: top;
+}
+.main_calendar tr:nth-child(7){
+  text-align: center;
+  font-size: 18px;
+  height: 60px;
+  vertical-align: top;
+}
+.main_calendar tr:nth-child(8){
+  text-align: center;
+  font-size: 18px;
+  height: 60px;
+  vertical-align: top;
+}
+
+td{
+  width: 80px;
+}
+.main_calendar td:nth-child(1){
+  border-left: double white;
+}
+.main_calendar td:nth-child(7){
+  border-right: double white;
+}
+.calendar_cell{
+  background-color: #B90000;
+  width: 20%;
+  margin: auto;
+  border-radius: 30px;
+  color: white;
+}
+.calendar_label{
+  font-size: 40px;
+}
+.calendar_a_tag_example{
+  font-size: 16px;
+}
+
+.record{
+  background: #FFFFFF;
+  border: 0.5px solid #D1CCC6;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  width: 540px;
+  float: right;
+  padding: 24px;
+}
+.record-content{
+  padding-top: 100px;
+  padding-bottom: 50px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+.record-1st{
+  margin-bottom: 48px;
+}
+.view-record-date{
+  float: left;
+  margin-right: 24px;
+  font-size: 18px
+}
+.view-record-mood{
+  float: left;
+}

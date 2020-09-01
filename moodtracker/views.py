@@ -81,6 +81,8 @@ def learning():
 
 # 감정 일기 보는 화면으로 이동
 def view_record(request):
+    # 누른 날짜 받아와야 함. (url로)
+    # 날짜와 username 일치하는 일기를 object로 받아와서 render로 전한다.
     return render(request, 'moodtracker/moodtracker_record.html')
 
 

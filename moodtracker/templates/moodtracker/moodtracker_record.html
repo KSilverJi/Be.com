@@ -1,9 +1,56 @@
 {% extends "base.html" %}
+{% block title %}Record(View){% endblock %}
+{% load static %}
+{% block extra-style %}<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">{% endblock %}
+{% block script %}
 
-{% block title %}post_all.html{% endblock %}
+{% endblock %}
 
 {% block content %}
-    <!-- 작성 -->
-    MoodTracker - Record
-
+        <div class="main_wrap">
+            <div class="calendar">
+                감정 일기 캘린더
+                <div class="calendar-content">
+                    <table class = "main_calendar" id = "tab">
+                        <tr>
+                            <td class="calendar_prev" id="prev"><label class="calendar_label" onclick="prevmonth()"><</td>
+                            <td class="calendar_year_month" id="Ymd"colspan="5"></td>
+                            <td class="calendar_next" id="next"><label class="calendar_label" onclick="nextmonth()">></td>
+                        </tr>
+                        <tr class="calendar_weekday">
+                            <td class="week_sun">일</td>
+                            <td class="week_mon">월</td>
+                            <td class="week_tue">화</td>
+                            <td class="week_wed">수</td>
+                            <td class="week_thu">목</td>
+                            <td class="week_fri">금</td>
+                            <td class="week_sat">토</td> 
+                        </tr>
+                    </table>
+                    <script type="text/javascript" src="/static/js/calendar.js">present();</script>
+                </div> 
+            </div>
+            <div class="record">
+                그날의 감정 일기
+                <div class="record-content">
+                    <div class="record-1st">
+                        <div class="view-record-date">
+                            2020년 8월 17일
+                        </div>
+                        <div class="view-record-mood">
+                            mood image <!--저장된 mood에 따라 image src url로 삽입하기-->
+                        </div>
+                    </div>
+                    <div class="view-record-content">
+                        <!--저장된 일기 content 표기-->
+                        <form id="paper" method="get" action="">
+                            <textarea placeholder="일기 내용" id="text" name="text" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none;  width:100%; " disabled>
+                                멈춘 시간 속 잠든 너를 찾아가 아무리 막아도 결국 너의 곁인걸 길고 긴 여행을 끝내 이젠 돌아가 너라는 집으로 지금 다시 way back home~
+                            </textarea>  
+                            <br>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 {% endblock %}
