@@ -94,18 +94,25 @@ td{
 .main_calendar td:nth-child(7){
   border-right: double white;
 }
-.calendar_cell{
+.calendar_today{
   background-color: #B90000;
   width: 20%;
   margin: auto;
-  border-radius: 30px;
+  border-radius: 20px;
   color: white;
 }
 .calendar_label{
   font-size: 40px;
 }
 .calendar_a_tag_example{
-  font-size: 16px;
+  font-size: 18px;
+}
+.calendar-record-day{
+  background-color: black;
+  width: 20%;
+  margin: auto;
+  border-radius: 20px;
+  color: white;
 }
 
 .record{

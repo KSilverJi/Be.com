@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils import timezone
 
 from django.views import generic
@@ -80,10 +80,17 @@ def learning():
     step2_learning(text_train, pos_neg_train, text_test, pos_neg_test)
 
 # 감정 일기 보는 화면으로 이동
-def view_record(request):
+def view_record(request, record_id):#request, record_date
     # 누른 날짜 받아와야 함. (url로)
     # 날짜와 username 일치하는 일기를 object로 받아와서 render로 전한다.
-    return render(request, 'moodtracker/moodtracker_record.html')
+    user = request.user
+    records = MoodTracker.objects.filter(username=user)
+    sp_record = MoodTracker.objects.get(pk=record_id)
+    item = {
+        'records': records,
+        'sp_record': sp_record,
+    }
+    return render(request, 'moodtracker/moodtracker_record.html', item)
 
 
 # 감정 일기 분석 화면으로 이동
@@ -113,7 +120,9 @@ def analysis(request):
 
 # 감정 일기 쓰는 페이지로 이동
 def write_record(request):
-    return render(request, 'moodtracker/moodtracker_write.html')
+    user = request.user
+    records = MoodTracker.objects.filter(username=user)
+    return render(request, 'moodtracker/moodtracker_write.html', {'records':records}) #, {'records':records}
 
 
 # Analysis - 긍정, 부정 비율 구하기

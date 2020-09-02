@@ -5,6 +5,9 @@ class MoodTracker(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='USERNAME', blank=True, null=True) # User 모델과 연결
     content = models.CharField(max_length=800) # 최대 800자
     pub_date = models.DateTimeField(auto_now=True)
+    pub_date_year = models.CharField(max_length=10, default=0)
+    pub_date_month = models.CharField(max_length=10, default=0)
+    pub_date_day = models.CharField(max_length=10, default=0)
     mood = models.CharField(max_length=15)
     pos_neg = models.IntegerField(default=0)
     #timeout = models.IntegerField(default=0)
