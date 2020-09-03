@@ -222,14 +222,19 @@ def create_record(request):
     content = request.GET['content']
 
     mood_record = MoodTracker()
+    mood_record.username = request.user
     mood_record.content = content
-    # mood_record.mood = request.GET['mood'] 
+    mood_record.mood = request.GET['mood'] 
     mood_record.pub_date = timezone.datetime.now()
-    pos_neg = use_model(content)
+    mood_record.pub_date_year = timezone.datetime.now().year
+    mood_record.pub_date_month = timezone.datetime.now().month
+    mood_record.pub_date_day = timezone.datetime.now().day
+    #pos_neg = use_model(content)
+    pos_neg = 0
     mood_record.pos_neg = pos_neg    
 
     mood_record.save()
-    return redirect('/moodtracker/record') # '/moodtracker/' + +str(mood_record.id)
+    return redirect('/moodtracker/record/'+str(mood_record.id)) # '/moodtracker/' + +str(mood_record.id)
 
 
 # moodtracker_record.html에서 이전 일기를 보여주거나, 작성 화면 보여준다.
