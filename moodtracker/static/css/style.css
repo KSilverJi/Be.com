@@ -1,24 +1,46 @@
-@import url('https://fonts.googleapis.com/css?family=Cabin');
+@import url('https://fonts.googleapis.com/css?family=notosanskr.css');
 @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
-/*----------------------------------new_main------------------------------*/
 
+a {
+  text-decoration: none;
+  color: black;
+}
+a:hover{
+  text-decoration: none;
+  color: #f99b0d;
+}
+
+/* 작성된 감정 일기 리스트 */
 .main_wrap{
   width: 100%;
 }
 
 .calendar{
+  font-family: "Noto Sans KR";
   background: #FFFFFF;
   border: 0.5px solid #D1CCC6;
   box-sizing: border-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  width: 560px;
+  width: 500px;
   float: left;
   padding: 24px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  height: 560px;
 }
 .calendar-content{
-  
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-left: 50px;
+  padding-right: 50px;
+  overflow: auto;
+  width: auto;
+  height: 430px;
+}
+.record-list{
+  line-height: 200%;
 }
 .calendar_prev{
   text-align: center;
@@ -115,21 +137,31 @@ td{
   color: white;
 }
 
+/* 감정 일기 작성 & 확인 */
 .record{
+  font-family: "Noto Sans KR";
   background: #FFFFFF;
   border: 0.5px solid #D1CCC6;
   box-sizing: border-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   width: 540px;
-  float: right;
+  height: 560px;
+  float: left;
   padding: 24px;
 }
 .record-content{
-  padding-top: 100px;
-  padding-bottom: 50px;
+  padding-top: 30px;
   padding-left: 100px;
   padding-right: 100px;
+  display: inline-block;
+  text-align: center;
+}
+.record-date{
+  color: #5B5652;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 12px;
 }
 .record-1st{
   margin-bottom: 48px;
@@ -141,4 +173,42 @@ td{
 }
 .view-record-mood{
   float: left;
+}
+
+.mood_input{
+  margin-bottom: 12px;
+}
+/* HIDE RADIO */
+.mood_input label [type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+}
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+  -webkit-filter: brightness(0.6);/*contrast(3.4)hue-rotate(217deg)saturate(9.9);*/
+  /*filter: brightness(0.6)contrast(3.4)hue-rotate(217deg)saturate(9.9);*/
+}
+.content_input{
+  margin-bottom: 20px;
+}
+.diary_submit_button_wrap{
+  float: right;
+}
+.diary_submit_button{
+  background-color: #f99b0d;
+  border: none;
+  color: white;
+  width: 104px;
+  height: 46px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  border-radius: 10px;
 }

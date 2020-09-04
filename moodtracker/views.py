@@ -122,7 +122,16 @@ def analysis(request):
 def write_record(request):
     user = request.user
     records = MoodTracker.objects.filter(username=user)
-    return render(request, 'moodtracker/moodtracker_write.html', {'records':records}) #, {'records':records}
+    year = timezone.datetime.now().year
+    month = timezone.datetime.now().month
+    day = timezone.datetime.now().day
+    item = {
+        'records' : records,
+        'year' : year,
+        'month' : month,
+        'day' : day,
+    }
+    return render(request, 'moodtracker/moodtracker_write.html', item) #, {'records':records}
 
 
 # Analysis - 긍정, 부정 비율 구하기
@@ -135,7 +144,9 @@ def pos_neg_percent(moodtrackers):
             neg+=1
         else:
             pos+=1
-    return pos/(pos+neg)*100, neg/(pos+neg)*100
+    pos_per = round(pos/(pos+neg)*100, 1)
+    neg_per = round(neg/(pos+neg)*100, 1)
+    return pos_per, neg_per
     
 
 # Analysis - 감정 개수 구하기

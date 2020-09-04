@@ -132,37 +132,46 @@
                     </table>
                 -->
                     {% for record in records.all %}
-                        <a href="{% url 'moodtracker:moodtracker_view_record' record.id %}">{{ record.pub_date_month }}월 {{ record.pub_date_day }}일의 감정일기</a> <br>
+                        <a class="record-list" href="{% url 'moodtracker:view' record.id %}">{{ record.pub_date_month }}월 {{ record.pub_date_day }}일의 감정일기</a> <br>
                     {% endfor %}
                 </div> 
             </div>
             <div class="record">
-                <form action="{% url 'moodtracker:create_record' %}">
-                    <div class="mood_input">
-                        <span class="mood_happy">
-                            <input type="radio" id="happy" name="mood" value="happy" checked="checked"><label for="happy">&nbsp;</label>
-                        </span>
-                        <span class="mood_sad">
-                            <input type="radio" id="sad" name="mood" value="sad"><label for="sad">&nbsp;</label>
-                        </span>
-                        <span class="mood_calm">
-                            <input type="radio" id="calm" name="mood" value="calm"><label for="calm">&nbsp;</label>
-                        </span>
-                        <span class="mood_angry">
-                            <input type="radio" id="angry" name="mood" value="angry"><label for="angry">&nbsp;</label>
-                        </span>
-                        <span class="mood_soso">
-                            <input type="radio" id="soso" name="mood" value="soso"><label for="soso">&nbsp;</label>
-                        </span>
-                    </div>
-                    <div class="content_input">
-                        <textarea placeholder="일기 내용" onkeyup="autoTextarea(this,2000)" id="text" name="content" rows="4" style="word-wrap: break-word; resize: none; height: 100px; "></textarea>  
-                        <br>
-                    </div>
-                    <div class="diary_submit_button_wrap">
-                        <input type="submit" class="diary_submit_button" value="일기 저장" name="submit"/>
-                    </div>
-                </form>
+                감정 일기 작성
+                <div class="record-content">
+                    <div class="record-date">{{year}}년 {{month}}월 {{day}}일</div>
+                    <form action="{% url 'moodtracker:create' %}">
+                        <div class="mood_input">
+                            <label>
+                                <input type="radio" name="mood" value="happy" checked="checked"><!--<label for="happy">&nbsp;</label>-->
+                                <img src="{% static 'img/happy_emoji.png' %}" height=50>
+                            </label>
+                            <label>
+                                <input type="radio" name="mood" value="sad">
+                                <img src="{% static 'img/sad_emoji.png' %}" height=50>
+                            </label>
+                            <label>
+                                <input type="radio" name="mood" value="calm">
+                                <img src="{% static 'img/calm_emoji.png' %}" height=50>
+                            </label>
+                            <label>
+                                <input type="radio" name="mood" value="angry">
+                                <img src="{% static 'img/angry_emoji.png' %}" height=50>
+                            </label>
+                            <label>
+                                <input type="radio" name="mood" value="soso">
+                                <img src="{% static 'img/soso_emoji.png' %}" height=50>
+                            </label>
+                        </div>
+                        <div class="content_input">
+                            <textarea placeholder="감정 일기 작성" onkeyup="autoTextarea(this,2000)" id="text" name="content" rows="10" style="word-wrap: break-word; resize: none; width: 100%; "></textarea>  
+                            <br>
+                        </div>
+                        <div class="diary_submit_button_wrap">
+                            <input type="submit" class="diary_submit_button" value="저장" name="submit"/>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </body>
