@@ -113,9 +113,20 @@
                 }
             }
         </script>
+        <div class="moodtracker-nav">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link link-active" href="#">쓰기</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-disabled" href="{% url 'moodtracker:analysis' %}">분석</a>
+                </li>
+            </ul>
+        </div>
         <div class="main_wrap">
             <div class="calendar">
                 감정 일기 캘린더
+                <a href="{% url 'moodtracker:write' %}" class="write-link">감정 일기 쓰기</a>
                 <div class="calendar-content"><!--
                     <table class = "main_calendar" id = "tab">
                         <tr>
@@ -137,14 +148,14 @@
                 -->
                 <!--일기 기록 리스트 형태로 출력-->
                     {% for record in records.all %}
-                        <a href="{% url 'moodtracker:view' record.id %}">{{ record.pub_date_month }}월 {{ record.pub_date_day }}일의 감정일기</a> <br>
+                        <a class="record-list" href="{% url 'moodtracker:view' record.id %}">{{ record.pub_date_month }}월 {{ record.pub_date_day }}일의 감정일기</a> <br>
                     {% endfor %}
                 </div> 
             </div>
             <div class="record">
                 그날의 감정 일기
                 <div class="record-content">
-                    <div class="record-1st">
+                    <div class="record-date">
                         <div class="view-record-date">
                             {{sp_record.pub_date_year}}년 {{sp_record.pub_date_month}}월 {{sp_record.pub_date_day}}일
                         </div>
@@ -153,11 +164,7 @@
                         </div>
                     </div>
                     <div class="view-record-content">
-                        <!--저장된 일기 content 표기-->
-                        <form id="paper" method="get" action="">
-                            {{sp_record.content}}
-                            <br>
-                        </form>
+                        {{sp_record.content}}<!--저장된 일기 content 표기-->
                     </div>
                 </div>
             </div>

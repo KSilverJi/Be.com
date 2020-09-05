@@ -113,6 +113,7 @@ def analysis(request):
         'soso' : soso,
         'wc' : wc,
         'moodtrackers' : moodtrackers,
+        'user' : user,
     }
 
     return render(request, 'moodtracker/moodtracker_analysis.html', item)

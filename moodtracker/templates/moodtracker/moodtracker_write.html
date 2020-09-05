@@ -109,6 +109,16 @@
                 }
             }
         </script>
+        <div class="moodtracker-nav">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link link-active" href="#">쓰기</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-disabled" href="{% url 'moodtracker:analysis' %}">분석</a>
+                </li>
+            </ul>
+        </div>
         <div class="main_wrap">
             <div class="calendar">
                 감정 일기 캘린더
@@ -164,7 +174,7 @@
                             </label>
                         </div>
                         <div class="content_input">
-                            <textarea placeholder="감정 일기 작성" onkeyup="autoTextarea(this,2000)" id="text" name="content" rows="10" style="word-wrap: break-word; resize: none; width: 100%; "></textarea>  
+                            <textarea placeholder="감정 일기 작성" onkeyup="autoTextarea(this,2000)" id="text" name="content" rows="10" style="word-wrap: break-word; resize: none; width: 300px; "></textarea>  
                             <br>
                         </div>
                         <div class="diary_submit_button_wrap">
