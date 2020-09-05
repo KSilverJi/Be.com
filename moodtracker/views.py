@@ -113,6 +113,7 @@ def analysis(request):
         'soso' : soso,
         'wc' : wc,
         'moodtrackers' : moodtrackers,
+        'user' : user,
     }
 
     return render(request, 'moodtracker/moodtracker_analysis.html', item)
@@ -122,7 +123,16 @@ def analysis(request):
 def write_record(request):
     user = request.user
     records = MoodTracker.objects.filter(username=user)
-    return render(request, 'moodtracker/moodtracker_write.html', {'records':records}) #, {'records':records}
+    year = timezone.datetime.now().year
+    month = timezone.datetime.now().month
+    day = timezone.datetime.now().day
+    item = {
+        'records' : records,
+        'year' : year,
+        'month' : month,
+        'day' : day,
+    }
+    return render(request, 'moodtracker/moodtracker_write.html', item) #, {'records':records}
 
 
 # Analysis - 긍정, 부정 비율 구하기
@@ -135,7 +145,9 @@ def pos_neg_percent(moodtrackers):
             neg+=1
         else:
             pos+=1
-    return pos/(pos+neg)*100, neg/(pos+neg)*100
+    pos_per = round(pos/(pos+neg)*100, 1)
+    neg_per = round(neg/(pos+neg)*100, 1)
+    return pos_per, neg_per
     
 
 # Analysis - 감정 개수 구하기
@@ -222,14 +234,19 @@ def create_record(request):
     content = request.GET['content']
 
     mood_record = MoodTracker()
+    mood_record.username = request.user
     mood_record.content = content
-    # mood_record.mood = request.GET['mood'] 
+    mood_record.mood = request.GET['mood'] 
     mood_record.pub_date = timezone.datetime.now()
-    pos_neg = use_model(content)
+    mood_record.pub_date_year = timezone.datetime.now().year
+    mood_record.pub_date_month = timezone.datetime.now().month
+    mood_record.pub_date_day = timezone.datetime.now().day
+    #pos_neg = use_model(content)
+    pos_neg = 0
     mood_record.pos_neg = pos_neg    
 
     mood_record.save()
-    return redirect('/moodtracker/record') # '/moodtracker/' + +str(mood_record.id)
+    return redirect('/moodtracker/record/'+str(mood_record.id)) # '/moodtracker/' + +str(mood_record.id)
 
 
 # moodtracker_record.html에서 이전 일기를 보여주거나, 작성 화면 보여준다.
