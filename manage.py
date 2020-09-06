@@ -3,6 +3,12 @@
 import os
 import sys
 
+import pickle
+from konlpy.tag import Okt
+
+def tokenizer(text):
+    okt = Okt()
+    return okt.morphs(text)
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')

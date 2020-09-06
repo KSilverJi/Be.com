@@ -7,79 +7,13 @@ from .models import MoodTracker, Wordcloud
 from django.contrib.auth.models import User
 
 import pickle
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import Pipeline
-from sklearn.metrics import accuracy_score
-from sklearn.model_selection import train_test_split
 from konlpy.tag import Okt
 
 from wordcloud import WordCloud
 from wordcloud import STOPWORDS
 import matplotlib.pyplot as plt
 
-#형태소로 쪼개는 함수
-def tokenizer(text):
-    okt = Okt()
-    return okt.morphs(text)
-
-
-#평점 전처리 함수
-def pos_neg_preprocessing(value):
-    if value==0 :
-        return '0'
-    else :
-        return '1'
-
-
-
-# 전처리, 데이터 준비
-def step1_data_preprocessing(content):
-    # 수집한 데이터를 읽어온다.
-    df = content
-
-    # 전처리를 수행한다
-    df['rating'] = df['rating'].apply(pos_neg_preprocessing)
-
-    # 학습데이터와 테스트 데이터로 나눈다.
-    text_list = df['sentences'].tolist()
-    pos_neg_list = df['rating'].tolist()
-
-    # 80%는 학습, 20%는 test data
-    text_train, text_test, pos_neg_train, pos_neg_test = train_test_split(text_list, pos_neg_list, test_size=0.3, random_state=123, shuffle=True)
-
-    return text_train, text_test, pos_neg_train, pos_neg_test
-
-# 학습
-def step2_learning(X_train, y_train, X_test, y_test):
-    #주어진 데이터를 단어 사전으로 만들고 각 단어의 빈도수를 계산한 후 벡터화하는 객체 생성
-    tfidf = TfidfVectorizer(lowercase=False, tokenizer=tokenizer)
-
-    # 문장별 나오는 단어 수 세서 수치화, 벡터화해서 학습 시킨다.
-    logistic = LogisticRegression(C=10.0, penalty='l2', random_state=0)
-
-    pipe=Pipeline([('vect', tfidf), ('clf', logistic)])
-
-    #학습한다.
-    pipe.fit(X_train, y_train)
-
-    #학습 정확도 측정
-    y_pred = pipe.predict(X_test)
-    print('학습 정확도: ', accuracy_score(y_test, y_pred))
-
-    #학습된 모델을 저장한다.
-    with open('./static/pipe.dat', 'wb') as fp:
-        pickle.dump(pipe, fp)
-
-    print('모델 저장 완료')
-
-
-# 학습 함수
-def learning():
-    text_train, text_test, pos_neg_train, pos_neg_test = step1_data_preprocessing()
-    step2_learning(text_train, pos_neg_train, text_test, pos_neg_test)
-
-# 감정 일기 보는 화면으로 이동
+# 작성된 감정 일기 보는 화면으로 이동
 def view_record(request, record_id):#request, record_date
     # 누른 날짜 받아와야 함. (url로)
     # 날짜와 username 일치하는 일기를 object로 받아와서 render로 전한다.
@@ -180,7 +114,9 @@ def create_wordcloud(moodtrackers, user):
     stopwords = ['나는', '나를', '내가', '너무', '없다', '정말', '것은', '있다.', '자꾸', '싶지', '않다', '같다', '싶다', '했다', '나왔다']
 
     wordcloud = WordCloud(font_path='moodtracker/static/fonts/AppleSDGothicNeoSB.ttf', background_color='white', stopwords=stopwords, width=800, height=800).generate_from_text(content_text)
-    wordcloud.to_file('media/wc_test.png') # 변수로 바꿔야 함
+    filename1 = 'media/%s.png' % user
+    filename2 = '%s.png' % user
+    wordcloud.to_file(filename1) # 변수로 바꿔야 함
     '''
     plt.figure(figsize=(400,400)) #이미지 사이즈 지정
     plt.imshow(wordcloud)
@@ -189,30 +125,18 @@ def create_wordcloud(moodtrackers, user):
     '''
     wc = Wordcloud() # 워드클라우드 객체 하나 생성
     wc.username = user 
-    wc.wc_image = 'wc_test.png' # 변수로 바꿔야 함
+    wc.wc_image = filename2 # 변수로 바꿔야 함
     wc.save() # 데이터베이스에 저장
 
+
+def tokenizer(text):
+    okt = Okt()
+    return okt.morphs(text)
 
 # 작성 내용을 모델에 돌려서 긍정/부정 결과 얻는다.
 # !!계속 오류나는 중.
 def use_model(content):
-    import pickle
-    from sklearn.feature_extraction.text import TfidfVectorizer
-    from sklearn.linear_model import LogisticRegression
-    from sklearn.pipeline import Pipeline
-    from sklearn.metrics import accuracy_score
-    from sklearn.model_selection import train_test_split
-    from konlpy.tag import Okt
-
-    #주어진 데이터를 단어 사전으로 만들고 각 단어의 빈도수를 계산한 후 벡터화하는 객체 생성
-    tfidf = TfidfVectorizer(lowercase=False, tokenizer=tokenizer)
-
-    # 문장별 나오는 단어 수 세서 수치화, 벡터화해서 학습 시킨다.
-    logistic = LogisticRegression(C=10.0, penalty='l2', random_state=0)
-
-    pipe=Pipeline([('vect', tfidf), ('clf', logistic)])
-
-    with open('./static/pipe.dat', 'rb') as fp:
+    with open('static/pipe.dat', 'rb') as fp:
         pipe = pickle.load(fp)
     
     import numpy as np
@@ -241,8 +165,8 @@ def create_record(request):
     mood_record.pub_date_year = timezone.datetime.now().year
     mood_record.pub_date_month = timezone.datetime.now().month
     mood_record.pub_date_day = timezone.datetime.now().day
-    #pos_neg = use_model(content)
-    pos_neg = 0
+    
+    pos_neg = use_model(content)
     mood_record.pos_neg = pos_neg    
 
     mood_record.save()
