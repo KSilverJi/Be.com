@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}moodtracker_write.html{% endblock %}
+{% block title %}Be.com - 감정일기{% endblock %}
 {% block extra-style %}<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">{% endblock %}
 {% block content %}
     <body onload=present();>
@@ -121,7 +121,7 @@
         </div>
         <div class="main_wrap">
             <div class="calendar">
-                감정 일기 캘린더
+                <div class="moodtracker-title">감정 일기 리스트</div>
                 <div class="calendar-content"><!--
                     <table class = "main_calendar" id = "tab">
                         <tr>
@@ -147,8 +147,8 @@
                 </div> 
             </div>
             <div class="record">
-                감정 일기 작성
-                <div class="record-content">
+                <div class="moodtracker-title">감정 일기 작성</div>
+                <div class="record-write">
                     <div class="record-date">{{year}}년 {{month}}월 {{day}}일</div>
                     <form action="{% url 'moodtracker:create' %}">
                         <div class="mood_input">
@@ -174,7 +174,7 @@
                             </label>
                         </div>
                         <div class="content_input">
-                            <textarea placeholder="감정 일기 작성" onkeyup="autoTextarea(this,2000)" id="text" name="content" rows="10" style="word-wrap: break-word; resize: none; width: 300px; "></textarea>  
+                            <textarea placeholder=" 감정 일기 작성" onkeyup="autoTextarea(this,100)" id="text" name="content" rows="10" style="word-wrap: break-word; resize: none; width: 300px; "></textarea>  
                             <br>
                         </div>
                         <div class="diary_submit_button_wrap">

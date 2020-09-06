@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Record(View){% endblock %}
+{% block title %}Be.com - 감정일기{% endblock %}
 {% load static %}
 {% block extra-style %}<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">{% endblock %}
 {% block script %}
@@ -125,42 +125,33 @@
         </div>
         <div class="main_wrap">
             <div class="calendar">
-                감정 일기 캘린더
-                <a href="{% url 'moodtracker:write' %}" class="write-link">감정 일기 쓰기</a>
-                <div class="calendar-content"><!--
-                    <table class = "main_calendar" id = "tab">
-                        <tr>
-                            <td class="calendar_prev" id="prev"><label class="calendar_label" onclick="prevmonth()"><</td>
-                            <td class="calendar_year_month" id="Ymd"colspan="5"></td>
-                            <td class="calendar_next" id="next"><label class="calendar_label" onclick="nextmonth()">></td>
-                        </tr>
-                        <tr class="calendar_weekday">
-                            <td class="week_sun">일</td>
-                            <td class="week_mon">월</td>
-                            <td class="week_tue">화</td>
-                            <td class="week_wed">수</td>
-                            <td class="week_thu">목</td>
-                            <td class="week_fri">금</td>
-                            <td class="week_sat">토</td> 
-                        </tr>
-                        
-                    </table>
-                -->
-                <!--일기 기록 리스트 형태로 출력-->
+                <div class="moodtracker-title">감정 일기 리스트</div>
+                <div class="calendar-content">
                     {% for record in records.all %}
                         <a class="record-list" href="{% url 'moodtracker:view' record.id %}">{{ record.pub_date_month }}월 {{ record.pub_date_day }}일의 감정일기</a> <br>
                     {% endfor %}
-                </div> 
+                </div>
+                <div class="write-link-div"><a href="{% url 'moodtracker:write' %}" class="write-link">쓰기</a></div>
             </div>
             <div class="record">
-                그날의 감정 일기
+                <div class="moodtracker-title">그날의 감정 일기</div>
                 <div class="record-content">
                     <div class="record-date">
                         <div class="view-record-date">
                             {{sp_record.pub_date_year}}년 {{sp_record.pub_date_month}}월 {{sp_record.pub_date_day}}일
                         </div>
                         <div class="view-record-mood">
-                            {{sp_record.mood}} <!--저장된 mood에 따라 image src url로 삽입하기-->
+                            {% if sp_record.mood == 'happy' %} <!--저장된 mood에 따라 image src url로 삽입하기-->
+                                <img src="{% static 'img/happy_emoji.png' %}" height=50>
+                            {% elif sp_record.mood == 'sad' %}
+                                <img src="{% static 'img/sad_emoji.png' %}" height=50>
+                            {% elif sp_record.mood == 'calm' %}
+                                <img src="{% static 'img/calm_emoji.png' %}" height=50>
+                            {% elif sp_record.mood == 'angry' %}
+                                <img src="{% static 'img/angry_emoji.png' %}" height=50>
+                            {% elif sp_record.mood == 'soso' %}
+                                <img src="{% static 'img/soso_emoji.png' %}" height=50>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="view-record-content">
