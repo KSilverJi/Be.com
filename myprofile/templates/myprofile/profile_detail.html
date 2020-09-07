@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block extra-style %}<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">{% endblock %}
+{% block title %}home.html{% endblock %}
+
+{% block content %}
+<div class="container">
+    <a href="{% url 'myprofile:home' %}">목록으로 가기</a>
+    <div class="row mb-2">
+        <div class="my-profile-home col-md-6 ">
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    {% if detail == 'my' %}
+                        <div class="profile-title">내 프로필</div>
+                    {% elif detail == 'friend' %}
+                        <div class="profile-title">{{person.username}}님의 프로필</div>
+                    {% endif %}
+                <img src="{{person.profile_image.url}}" width="150" height="150">
+                <!--<div class="mb-1 text-muted">Nov 12</div>-->
+                <div class="my-profile-intro card-text mb-auto"><br><br>
+                    이름: {{person.username}}<br>
+                    학교: {{person.school}}<br>
+                    학급: {{person.school_year}}년 {{person.school_class}}반<br>
+                    소개: {{person.intro}}<br><br><br></p>
+                <!--<a href="#" class="stretched-link">Continue reading</a>-->
+                </div>
+                
+                </div>
+            </div>
+        </div>
+
+        <div >
+            <div class="profile-image-list col-md-6 px-0">
+            <div class="profile-title">나를 소개합니다</div>
+                <!-- 그 동안 이미지 삽입 -->
+                {% for photo in person_images.all%}
+                    <div class="profile-images">
+                        <img src="{{photo.image.url}}" height="300"><br>
+                    </div>
+                {% endfor %}
+                <!-- 내 프로필일 때만 사진 업로드 버튼 노출 -->
+                {% if detail == 'my' %}
+                    <form method="POST" action="{% url 'myprofile:upload' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="file" name="imgs" multiple>
+                        <input type="submit" value="업로드">
+                    </form>
+                {% endif %}
+            <!--<h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
+            <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
+            <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>-->
+            </div>
+        </div>
+    </div>
+</div>
+   
+{% endblock content %}
+
+{% block footer %}
+<footer class="fixed-bottom bg-info">
+    <div class="text-white font-italic text-right mr-5">Copyright &copy; 2020 Be.com by soljik</div>
+</footer>
+{% endblock %}

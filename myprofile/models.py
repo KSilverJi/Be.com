@@ -10,4 +10,11 @@ class MyProfile(models.Model):
     profile_image = models.ImageField(upload_to='', default='default.png')
 
     def __str__(self):
-        return "%s" % (self.username) # 유저 이름으로 구분
+        return "%s" % self.username # 유저 이름으로 구분
+    
+class ProfilePhoto(models.Model):
+    myprofile = models.ForeignKey(MyProfile, on_delete=models.CASCADE, null=True)
+    image = models.ImageField(upload_to='', blank=True, null=True)
+
+    def __str__(self):
+        return "%s - %s" % (self.myprofile, self.id)
