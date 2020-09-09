@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from .models import MyProfile, ProfilePhoto
@@ -49,14 +49,11 @@ def upload(request):
         user_id = MyProfile.objects.get(username=user)
         # name 속성이 imgs인 input 태그로부터 받은 파일들을 반복문을 통해 하나씩 가져온다 
         for img in request.FILES.getlist('imgs'):
-            # ProfilePhoto 객체를 하나 생성한다.
-            photo = ProfilePhoto()
-            # 외래키로 현재 생성한 MyProfile의 기본키를 참조한다.
-            photo.myprofile = user_id
-            # imgs로부터 가져온 이미지 파일 하나를 저장한다.
-            photo.image = img
-            # 데이터베이스에 저장
-            photo.save()
-        return redirect('/detail/' + str(user_id.id))
+            photo = ProfilePhoto() # ProfilePhoto 객체를 하나 생성한다.
+            photo.myprofile = user_id # 외래키로 현재 생성한 MyProfile의 기본키를 참조한다.
+            photo.image = img # imgs로부터 가져온 이미지 파일 하나를 저장한다.
+            photo.topic = request.POST.get('topic')
+            photo.save() # 데이터베이스에 저장
+        return redirect('/myprofile/detail/' + str(user_id.id))
     else:
         return render(request, 'myprofile/myprofile.html')

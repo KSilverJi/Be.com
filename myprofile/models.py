@@ -14,6 +14,7 @@ class MyProfile(models.Model):
     
 class ProfilePhoto(models.Model):
     myprofile = models.ForeignKey(MyProfile, on_delete=models.CASCADE, null=True)
+    topic = models.CharField(max_length=30, default=0, null=True)
     image = models.ImageField(upload_to='', blank=True, null=True)
 
     def __str__(self):
