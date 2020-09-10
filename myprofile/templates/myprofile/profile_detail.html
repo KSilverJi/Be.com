@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block extra-style %}<link rel="stylesheet" type="text/css" href="{% static 'css/myprofile_style.css' %}">{% endblock %}
+{% block title %}home.html{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="margin-bottom:12px;"><a href="{% url 'myprofile:home' %}">목록으로 가기</a></div>
+    <div class="col1">
+        <div class="my-profile-detail">
+            {% if detail == 'my' %}
+                <div class="profile-title">내 프로필</div>
+            {% elif detail == 'friend' %}
+                <div class="profile-title">{{person.username}}님의 프로필</div>
+            {% endif %}
+            <div class="my-profile">
+                <img src="{{person.profile_image.url}}" width="150" height="150">
+                <!--<div class="mb-1 text-muted">Nov 12</div>-->
+                <div class="my-profile-intro"><br><br>
+                    <b>이름</b> &nbsp; {{person.username}}<br>
+                    <b>학교</b> &nbsp; {{person.school}}<br>
+                    <b>학급</b> &nbsp; {{person.school_year}}학년 {{person.school_class}}반<br>
+                    <b>소개</b> &nbsp; {{person.intro}}<br><br><br></p>
+                <!--<a href="#" class="stretched-link">Continue reading</a>-->
+                </div>
+            </div> 
+        </div>
+    </div>
+    <div class="col2">
+        <div class="profile-images">
+            <div class="profile-title">나를 소개합니다</div>
+                <div style="padding:12px;">
+                    <!-- 내 프로필일 때만 사진 업로드 버튼 노출 -->
+                    {% if detail == 'my' %}
+                    <form  method="POST" action="{% url 'myprofile:upload' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <!--
+                        <select name="topic">
+                            <option value="profile-image">프로필 사진</option>
+                            <option value="favorite-spot">좋아하는 장소</option>
+                            <option value="happiness">행복할 때</option>
+                            <option value="friends">친구들과 함께</option>
+                            <option value="favorite-movie">좋아하는 영화</option>
+                            <option value="else">기타</option>
+                        </select>
+                        -->
+                        <div class="filebox">
+                            <input type="text" name="topic" size="10">
+                            <input type="file" name="imgs" multiple>
+                            <input type="submit" value="업로드" style="background:#f99b0d; color:white; border:none; border-radius:5px; padding:5px 12px;">
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
+                <!-- 업로드한 이미지 삽입 -->
+                <div class="profile-images-list">
+                    {% for photo in person_images.all%}
+                        <div class="profile-image">
+                            <img src="{{photo.image.url}}" height="200" class="image"><br>
+                            <div class="overlay">
+                                <div class="overlay-text">{{photo.topic}}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            <!--<h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
+            <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
+            <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>-->
+            </div>
+        </div>
+    </div>
+</div>
+   
+{% endblock content %}
+
+{% block footer %}
+<footer class="fixed-bottom bg-info">
+    <div class="text-white font-italic text-right mr-5">Copyright &copy; 2020 Be.com by soljik</div>
+</footer>
+{% endblock %}

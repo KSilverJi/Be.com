@@ -171,25 +171,3 @@ def create_record(request):
 
     mood_record.save()
     return redirect('/moodtracker/record/'+str(mood_record.id)) # '/moodtracker/' + +str(mood_record.id)
-
-
-# moodtracker_record.html에서 이전 일기를 보여주거나, 작성 화면 보여준다.
-#def show(request):
-    # 오늘 날짜이고, 오늘 날짜에 작성된 일기가 없으면
-    # write
-    # 캘린더에서 오늘 날짜 하이라이트
-
-    # 오늘 혹은 이전 날짜이고, 작성된 일기가 있으면
-    # 작성된 일기를 보여준다.
-    # 캘린더에서 해당 날짜 하이라이트
-
-    # 이전 날짜이고, 작성된 일기가 없으면
-    # 작성하지 않았다는 안내 텍스트
-    # 캘린더에서 해당 날짜 하이라이트
-    # 팝업
-
-    # 미래의 날짜이면
-    # 선택 불가능하거나 작성할 수 없다는 안내 텍스트
-    # 캘린더에서 해당 날짜 하이라이트
-    # 팝업
-

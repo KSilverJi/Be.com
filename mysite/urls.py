@@ -18,6 +18,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
+
+import myprofile.views
 import forum.views
 import moodtracker.views
 
@@ -36,7 +38,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('photo/', include('photo.urls')),
     path('mate/',include('mate.urls')),
-    path('myprofile/',include('myprofile.urls')),
+    path('myprofile/',include('myprofile.urls'), name='myprofile'),
     path('forum/',include('forum.urls')),
     path('moodtracker/', include('moodtracker.urls'), name='moodtracker'),
     
