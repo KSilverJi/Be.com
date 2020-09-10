@@ -1,86 +1,53 @@
 {% extends 'base.html' %}
 
 {% load static %}
-
+{% block extra-style %}<link rel="stylesheet" type="text/css" href="{% static 'css/myprofile_style.css' %}">{% endblock %}
 {% block title %}home.html{% endblock %}
 
-{% block extra-style %}
-<style type="text/css">
-.today_mind {
-    height: 350px;
-    border-top: 10px solid #ccc;
-    border-bottom: 10px solid #ccc;
-    padding: 20px 0 0 20px;
-}
-.class_act {
-    height: 350px;
-    
-    padding: 0px 0 0 20px;
-}
-.my_mind {
-    height: 500px;
-    border-top: 10px solid rgb(14, 30, 175);
-    border-bottom: 10px solid rgb(14, 30, 175);
-    padding: 20px 0 0 20px;
-}
-.mate_diary {
-    height: 350px;
-    border-top: 10px solid rgb(244, 200, 175);
-    border-bottom: 10px solid rgb(244, 200, 175);
-    padding: 20px 0 0 20px;
-}
-.class_hot {
-    height: 350px;
-    border-top: 10px solid #ccc;
-    border-bottom: 10px solid #ccc;
-    padding: 20px 0 0 20px;
-}
-.title {
-    color: #c80;
-    font-weight: bold;
-}
-.powered {
-    position: relative;
-    top: 77%;
-    color: #cc0;
-    font-style: italic;
-}
-</style>
-{% endblock %}
-
 {% block content %}
-<div class="row mb-2">
-    <div class="col-md-6">
-      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">profile</strong>
-          <h3 class="mb-0">내 프로필</h3>
-          <img src="/static/img/myprofile.png" width="200" height="150">
-          <!--<div class="mb-1 text-muted">Nov 12</div>-->
-          <p class="card-text mb-auto"><br><br>이름: 강미나<br>학급: 6반<br>소개: 안녕 내 이름은 강미나야.<br><br><br></p>
-          <!--<a href="#" class="stretched-link">Continue reading</a>-->
+<div class="container">
+  <div class="col1">
+    <div class="my-profile-home row1">
+      <div class="profile-title">내 프로필</div>
+      <div style="float:right;"><a href="{% url 'myprofile:detail' my.id %}">더보기</a></div>
+      <div class="my-profile">
+        <img src="{{my.profile_image.url}}" width="150" height="150">
+        <!--<div class="mb-1 text-muted">Nov 12</div>-->
+        <div class="my-profile-intro">
+          <b>이름</b> &nbsp; {{my.username}}<br>
+          <b>학교</b> &nbsp; {{my.school}}<br>
+          <b>학급</b> &nbsp; {{my.school_year}}학년 {{my.school_class}}반<br>
+          <b>소개</b> &nbsp; {{my.intro}}</p>
+        <!--<a href="#" class="stretched-link">Continue reading</a>-->
         </div>
-        
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="class-achievement row2">
       <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-success">class</strong>
-          <img src="/static/img/active_class.png" width="400px" height="350px" alt="우리 반의 활성도">
-          <!--<h3 class="mb-0">Post title</h3>
-          <div class="mb-1 text-muted">Nov 11</div>
-          <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="stretched-link">Continue reading</a>-->
+          <div class="profile-title">우리 반 활성도</div>
+          <img src="/static/img/active_class.png" width="300px" height="300px" alt="우리 반의 활성도">
+          <!-- view에서 class achievement 점수 받아서 점수 범위에 따라 다른 이미지 띄우기 -->
         </div>
       </div>
     </div>
   </div>
-
-  <div >
-    <div class="col-md-6 px-0">
-    <img src="/static/img/friends.png"  alt="우리 반의 칭긔들">
-
+    
+  <div class="col2">
+    <div class="friends">
+      <div class="profile-title" style="margin:24px;">반 친구들</div>
+      <div class="friends-list">
+        {% for friend in class_friends.all %}
+          <div class="friend-card">
+            <a class="friend-card-a" href="{% url 'myprofile:detail' friend.id %}">
+              <img src="{{friend.profile_image.url}}" width="75" height="75">
+              <div>{{friend.username}}</div>
+            </a>
+            <div style="height: 1px; background-color: #f99b0d; margin:5px;"></div>
+            <div>{{friend.intro}}</div>
+          </div>
+        {% endfor %}
+      </div>
       <!--<h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
       <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
       <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>-->
