@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extra-style %}<link rel="stylesheet" type="text/css" href="{% static 'css/mate_style.css' %}">{% endblock %}
+
+{% block title %}home.html{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="mate-detail">
+        <a href="{% url 'mate:home' %}" style="float:left; margin:12px;"><</a> <!-- '<' 이미지로 넣기 -->
+        <div class="mate-detail-title">갤러리</div>
+
+        <div class="mate-gallery-imgs" style="width:1000px; height:500px; overflow:auto;">
+            {% for photo in photos.all %}
+                <img src="{{photo.image.url}}" height="200" class="mate-gallery-img">
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
+
+{% block footer %}
+<footer class="fixed-bottom bg-info">
+    <div class="text-white font-italic text-right mr-5">Copyright &copy; 2020 Be.com by soljik</div>
+</footer>
+{% endblock %}

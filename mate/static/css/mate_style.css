@@ -1,0 +1,68 @@
+a {
+    text-decoration: none;
+    color: black;
+}
+ a:hover{
+    text-decoration: none;
+    color: #f99b0d;
+}
+
+.container{
+    font-family: Noto Sans KR;
+}
+.mate-title{
+    color: #5B5652;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+/* 갤러리, 태스크 화면 공통 */
+.mate-detail{
+    padding: 24px;
+    height: 600px;
+    background: #FFFFFF;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+.mate-detail-title{
+    color: #5B5652;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+/* 갤러리 */
+.mate-gallery-img{
+    border-radius:10px;
+    margin:12px;
+}
+
+/* 태스크 */
+.mate-task-card-row{
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+.mate-task-card{
+    background-color: #f99b0d;
+    border-radius: 10px;
+    width: 20%;
+    height: 100px;
+    color: white;
+    font-size: 18px;
+    line-height: 36px;
+    padding-top: 30px;
+    text-align: center;
+}
