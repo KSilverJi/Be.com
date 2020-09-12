@@ -12,3 +12,4 @@ class MateAdmin(admin.ModelAdmin):
 
 admin.site.register(Mate, MateAdmin)
 admin.site.register(MateTask)
+#admin.site.register(Task)

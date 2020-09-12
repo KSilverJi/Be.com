@@ -28,7 +28,14 @@
       <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
           <div class="mate-title">친밀도</div>
-          
+          <div>
+            두 분 정말 잘 맞는 친구네요! 절친이 되기까지 28% 남았어요~
+          </div>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:72%">
+              72%
+            </div>
+        </div>
         </div>
       </div>
     </div>
@@ -48,7 +55,54 @@
         <div class="col p-4 d-flex flex-column position-static">
           <div class="mate-title">태스크</div>
           <a href="{% url 'mate:task' %}">더보기</a>
-          
+          <div class="mate-task-percent">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:{{task_done_per}}%">
+                  {{task_done_per}}%
+                </div>
+              </div>
+          </div>
+          <div>
+            남은 태스크
+          </div>
+          <div class="home-mate-task-list">
+            {% if tasks.task1 == 0 %}
+              <div class="home-mate-task-card">도서관 가기</div>
+            {% endif %}
+            {% if tasks.task2 == 0 %}
+              <div class="home-mate-task-card">산책하기</div>
+            {% endif %}
+            {% if tasks.task3 == 0 %}
+              <div class="home-mate-task-card">숙제하기</div>
+            {% endif %}
+            {% if tasks.task4 == 0 %}
+              <div class="home-mate-task-card">선물 주기</div>
+            {% endif %}
+            {% if tasks.task5 == 0 %}
+              <div class="home-mate-task-card">봉사활동 가기</div>
+            {% endif %}
+            {% if tasks.task6 == 0 %}
+              <div class="home-mate-task-card">카페 가기</div>
+            {% endif %}
+            {% if tasks.task7 == 0 %}
+              <div class="home-mate-task-card">자전거 타기</div>
+            {% endif %}
+            {% if tasks.task8 == 0 %}
+              <div class="home-mate-task-card">쇼핑하기</div>
+            {% endif %}
+            {% if tasks.task9 == 0 %}
+              <div class="home-mate-task-card">편지 쓰기</div>
+            {% endif %}
+            {% if tasks.task10 == 0 %}
+              <div class="home-mate-task-card">밥 먹기</div>
+            {% endif %}
+            {% if tasks.task11 == 0 %}
+              <div class="home-mate-task-card">영화 보기</div>
+            {% endif %}
+            {% if tasks.task12 == 0 %}
+              <div class="home-mate-task-card">게임하기</div>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>

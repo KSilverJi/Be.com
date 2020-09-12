@@ -14,36 +14,127 @@
         <div class="mate-detail-title">태스크</div>
         
         <div class="mate-task-percent">
-            
+            {{task_done_num}}/12 개 완료!
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:{{task_done_per}}%">
+                  {{task_done_per}}%
+                </div>
+            </div>
         </div>
 
-        <div class="mate-task-list" style="width:1000px; height:500px;">
+        <div class="mate-task-list" style="width:1000px; height:500px;"> <!-- task가 list 형태로 있으면 편할 것 같은데 모델에서 list field가 없는 것 같다. -->
             <div class="mate-task-card-row">
                 <div class="mate-task-card">
-                    도서관 가기
+                    {% if tasks.task1 == 0 %}
+                    <a href="{% url 'mate:task-done' 1 %}">
+                        <div class="yet">도서관 가기</div>
+                    </a>
+                    {% else %}
+                        <div class="done">도서관 가기</div>
+                    {% endif %}
                 </div>
                 <div class="mate-task-card">
-                    산책하기
+                    {% if tasks.task2 == 0 %}
+                    <a href="{% url 'mate:task-done' 2 %}">
+                        <div class="yet">산책하기</div>
+                    </a>
+                    {% else %}
+                        <div class="done">산책하기</div>
+                    {% endif %}                    
                 </div>
                 <div class="mate-task-card">
-                    숙제하기
+                    {% if tasks.task3 == 0 %}
+                    <a href="{% url 'mate:task-done' 3 %}">
+                        <div class="yet">숙제하기</div>
+                    </a>
+                    {% else %}
+                        <div class="done">숙제하기</div>
+                    {% endif %}           
                 </div>
                 <div class="mate-task-card">
-                    깜짝 선물주기
+                    {% if tasks.task4 == 0 %}
+                    <a href="{% url 'mate:task-done' 4 %}">
+                        <div class="yet">선물 주기</div>
+                    </a>
+                    {% else %}
+                        <div class="done">선물 주기</div>
+                    {% endif %}
                 </div>
             </div>
             <div class="mate-task-card-row">
                 <div class="mate-task-card">
-                    도서관 가기
+                    {% if tasks.task5 == 0 %}
+                    <a href="{% url 'mate:task-done' 5 %}">
+                        <div class="yet">봉사활동 가기</div>
+                    </a>
+                    {% else %}
+                        <div class="done">봉사활동 가기</div>
+                    {% endif %}
                 </div>
                 <div class="mate-task-card">
-                    산책하기
+                    {% if tasks.task6 == 0 %}
+                    <a href="{% url 'mate:task-done' 6 %}">
+                        <div class="yet">카페 가기</div>
+                    </a>
+                    {% else %}
+                        <div class="done">카페 가기</div>
+                    {% endif %}                    
                 </div>
                 <div class="mate-task-card">
-                    숙제하기
+                    {% if tasks.task7 == 0 %}
+                    <a href="{% url 'mate:task-done' 7 %}">
+                        <div class="yet">자전거 타기</div>
+                    </a>
+                    {% else %}
+                        <div class="done">자전거 타기</div>
+                    {% endif %}           
                 </div>
                 <div class="mate-task-card">
-                    깜짝 선물주기
+                    {% if tasks.task8 == 0 %}
+                    <a href="{% url 'mate:task-done' 8 %}">
+                        <div class="yet">쇼핑하기</div>
+                    </a>
+                    {% else %}
+                        <div class="done">쇼핑하기</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="mate-task-card-row">
+                <div class="mate-task-card">
+                    {% if tasks.task9 == 0 %}
+                    <a href="{% url 'mate:task-done' 9 %}">
+                        <div class="yet">편지 쓰기</div>
+                    </a>
+                    {% else %}
+                        <div class="done">편지 쓰기</div>
+                    {% endif %}
+                </div>
+                <div class="mate-task-card">
+                    {% if tasks.task10 == 0 %}
+                    <a href="{% url 'mate:task-done' 10 %}">
+                        <div class="yet">밥 먹기</div>
+                    </a>
+                    {% else %}
+                        <div class="done">밥 먹기</div>
+                    {% endif %}                    
+                </div>
+                <div class="mate-task-card">
+                    {% if tasks.task11 == 0 %}
+                    <a href="{% url 'mate:task-done' 11 %}">
+                        <div class="yet">영화 보기</div>
+                    </a>
+                    {% else %}
+                        <div class="done">영화 보기</div>
+                    {% endif %}           
+                </div>
+                <div class="mate-task-card">
+                    {% if tasks.task12 == 0 %}
+                    <a href="{% url 'mate:task-done' 12 %}">
+                        <div class="yet">게임하기</div>
+                    </a>
+                    {% else %}
+                        <div class="done">게임하기</div>
+                    {% endif %}
                 </div>
             </div>
         </div>

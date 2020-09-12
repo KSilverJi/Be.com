@@ -12,7 +12,25 @@
     <div class="mate-detail">
         <a href="{% url 'mate:home' %}" style="float:left; margin:12px;"><</a> <!-- '<' 이미지로 넣기 -->
         <div class="mate-detail-title">갤러리</div>
-
+        <div>
+            <form  method="POST" action="{% url 'mate:upload' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!--
+                <select name="topic">
+                    <option value="profile-image">프로필 사진</option>
+                    <option value="favorite-spot">좋아하는 장소</option>
+                    <option value="happiness">행복할 때</option>
+                    <option value="friends">친구들과 함께</option>
+                    <option value="favorite-movie">좋아하는 영화</option>
+                    <option value="else">기타</option>
+                </select>
+                -->
+                <div class="filebox">
+                    <input type="file" name="imgs" multiple>
+                    <input type="submit" value="업로드" style="background:#f99b0d; color:white; border:none; border-radius:5px; padding:5px 12px;">
+                </div>
+            </form>
+        </div>
         <div class="mate-gallery-imgs" style="width:1000px; height:500px; overflow:auto;">
             {% for photo in photos.all %}
                 <img src="{{photo.image.url}}" height="200" class="mate-gallery-img">
