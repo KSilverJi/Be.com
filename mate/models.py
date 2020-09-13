@@ -40,6 +40,10 @@ class MateQuest(models.Model): # 0이 완료 안 된 상태
     def __str__(self):
         return "%s" % self.mate
 
+class MateMsg(models.Model):
+    mate = models.ForeignKey(Mate, on_delete=models.CASCADE, null=True) # Mate 모델과 연결
+    content = models.CharField(max_length=400)
+
 #class Task(models.Model):
 #    mate = models.ForeignKey(Mate, on_delete=models.CASCADE, null=True) # Mate 모델과 연결
 #    task = ArrayField(IntegerField(), size=8)

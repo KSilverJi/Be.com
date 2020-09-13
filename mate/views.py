@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.db.models import Q # OR문 추가
 
-from .models import Mate, MatePhoto, MateQuest
+from .models import Mate, MatePhoto, MateQuest, MateMsg
 from myprofile.models import MyProfile
 from django.contrib.auth.models import User
 
