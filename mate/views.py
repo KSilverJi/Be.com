@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.db.models import Q # OR문 추가
 
-from .models import Mate, MatePhoto, MateTask
+from .models import Mate, MatePhoto, MateQuest
 from myprofile.models import MyProfile
 from django.contrib.auth.models import User
 
@@ -12,15 +12,15 @@ def mate_home(request):
     profile = MyProfile.objects.get(username=user)
     mate = Mate.objects.get(Q(mate1=profile) | Q(mate2=profile))
     photos = MatePhoto.objects.filter(mate=mate)
-    tasks = MateTask.objects.get(mate=mate)
-    task_done_num = task_percent(tasks)
-    task_done_per = round(task_done_num/12*100)
+    quests = MateQuest.objects.get(mate=mate)
+    quest_done_num = quest_percent(quests)
+    quest_done_per = round(quest_done_num/12*100)
 
     item={
         'mate' : mate,
         'photos' : photos,
-        'tasks' : tasks,
-        'task_done_per' : task_done_per,
+        'quests' : quests,
+        'quest_done_per' : quest_done_per,
     }
     return render(request, 'mate/mate.html', item)
 
@@ -31,7 +31,7 @@ def gallery(request):
     photos = MatePhoto.objects.filter(mate=mate)
     return render(request, 'mate/gallery.html', {'photos':photos})
 
-def upload(request):
+def upload(request): #intimacy 다시 계산하여 저장한다.
     if(request.method == 'POST'):
         user = request.user
         profile = MyProfile.objects.get(username=user)
@@ -46,86 +46,86 @@ def upload(request):
     else:
         return render(request, 'mate/mate.html')
 
-def task(request):
+def quest(request):
     user = request.user
     profile = MyProfile.objects.get(username=user)
     mate = Mate.objects.get(Q(mate1=profile) | Q(mate2=profile))
-    tasks = MateTask.objects.get(mate=mate)
-    task_done_num = task_percent(tasks)
-    task_done_per = round(task_done_num/12*100)
+    quests = MateQuest.objects.get(mate=mate)
+    quest_done_num = quest_percent(quests)
+    quest_done_per = round(quest_done_num/12*100)
 
     item={
-        'tasks': tasks,
-        'task_done_num' : task_done_num,
-        'task_done_per' : task_done_per,
+        'quests': quests,
+        'quest_done_num' : quest_done_num,
+        'quest_done_per' : quest_done_per,
     }
     #new = Task()
     #new.mate = mate
     #new.task = [0, 0, 0, 0, 0, 0, 0, 0]
     #new.save()
-    return render(request, 'mate/task.html', item)
+    return render(request, 'mate/quest.html', item)
 
-def task_done(request, task_id):
+def quest_done(request, quest_id): #intimacy 다시 계산하여 저장
     user = request.user
     profile = MyProfile.objects.get(username=user)
     mate = Mate.objects.get(Q(mate1=profile) | Q(mate2=profile))
-    tasks = MateTask.objects.get(mate=mate)
-    find_task(task_id, tasks)
-    return redirect('/mate/task')
+    quests = MateQuest.objects.get(mate=mate)
+    find_quest(quest_id, quests)
+    return redirect('/mate/quest')
 
-def find_task(task_id, tasks):
-    if task_id==1:
-        tasks.task1 = 1
-    elif task_id==2:
-        tasks.task2 = 1
-    elif task_id==3:
-        tasks.task3 = 1
-    elif task_id==4:
-        tasks.task4 = 1
-    elif task_id==5:
-        tasks.task5 = 1
-    elif task_id==6:
-        tasks.task6 = 1
-    elif task_id==7:
-        tasks.task7 = 1
-    elif task_id==8:
-        tasks.task8 = 1
-    elif task_id==9:
-        tasks.task9 = 1
-    elif task_id==10:
-        tasks.task10 = 1
-    elif task_id==11:
-        tasks.task11 = 1
-    elif task_id==12:
-        tasks.task12 = 1
+def find_quest(quest_id, quests):
+    if quest_id==1:
+        quests.quest1 = 1
+    elif quest_id==2:
+        quests.quest2 = 1
+    elif quest_id==3:
+        quests.quest3 = 1
+    elif quest_id==4:
+        quests.quest4 = 1
+    elif quest_id==5:
+        quests.quest5 = 1
+    elif quest_id==6:
+        quests.quest6 = 1
+    elif quest_id==7:
+        quests.quest7 = 1
+    elif quest_id==8:
+        quests.quest8 = 1
+    elif quest_id==9:
+        quests.quest9 = 1
+    elif quest_id==10:
+        quests.quest10 = 1
+    elif quest_id==11:
+        quests.quest11 = 1
+    elif quest_id==12:
+        quests.quest12 = 1
     
-    tasks.save()
+    quests.save()
 
-def task_percent(tasks):
-    task_done_num = 0
-    if tasks.task1==1:
-        task_done_num += 1
-    if tasks.task2==1:
-        task_done_num += 1
-    if tasks.task3==1:
-        task_done_num += 1
-    if tasks.task4==1:
-        task_done_num += 1
-    if tasks.task5==1:
-        task_done_num += 1
-    if tasks.task6==1:
-        task_done_num += 1
-    if tasks.task7==1:
-        task_done_num += 1
-    if tasks.task8==1:
-        task_done_num += 1
-    if tasks.task9==1:
-        task_done_num += 1
-    if tasks.task10==1:
-        task_done_num += 1
-    if tasks.task11==1:
-        task_done_num += 1
-    if tasks.task12==1:
-        task_done_num += 1
+def quest_percent(quests):
+    quest_done_num = 0
+    if quests.quest1==1:
+        quest_done_num += 1
+    if quests.quest2==1:
+        quest_done_num += 1
+    if quests.quest3==1:
+        quest_done_num += 1
+    if quests.quest4==1:
+        quest_done_num += 1
+    if quests.quest5==1:
+        quest_done_num += 1
+    if quests.quest6==1:
+        quest_done_num += 1
+    if quests.quest7==1:
+        quest_done_num += 1
+    if quests.quest8==1:
+        quest_done_num += 1
+    if quests.quest9==1:
+        quest_done_num += 1
+    if quests.quest10==1:
+        quest_done_num += 1
+    if quests.quest11==1:
+        quest_done_num += 1
+    if quests.quest12==1:
+        quest_done_num += 1
     
-    return task_done_num
+    return quest_done_num

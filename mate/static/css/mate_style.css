@@ -44,10 +44,66 @@ a {
 }
 
 /* HOME */
-.home-mate-task-list{
+.mate-home-profile{
+    background: #FFFFFF;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin-bottom: 24px;
+}
+.mate-profile-img{
+    float: left;
+}
+.mate-home-percent{
+    background: #FFFFFF;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin-bottom: 24px;
+}
+.mate-home-message{
+    background: #FFFFFF;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin-bottom: 24px;
+}
+.message-send-button{
+    float:right; 
+    background-color:#f99b0d; 
+    color:white; 
+    border:none; 
+    border-radius:5px;
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+}
+.mate-home-gallery{
+    background: #FFFFFF;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin-bottom: 24px;
+}
+.mate-home-quest{
+    background: #FFFFFF;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin-bottom: 24px;
+}
+.home-mate-quest-list{
     margin: 0 auto;
 }
-.home-mate-task-card{
+.home-mate-quest-card{
     width: 30%;
     height: 80px;
     font-size: 16px;
@@ -70,7 +126,7 @@ a {
 }
 
 /* 태스크 */
-.mate-task-percent{
+.mate-quest-percent{
     width: 80%;
     padding: 12px;
     text-align: center;
@@ -81,13 +137,13 @@ a {
     border-radius: 7px;
     background-color: #f99b0d;
 }
-.mate-task-card-row{
+.mate-quest-card-row{
     width: 100%;
     padding: 12px;
     display: flex;
     justify-content: space-between;
 }
-.mate-task-card{
+.mate-quest-card{
     width: 20%;
     height: 100px;
     font-size: 18px;

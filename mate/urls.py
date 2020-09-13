@@ -1,13 +1,13 @@
 from django.urls import path
 
-from . import views
+from mate import views
 
 app_name = 'mate' 
 urlpatterns = [
     path('', views.mate_home, name="home"),
     path('gallery', views.gallery, name="gallery"),
-    path('task', views.task, name="task"),
-    path('taskdone/<int:task_id>', views.task_done, name="task-done"),
+    path('quest', views.quest, name="quest"),
+    path('questdone/<int:quest_id>', views.quest_done, name="quest-done"),
     path('upload/', views.upload, name='upload'),
 ]
 

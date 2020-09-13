@@ -22,20 +22,20 @@ class MatePhoto(models.Model):
     def __str__(self):
         return "%s" % self.mate
 
-class MateTask(models.Model): # 0이 완료 안 된 상태
+class MateQuest(models.Model): # 0이 완료 안 된 상태
     mate = models.ForeignKey(Mate, on_delete=models.CASCADE, null=True) # Mate 모델과 연결
-    task1 = models.IntegerField(default=0)
-    task2 = models.IntegerField(default=0)
-    task3 = models.IntegerField(default=0)
-    task4 = models.IntegerField(default=0)
-    task5 = models.IntegerField(default=0)
-    task6 = models.IntegerField(default=0)
-    task7 = models.IntegerField(default=0)
-    task8 = models.IntegerField(default=0)
-    task9 = models.IntegerField(default=0)
-    task10 = models.IntegerField(default=0)
-    task11 = models.IntegerField(default=0)
-    task12 = models.IntegerField(default=0)
+    quest1 = models.IntegerField(default=0)
+    quest2 = models.IntegerField(default=0)
+    quest3 = models.IntegerField(default=0)
+    quest4 = models.IntegerField(default=0)
+    quest5 = models.IntegerField(default=0)
+    quest6 = models.IntegerField(default=0)
+    quest7 = models.IntegerField(default=0)
+    quest8 = models.IntegerField(default=0)
+    quest9 = models.IntegerField(default=0)
+    quest10 = models.IntegerField(default=0)
+    quest11 = models.IntegerField(default=0)
+    quest12 = models.IntegerField(default=0)
 
     def __str__(self):
         return "%s" % self.mate

@@ -9,8 +9,8 @@
 
 {% block content %}
 <div class="container">
+    <div style="margin-bottom:12px;"><a href="{% url 'mate:home' %}">< 짝꿍 홈</a></div>
     <div class="mate-detail">
-        <a href="{% url 'mate:home' %}" style="float:left; margin:12px;"><</a> <!-- '<' 이미지로 넣기 -->
         <div class="mate-detail-title">갤러리</div>
         <div>
             <form  method="POST" action="{% url 'mate:upload' %}" enctype="multipart/form-data">
