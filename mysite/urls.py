@@ -22,6 +22,7 @@ from django.conf.urls import url
 import myprofile.views
 import forum.views
 import moodtracker.views
+import mate.views
 
 from mysite.views import HomeView, UserCreateView, UserCreateDoneTV
 
@@ -37,10 +38,10 @@ urlpatterns = [
     path('bookmark/', include('bookmark.urls')),
     path('blog/', include('blog.urls')),
     path('photo/', include('photo.urls')),
-    path('mate/',include('mate.urls')),
-    path('myprofile/',include('myprofile.urls'), name='myprofile'),
     path('forum/',include('forum.urls')),
+    path('myprofile/',include('myprofile.urls'), name='myprofile'),
     path('moodtracker/', include('moodtracker.urls'), name='moodtracker'),
+    path('mate/',include('mate.urls'), name='mate'),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
