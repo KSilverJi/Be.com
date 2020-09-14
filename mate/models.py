@@ -10,7 +10,7 @@ from myprofile.models import MyProfile
 class Mate(models.Model):
     mate1 = models.ForeignKey(MyProfile, on_delete=models.CASCADE, verbose_name='USERNAME', blank=True, null=True, related_name='mate1') # 학생1의 id (User 모델과 연결)
     mate2 = models.ForeignKey(MyProfile, on_delete=models.CASCADE, verbose_name='USERNAME', blank=True, null=True, related_name='mate2') # 학생2의 id (User 모델과 연결)
-    intimacy = models.IntegerField(default=0)
+    intimacy = models.IntegerField(default=0) # Quest 3%, Photo 1%, Message 1% 증가
     
     def __str__(self):
         return "%s - %s" % (self.mate1, self.mate2)
@@ -42,6 +42,7 @@ class MateQuest(models.Model): # 0이 완료 안 된 상태
 
 class MateMsg(models.Model):
     mate = models.ForeignKey(Mate, on_delete=models.CASCADE, null=True) # Mate 모델과 연결
+    sender = models.ForeignKey(MyProfile, on_delete=models.CASCADE, verbose_name='USERNAME', blank=True, null=True)
     content = models.CharField(max_length=400)
 
 #class Task(models.Model):

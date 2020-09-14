@@ -15,14 +15,34 @@ def mate_home(request):
     quests = MateQuest.objects.get(mate=mate)
     quest_done_num = quest_percent(quests)
     quest_done_per = round(quest_done_num/12*100)
+    messages = MateMsg.objects.filter(mate=mate)
 
     item={
         'mate' : mate,
+        'profile' : profile,
         'photos' : photos,
         'quests' : quests,
         'quest_done_per' : quest_done_per,
+        'messages' : messages,
     }
     return render(request, 'mate/mate.html', item)
+
+def send_message(request):
+    user = request.user
+    profile = MyProfile.objects.get(username=user)
+    mate = Mate.objects.get(Q(mate1=profile) | Q(mate2=profile))
+    
+    message = MateMsg()
+    message.mate = mate
+    message.sender = profile
+    message.content = request.GET['message']
+    message.save()
+
+    if mate.intimacy < 100:
+        mate.intimacy += 1 # 친밀도 1% 증가
+        mate.save()
+
+    return redirect('/mate')
 
 def gallery(request):
     user = request.user
@@ -31,7 +51,7 @@ def gallery(request):
     photos = MatePhoto.objects.filter(mate=mate)
     return render(request, 'mate/gallery.html', {'photos':photos})
 
-def upload(request): #intimacy 다시 계산하여 저장한다.
+def upload(request): 
     if(request.method == 'POST'):
         user = request.user
         profile = MyProfile.objects.get(username=user)
@@ -42,6 +62,9 @@ def upload(request): #intimacy 다시 계산하여 저장한다.
             photo.mate = mate # 외래키로 현재 생성한 MyProfile의 기본키를 참조한다.
             photo.image = img # imgs로부터 가져온 이미지 파일 하나를 저장한다.
             photo.save() # 데이터베이스에 저장
+        if mate.intimacy < 100:
+            mate.intimacy += 1 # 친밀도 1% 증가
+            mate.save()
         return redirect('/mate/gallery')
     else:
         return render(request, 'mate/mate.html')
@@ -65,14 +88,18 @@ def quest(request):
     #new.save()
     return render(request, 'mate/quest.html', item)
 
-def quest_done(request, quest_id): #intimacy 다시 계산하여 저장
+def quest_done(request, quest_id):
     user = request.user
     profile = MyProfile.objects.get(username=user)
     mate = Mate.objects.get(Q(mate1=profile) | Q(mate2=profile))
     quests = MateQuest.objects.get(mate=mate)
     find_quest(quest_id, quests)
+    if mate.intimacy < 100:
+        mate.intimacy += 3 # 친밀도 3% 증가
+        mate.save()
     return redirect('/mate/quest')
 
+# Quest_id 찾아서 완료 처리
 def find_quest(quest_id, quests):
     if quest_id==1:
         quests.quest1 = 1
@@ -101,6 +128,7 @@ def find_quest(quest_id, quests):
     
     quests.save()
 
+# 완료된 Quest 수 계산
 def quest_percent(quests):
     quest_done_num = 0
     if quests.quest1==1:

@@ -9,5 +9,6 @@ urlpatterns = [
     path('quest', views.quest, name="quest"),
     path('questdone/<int:quest_id>', views.quest_done, name="quest-done"),
     path('upload/', views.upload, name='upload'),
+	path('message/', views.send_message, name='send_message'),
 ]
 
