@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.db.models import Q # OR문 추가
+from django.utils import timezone
+from datetime import datetime
 
 from .models import Mate, MatePhoto, MateQuest, MateMsg
 from myprofile.models import MyProfile
@@ -36,6 +38,7 @@ def send_message(request):
     message.mate = mate
     message.sender = profile
     message.content = request.GET['message']
+    message.created_date = timezone.now()
     message.save()
 
     if mate.intimacy < 100:

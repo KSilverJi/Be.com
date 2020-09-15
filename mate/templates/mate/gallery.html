@@ -9,10 +9,10 @@
 
 {% block content %}
 <div class="container">
-    <div style="margin-bottom:12px;"><a href="{% url 'mate:home' %}">< 짝꿍 홈</a></div>
+    <div class="go-home-button"><a href="{% url 'mate:home' %}" style="color:#5B5652;"><img src="{% static 'img/left_arrow.png' %}" height="16" style="float:left; margin-top:4px;">짝꿍 홈</a></div>
     <div class="mate-detail">
         <div class="mate-detail-title">갤러리</div>
-        <div>
+        <div style="float:right;">
             <form  method="POST" action="{% url 'mate:upload' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <!--

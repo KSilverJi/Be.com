@@ -16,13 +16,19 @@
         <div class="col p-4 d-flex flex-column position-static">
           <div class="mate-title">프로필</div>
           <div class="mate-profile-img">
-            <a href="{% url 'myprofile:detail' mate.mate1.id %}">
-              <img src="{{mate.mate1.profile_image.url}}" width="100" height="100">
-            </a>
-            <img src="{% static 'img/mate-zigzag.png' %}" height="50">
-            <a href="{% url 'myprofile:detail' mate.mate2.id %}">
-              <img src="{{mate.mate2.profile_image.url}}" width="100" height="100">
-            </a>
+            <div class="mate-profile">
+              <a href="{% url 'myprofile:detail' mate.mate1.id %}">
+                <img src="{{mate.mate1.profile_image.url}}" width="100" height="100">
+                <div style="width:100px;">{{mate.mate1.username}}</div>
+              </a>
+            </div>
+            <img src="{% static 'img/mate-zigzag.png' %}" height="50" style="float:left; margin-top:20px;">
+            <div class="mate-profile">
+              <a href="{% url 'myprofile:detail' mate.mate2.id %}">
+                <img src="{{mate.mate2.profile_image.url}}" width="100" height="100">
+                <div style="width:100px;">{{mate.mate2.username}}</div>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -33,26 +39,38 @@
       <div class="mate-home-message row no-gutters overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
           <div class="mate-title">쪽지</div>
-          <div class="message" style="margin:0 auto; width:100%; background-color:#eee; padding:5px;">
+          <div class="message">
             <div class="message-list">
-              <div class="msg-mine">
-                안녕ㅎㅎ 난 강미나라고 해! 한 학기 동안 친하게 지내자
-              </div>
-              <div class="msg-mate">
-                안녕! 난 김세정이야 만나서 반가워ㅎㅎ
-              </div>
               {% for message in messages.all %}
                 {% if message.sender == profile %}
-                  <div class="msg-mine">{{message.content}}</div>
+                  <div class="msg-mine">
+                    <div class="msg-mine-content">{{message.content}}</div>
+                    <div class="msg-mine-date">
+                      {% if message.created_string == False %}
+                        <div>{{ message.created_date|date:'m월 d일' }}</div>
+                      {% else %}
+                        <div>{{ message.created_string }}</div>
+                      {% endif %}
+                    </div>
+                  </div>
                 {% else %}
-                  <div class="msg-mate">{{message.content}}</div>
+                  <div class="msg-mate">
+                    <div class="msg-mate-content">{{message.content}}</div>
+                    <div class="msg-mate-date">
+                      {% if message.created_string == False %}
+                        {{ message.created_date|date:'m월 d일' }}
+                      {% else %}
+                        {{ message.created_string }}
+                      {% endif %}
+                    </div>
+                  </div>
                 {% endif %}
               {% endfor %}
             </div>            
             <div class="message-input" style="width:100%; padding-top:12px;">
               <form action="{% url 'mate:send_message' %}">
-                <input type="text" name="message" size="30">
-                <input type="submit" value=">" name="submit" class="message-send-button">
+                <input type="text" name="message" size="35" style="height:50px; border: 1px solid #BDBDBD; box-sizing: border-box; border-radius: 100px;">
+                <input type="image" src="{% static 'img/send_button.png' %}" name="submit" width="40" height="40" class="message-send-button">
               </form>
             </div>
           </div>

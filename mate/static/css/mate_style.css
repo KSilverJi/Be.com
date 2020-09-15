@@ -20,7 +20,13 @@ a {
     display: inline-block;
 }
 
-/* 갤러리, 태스크 화면 공통 */
+/* 갤러리, 퀘스트 화면 공통 */
+.go-home-button{
+    margin-bottom:12px;
+    font-size:16px;
+    font-style:normal;
+    font-weight:bold;
+}
 .mate-detail{
     padding: 24px;
     background: #FFFFFF;
@@ -36,9 +42,9 @@ a {
     font-weight: 600;
     font-size: 24px;
     line-height: 32px;
-    display: flex;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 24px;
+    display: inline-block;
 }
 
 /* HOME */
@@ -52,7 +58,11 @@ a {
     margin-bottom: 24px;
 }
 .mate-profile-img{
+    margin: 0 auto;
+}
+.mate-profile{
     float: left;
+    text-align: center;
 }
 .mate-home-percent{
     width: 100%;
@@ -85,40 +95,62 @@ a {
     border-radius: 20px;
     margin-bottom: 24px;
 }
+.message{
+    background-color: white;
+    margin:0 auto; 
+    width:100%;
+    padding:5px;
+}
 .message-list{
     display:block; 
     margin-bottom:12px;
     overflow: auto;
+    height: 360px;
 }
 .msg-mine{
+    margin-bottom: 12px;
+    overflow: auto;
+}
+.msg-mine-content{
     width: 70%; 
     float: right; 
     background-color: #f99b0d; 
     color: white; 
-    margin-bottom: 12px; 
     border-radius: 10px; 
     padding: 10px;
+}
+.msg-mine-date{
+    float: right;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #BDBDBD;
+    margin-right: 10px;
 }
 .msg-mate{
+    margin-bottom: 12px; 
+    overflow: auto;
+}
+.msg-mate-content{
     width: 70%; 
     float: left; 
-    background-color :#aaa; 
-    margin-bottom: 12px; 
+    background-color: #F6F6F6; 
+    border: 1px solid #E8E8E8;
     border-radius: 10px; 
     padding: 10px;
 }
+.msg-mate-date{
+    float: left;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #BDBDBD;
+    margin-left: 10px;
+}
 .message-send-button{
-    float: right; 
-    background-color: #f99b0d; 
-    color: white; 
-    border: none; 
-    border-radius: 5px;
-    width: 60px;
-    height: 30px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
+    position: relative;
+    vertical-align: middle;
+    margin-bottom: 5px;
 }
 .mate-home-gallery{
     width: 100%;
