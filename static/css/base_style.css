@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=notosanskr.css');
+
+#becom .navbar .navbar-expand-lg .fixed-top{
+    background-color:black;
+}
+
+.nav-item .mx-1 .btn .nav-link{
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 29px;
+    color: #504B47;
+    text-decoration: none;
+}
+
+#navnavnav{
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 29px;
+    color: #504B47;
+    text-decoration: none;
+}
+
+.register-therapy{
+    color: #f99b0d;
+}

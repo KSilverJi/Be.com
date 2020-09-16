@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=notosanskr.css');
+
 a {
     text-decoration: none;
     color: black;
@@ -194,8 +196,7 @@ a {
 /* 갤러리 */
 .mate-gallery-img{
     border-radius:10px;
-    margin-left: 12px;
-    margin-right: 12px;
+    margin: 12px;
 }
 
 /* 태스크 */

@@ -12,108 +12,114 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-    {% block extra-style %}{% endblock %}
+    {% block extra-style %}<link rel="stylesheet" type="text/css" href="{% static 'css/base_style.css' %}">{% endblock %}
 </head>
 
-<body style="padding-top:90px;">
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #f99b0d;">
-    <a class="navbar-brand mx-5 mb-0 font-weight-bold font-italic" href="{% url 'home' %}">Be.com</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-        <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <!--<li class="nav-item mx-1 btn" style="background-color: #f99b0d;">
-                <a class="nav-link text-white" href="{% url 'home' %}">Home</a></li>-->
-            <!--<li class="nav-item mx-1 btn btn-primary">
-                <a class="nav-link text-white" href="{% url 'bookmark:index' %}">Bookmark</a></li>-->
-            <li class="nav-item mx-1 btn" style="background-color: #f99b0d;">
-                <a class="nav-link text-white" href="{% url 'myprofile:home' %}">프로필</a></li>
-            <li class="nav-item mx-1 btn" style="background-color: #f99b0d;">
-                <a class="nav-link text-white" href="{% url 'moodtracker:home' %}">감정 일기</a></li>
-            <li class="nav-item mx-1 btn" style="background-color: #f99b0d;">
-                <a class="nav-link text-white" href="{% url 'mate:home' %}">짝꿍</a></li>
-                <!--<a class="nav-link text-white" href="{% url 'photo:index' %}">짝꿍</a></li>-->
-            <li class="nav-item mx-1 btn" style="background-color: #f99b0d;">
-                <a class="nav-link text-white" href="#">게시판</a></li>
+<body id="becom" style="padding-top:90px;">
+    <nav class="becom navbar navbar-expand-lg fixed-top">
+        <a class="navbar-brand mx-5 mb-0" href="{% url 'main' %}"><img src="{% static 'img/becom_logo.png' %}"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <!--<li class="nav-item dropdown mx-1 btn" style="background-color: #f99b0d;">
-                <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">Add</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'bookmark:add' %}">Bookmark</a>
-                    <a class="dropdown-item" href="{% url 'blog:add' %}">Post</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'photo:album_add' %}">Album</a>
-                    <a class="dropdown-item" href="{% url 'photo:photo_add' %}">Photo</a>
-                </div>
-            </li>-->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item mx-1 btn">
+                    <a class="nav-link" href="{% url 'main' %}" style="font-family: Noto Sans KR; font-style: normal; font-weight: 500; font-size:20px; color: #504B47;">홈</a></li>
+                <!--<li class="nav-item mx-1 btn btn-primary">
+                    <a class="nav-link text-white" href="{% url 'bookmark:index' %}">Bookmark</a></li>-->
+                <li class="nav-item mx-1 btn">
+                    <a class="nav-link" href="{% url 'myprofile:home' %}" style="font-family: Noto Sans KR; font-style: normal; font-weight: 500; font-size:20px; color: #504B47;">프로필</a></li>
+                <li class="nav-item mx-1 btn">
+                    <a class="nav-link" href="{% url 'moodtracker:home' %}" style="font-family: Noto Sans KR; font-style: normal; font-weight: 500; font-size:20px; color: #504B47;">감정 일기</a></li>
+                <li class="nav-item mx-1 btn">
+                    <a class="nav-link" href="{% url 'mate:home' %}" style="font-family: Noto Sans KR; font-style: normal; font-weight: 500; font-size:20px; color: #504B47;">짝꿍</a></li>
+                <li class="nav-item mx-1 btn">
+                    <a class="nav-link" href="#" style="font-family: Noto Sans KR; font-style: normal; font-weight: 500; font-size:20px; color: #504B47;">게시판</a></li>
 
-            <!--<li class="nav-item dropdown mx-1 btn" style="background-color: #f99b0d;">
-                <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">Change</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'bookmark:change' %}">Bookmark</a>
-                    <a class="dropdown-item" href="{% url 'blog:change' %}">Post</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'photo:album_change' %}">Album</a>
-                    <a class="dropdown-item" href="{% url 'photo:photo_change' %}">Photo</a>
-                </div>
-            </li>-->
+                <!--<li class="nav-item dropdown mx-1 btn" style="background-color: #f99b0d;">
+                    <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">Add</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'bookmark:add' %}">Bookmark</a>
+                        <a class="dropdown-item" href="{% url 'blog:add' %}">Post</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'photo:album_add' %}">Album</a>
+                        <a class="dropdown-item" href="{% url 'photo:photo_add' %}">Photo</a>
+                    </div>
+                </li>-->
 
-            <!--<li class="nav-item dropdown mx-1 btn " style="background-color: #f99b0d;">
-                <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">Util</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'blog:post_archive' %}">Archive</a>
-                    <a class="dropdown-item" href="{% url 'blog:search' %}">Search</a>
-                </div>
-            </li>-->
-        </ul>
+                <!--<li class="nav-item dropdown mx-1 btn" style="background-color: #f99b0d;">
+                    <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">Change</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'bookmark:change' %}">Bookmark</a>
+                        <a class="dropdown-item" href="{% url 'blog:change' %}">Post</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'photo:album_change' %}">Album</a>
+                        <a class="dropdown-item" href="{% url 'photo:photo_change' %}">Photo</a>
+                    </div>
+                </li>-->
 
-        <form class="form-inline my-2" action="" method="post"> {% csrf_token %}
-            <input class="form-control mr-sm-2" type="search" placeholder="global search" name="search_word">
-        </form>
+                <!--<li class="nav-item dropdown mx-1 btn " style="background-color: #f99b0d;">
+                    <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">Util</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'blog:post_archive' %}">Archive</a>
+                        <a class="dropdown-item" href="{% url 'blog:search' %}">Search</a>
+                    </div>
+                </li>-->
+            </ul>
 
-        <ul class="navbar-nav ml-5 mr-5">
-            <li class="nav-item dropdown mx-1 btn " style="background-color: #f99b0d;">
-                {% if user.is_active %}
-                <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
-            	    <i class="fas fa-user"></i>&ensp;{% firstof user.get_short_name user.get_username %}&ensp;</a>
-                <div class="dropdown-menu">
-            	    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-            	    <a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a>
-                </div>
-                {% else %}
-                <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
-            	    <i class="fas fa-user"></i>&ensp;Anonymous&ensp;</a>
-                <div class="dropdown-menu">
-            	    <a class="dropdown-item" href="{% url 'login' %}">Login</a>
-            	    <a class="dropdown-item" href="{% url 'register' %}">Register</a>
-                </div>
-                {% endif %}
-            </li>
-        </ul>
+            <!--
+            <form class="form-inline my-2" action="" method="post"> {% csrf_token %}
+                <input class="form-control mr-sm-2" type="search" placeholder="global search" name="search_word">
+            </form>
+        -->
+            <ul class="navbar-nav">
+                <li class="nav-item" style="border: 2px solid #F99B0D;box-sizing:border-box;border-radius:10px;padding:12px 26px;">
+                    <a class="register-therapy" href="#" style="text-decoration:none;color:#f99b0d;font-family: Noto Sans KR;font-weight: 500;font-size: 16px;">상담 신청하기</a>
+                </li>
+            </ul>
 
+            <ul class="navbar-nav ml-5 mr-5">
+                <li class="nav-item dropdown mx-1 btn " style="background-color: #white;">
+                    {% if user.is_active %}
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" style="font-family: Noto Sans KR;font-size: 16px;color: #000000;">
+                        <i class="fas fa-user"></i>&ensp;{% firstof user.get_short_name user.get_username %}님 환영합니다!&ensp;</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'logout' %}">로그아웃</a>
+                        <a class="dropdown-item" href="{% url 'password_change' %}">비밀번호 변경</a>
+                    </div>
+                    {% else %}
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                        <i class="fas fa-user"></i>&ensp;로그인 하세요&ensp;</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'login' %}">로그인</a>
+                        <a class="dropdown-item" href="{% url 'register' %}">회원가입</a>
+                    </div>
+                    {% endif %}
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}{% endblock %}
     </div>
-</nav>
 
 
-<div class="container">
-    {% block content %}{% endblock %}
-</div>
+    {% block footer %}{% endblock %}
 
 
-{% block footer %}{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/c998a172fe.js"></script>
 
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/c998a172fe.js"></script>
-
-{% block extra-script %}{% endblock %}
+    {% block extra-script %}{% endblock %}
 
 </body>
 </html>

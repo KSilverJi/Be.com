@@ -24,6 +24,7 @@ import forum.views
 import moodtracker.views
 import mate.views
 
+from mysite import views
 from mysite.views import HomeView, UserCreateView, UserCreateDoneTV
 
 
@@ -34,7 +35,7 @@ urlpatterns = [
     path('accounts/register/', UserCreateView.as_view(), name='register'), 
     path('accounts/register/done/', UserCreateDoneTV.as_view(), name='register_done'),
 
-    path('', HomeView.as_view(), name='home'),
+    path('', views.test, name='main'),
     path('bookmark/', include('bookmark.urls')),
     path('blog/', include('blog.urls')),
     path('photo/', include('photo.urls')),

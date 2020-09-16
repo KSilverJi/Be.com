@@ -31,9 +31,9 @@
                 </div>
             </form>
         </div>
-        <div class="mate-gallery-imgs" style="width:1000px; height:450px; overflow:auto;">
+        <div class="mate-gallery-imgs" style="width:1000px; height:550px; overflow:auto;">
             {% for photo in photos.all %}
-                <img src="{{photo.image.url}}" height="200" class="mate-gallery-img">
+                <img src="{{photo.image.url}}" height="250" class="mate-gallery-img">
             {% endfor %}
         </div>
 
