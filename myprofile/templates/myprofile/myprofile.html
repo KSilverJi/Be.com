@@ -7,7 +7,7 @@
 {% block content %}
 <div class="container">
   <div class="col1">
-    <div class="my-profile-home row1">
+    <div class="my-profile-home row">
       <div class="profile-title">내 프로필</div>
       <div style="float:right;"><a href="{% url 'myprofile:detail' my.id %}">더보기</a></div>
       <div class="my-profile">
@@ -18,16 +18,29 @@
           <b>학교</b> &nbsp; {{my.school}}<br>
           <b>학급</b> &nbsp; {{my.school_year}}학년 {{my.school_class}}반<br>
           <b>소개</b> &nbsp; {{my.intro}}</p>
-        <!--<a href="#" class="stretched-link">Continue reading</a>-->
         </div>
       </div>
     </div>
-    <div class="class-achievement row2">
-      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
-          <div class="profile-title">우리 반 활성도</div>
-          <img src="/static/img/active_class.png" width="300px" height="300px" alt="우리 반의 활성도">
-          <!-- view에서 class achievement 점수 받아서 점수 범위에 따라 다른 이미지 띄우기 -->
+    <div class="class-achievement row">
+      <div class="profile-title">우리 반 활성도</div>
+      <div class="class-level">LEVEL{{class_level}}</div>
+      <div class="class-score-text">{{class_score_text}}</div>
+      <div class="class-level-img">
+        {% if class_level == 1 %}
+          <img src="{% static 'img/level1.png' %}" width="100px" alt="우리 반의 활성도">
+        {% elif class_level == 2 %}
+          <img src="{% static 'img/level2.png' %}" width="100px" alt="우리 반의 활성도">
+        {% elif class_level == 3 %}
+          <img src="{% static 'img/level3.png' %}" width="100px" alt="우리 반의 활성도">
+        {% elif class_level == 4 %}
+          <img src="{% static 'img/level4.png' %}" width="100px" alt="우리 반의 활성도">
+        {% elif class_level == 5 %}
+          <img src="{% static 'img/level5.png' %}" width="100px" alt="우리 반의 활성도">
+        {% endif %}
+      </div>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:{{class_score}}%">
+          {{class_score}}%
         </div>
       </div>
     </div>

@@ -9,18 +9,35 @@ def profile_home(request):
     user = request.user
     my = MyProfile.objects.get(username=user) # 현재 사용자의 프로필 정보를 불러온다.
     class_friends = MyProfile.objects.filter(school=my.school, school_year=my.school_year, school_class=my.school_class).exclude(username=user) # 같은 학교, 학년, 반인 친구들 프로필 정보
-    class_achievements = 20 # 학급 활성도
+    class_score, class_score_text, class_level = class_achievement(my) # 학급 활성도
     
     item={
         'my' : my,
         'class_friends' : class_friends,
-        'class_achievements' : class_achievements,
+        'class_score' : class_score,
+        'class_score_text' : class_score_text,
+        'class_level' : class_level,
     }
     return render(request, 'myprofile/myprofile.html', item)
 
-def class_achievment(user): # user가 속한 학교/학년/반이 작성한 게시판 글 수 등 받아서 계산 -> DB에 업데이트, 활성도 점수 index 함수로 보내기.
-    a = 1
-    return a
+def class_achievement(my): # user가 속한 학교/학년/반이 작성한 게시판 글 수 등 받아서 계산 -> DB에 업데이트, 활성도 점수 index 함수로 보내기.
+    a = 90
+    if a >= 0 and a < 20 :
+        class_score_text = str(my.school_year)+'학년 '+str(my.school_class)+'반의 새싹이 피어났어요! 반 친구들과 함께 키워보아요!'
+        class_level = 1
+    elif a < 40 :
+        class_score_text = '벌써 이만큼 자랐네요! 나무가 될 때까지 더 키워볼까요?'
+        class_level = 2
+    elif a < 60 :
+        class_score_text = str(my.school_year)+'학년 '+str(my.school_class)+'반과 함께 무럭무럭 자라고 있어요! 잎이 많아질 때까지 조금 더 힘내볼까요?'
+        class_level = 3
+    elif a < 80 :
+        class_score_text = '우와, 나무가 정말 많이 자랐어요! 조만간 꽃이 피겠는걸요?'
+        class_level = 4
+    elif a < 100 :
+        class_score_text = '짝짝짝! '+str(my.school_year)+'학년 '+str(my.school_class)+'반의 활발한 소통이 꽃을 피웠어요!'
+        class_level = 5 
+    return a, class_score_text, class_level
 
 def profile_detail(request, profile_id):
     user = request.user # 현재 로그인한 사용자

@@ -70,7 +70,49 @@ a {
     margin-right: 24px;
     margin-bottom: 48px;
 }
-
+.class-level{
+    float: right;
+    width: 72px;
+    height: 26px;
+    background: #FFFFFF;
+    border: 2px solid #F99B0D;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 3px 6px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    color: #F99B0D;
+    margin-left: 10px;
+}
+.class-score-text{
+    width: 280px;
+    background: #FFFFFF;
+    border: 1px solid #D1CCC6;
+    box-sizing: border-box;
+    border-radius: 33px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
+    margin: 12px auto;
+}
+.class-level-img{
+    margin: 0 auto;
+}
+.progress{
+    width: 300px;
+    margin: 16px auto;
+}
+.progress-bar {
+    border-radius: 7px;
+    background-color: #f99b0d;
+}
 /* 홈 - 반 친구들 */
 .friends{
     height: 100%;
