@@ -45,6 +45,7 @@ a {
     margin-bottom: 24px;
 }
 .my-profile{
+    width:100%;
     text-align:center;
     padding-top: 24px;
     padding-left: 24px;
@@ -53,7 +54,7 @@ a {
 .my-profile-intro{
     text-align: left;
     margin-top: 32px;
-    margin-left: 48px;
+    margin-left: 25%;
     font-size: 16px;
     line-height: 30px;
     color: black;
@@ -142,6 +143,12 @@ a {
 }
 
 /* 디테일 - 프로필 */
+.go-home-button{
+    margin-bottom: 12px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: bold;
+}
 .my-profile-detail{
     height: 100%;
     padding: 24px;

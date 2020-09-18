@@ -8,8 +8,10 @@
 <div class="container">
   <div class="col1">
     <div class="my-profile-home row">
-      <div class="profile-title">내 프로필</div>
-      <div><a href="{% url 'myprofile:detail' my.id %}">더보기</a></div>
+      <div>
+        <div class="profile-title">내 프로필</div>
+        <a href="{% url 'myprofile:detail' my.id %}">더보기</a>
+      </div>
       <div class="my-profile">
         <img src="{{my.profile_image.url}}" width="150" height="150" style="border-radius:75px; border: 0.75px solid #C4C4C4;">
         <!--<div class="mb-1 text-muted">Nov 12</div>-->

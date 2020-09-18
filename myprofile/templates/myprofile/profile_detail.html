@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="container">
-    <div style="margin-bottom:12px;"><a href="{% url 'myprofile:home' %}">< 프로필 홈</a></div>
+    <div class="go-home-button"><a href="{% url 'myprofile:home' %}" style="color:#5B5652;"><img src="{% static 'img/left_arrow.png' %}" height="16" style="float:left; margin-top:4px;">프로필 홈</a></div>
     <div class="col1">
         <div class="my-profile-detail">
             {% if detail == 'my' %}
