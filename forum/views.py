@@ -1,23 +1,32 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.core.paginator import Paginator
+from django.db.models import Q
 from .models import Forum
 from .forms import ForumUpdate
+from .models import MyProfile,MyClass
+from django.contrib.auth.models import User
 
 def home(request):
+    user = request.user     
     forums = Forum.objects.order_by('-id')
     forum_list = Forum.objects.all().order_by('-id')
     paginator = Paginator(forum_list,3)
     page = request.GET.get('page')
     posts = paginator.get_page(page)
 
-    return render(request,'forumhome.html', {'forums':forums,'posts':posts} )
+    my = MyProfile.objects.get(username=user)
+    myclass=MyClass.objects.filter( hak=my.school_year,ban=my.school_class)
+    #print(myclass)
+    
+    return render(request,'forumhome.html', {'forums':forums,'posts':posts,'my':my,'myclass':myclass} )
 
 def detail(request, forum_id):
     forum_detail = get_object_or_404(Forum, pk=forum_id)
     return render(request, 'detail.html', {'forum': forum_detail})
 
 def create(request):
+    
     return render(request, 'create.html')
 
 def postcreate(request):
@@ -26,7 +35,16 @@ def postcreate(request):
     forum.body = request.POST['body']
     forum.images = request.FILES['images']
     forum.pub_date = timezone.datetime.now()
+    #추가
+    user = request.user
+    my = MyProfile.objects.get(username=user)
+    myclass=MyClass.objects.get( hak=my.school_year,ban=my.school_class)
+    if myclass.class_intimacy < 100:
+        myclass.class_intimacy += 1 # 친밀도 1% 증가
+        myclass.save()
+
     forum.save()
+
     return redirect('/forum/detail/' + str(forum.id))
 
 def update(request, forum_id):

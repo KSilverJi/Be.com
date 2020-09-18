@@ -1,32 +1,58 @@
 {% extends 'base.html' %}
-
+{%load static%}
 {% block content %}
+  <style>
+  /*body{ background-color: #F7FFF5;}*/
+  /* 본문 내 이미지 요소의 'position' 속성을 'relative'로 지정 */
+    img.write_b { 
+      position: relative;
+      left: 1045px;
+      top: 3 px;
+    }
+  </style>
 
-      {% for forum in posts %}
-      <div class="container"> 
-      <div class="card">
-        <div class="card-body">
-        <h1>{{ forum.title }}</h1>
-        <p>{{ forum.pub_date | date:"Y-m-d" }}</p>
-        <p>{{ forum.summary }}<a href="{% url 'detail' forum.id %}"> ...자세히 보기</a></p> 
-        </div>
+  <a href="{% url 'create' %}">
+    <img src="{%static 'button_write.png'%}" class="write_b" height="30" alt="글쓰기 버튼" > 
+  </a>
+
+  {%if my %}
+  내 이름은:{{my.username}}
+  <br>
+  내 학교는:{{my.school}}
+  <br> 학년 반: {{my.school_year}}학년 {{my.school_class}}반
+  {%endif%}
+
+  {%for c in myclass%}
+  <br>친밀도는: {{c.class_intimacy}}
+  {%endfor%}
+  
+  {% for forum in posts %}
+    <div class="container"> 
+    <div class="card">
+      <div class="card-body">
+      <h1>{{ forum.title }}</h1>
+      <p>{{ forum.pub_date | date:"Y-m-d" }}</p>
+      <p>{{ forum.summary }}<a href="{% url 'detail' forum.id %}"> ...자세히 보기</a></p> 
       </div>
-      </div>
-      <br>
-      {% endfor %}
+    </div>
+    </div>
+    <br>
+    {% endfor %}
 
-      {%if posts.has_previous%}
-      <a href="?page=1">First</a>
-      <a href="?page={{posts.previous_page_number}}">Previous</a>
-      {%endif%}
+    {%if posts.has_previous%}
+    <a href="?page=1">First</a>
+    <a href="?page={{posts.previous_page_number}}">Previous</a>
+    {%endif%}
 
-      <span>{{posts.number}}</span>
-      <span>of</span>
-      <span>{{posts.paginator.num_pages}}</span>
+    <span>{{posts.number}}</span>
+    <span>of</span>
+    <span>{{posts.paginator.num_pages}}</span>
 
-      {%if posts.has_next%}
-      <a href="?page={{posts.next_page_number}}">Next</a>
-      <a href="?page={{posts.paginator.num_pages}}">Last</a>
-      {%endif%}
+    {%if posts.has_next%}
+    <a href="?page={{posts.next_page_number}}">Next</a>
+    <a href="?page={{posts.paginator.num_pages}}">Last</a>
+    {%endif%}
+
+  
 
 {% endblock %}

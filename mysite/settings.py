@@ -45,9 +45,8 @@ INSTALLED_APPS = [
     'taggit_templatetags2',
     'widget_tweaks',
 
-    'bookmark.apps.BookmarkConfig',
+    
     'blog.apps.BlogConfig',
-    'photo.apps.PhotoConfig',
     'mate.apps.MateConfig',
     'myprofile.apps.MyprofileConfig',
     'forum.apps.ForumConfig',
@@ -147,8 +146,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 TAGGIT_CASE_INSENSITIVE = True
 TAGGIT_LIMIT = 50
 
-DISQUS_SHORTNAME = 'pydjango-web-programming'
-DISQUS_MY_DOMAIN = 'http://192.168.56.101:8000'
+DISQUS_SHORTNAME = 'be-com'#'pydjango-web-programming'
+DISQUS_MY_DOMAIN = 'http://http://127.0.0.1:8000/'#http://192.168.56.101:8000'
 
 LOGIN_REDIRECT_URL = '/'
 
