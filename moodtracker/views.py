@@ -113,9 +113,9 @@ def create_wordcloud(moodtrackers, user):
 
     stopwords = ['나는', '나를', '내가', '너무', '없다', '정말', '것은', '있다.', '자꾸', '싶지', '않다', '같다', '싶다', '했다', '나왔다']
 
-    wordcloud = WordCloud(font_path='moodtracker/static/fonts/AppleSDGothicNeoSB.ttf', background_color='white', stopwords=stopwords, width=800, height=800).generate_from_text(content_text)
-    filename1 = 'media/%s.png' % user
-    filename2 = '%s.png' % user
+    wordcloud = WordCloud(font_path='moodtracker/static/fonts/AppleSDGothicNeoSB.ttf', background_color='white', stopwords=stopwords, width=500, height=500).generate_from_text(content_text)
+    filename1 = 'media/%s_wc.png' % user
+    filename2 = '%s_wc.png' % user
     wordcloud.to_file(filename1) # 변수로 바꿔야 함
     '''
     plt.figure(figsize=(400,400)) #이미지 사이즈 지정
