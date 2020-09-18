@@ -12,6 +12,7 @@ from mate.models import Mate
 from django.db.models import Q # OR문 추가
 
 from django.shortcuts import render, redirect
+from django.utils import timezone
 
 from moodtracker.views import pos_neg_percent, mood_num, create_wordcloud
 
@@ -20,15 +21,15 @@ def test(request):
     profile = MyProfile.objects.get(username=user)
     class_friends = MyProfile.objects.filter(school=profile.school, school_year=profile.school_year, school_class=profile.school_class).exclude(username=user) # 같은 학교, 학년, 반인 친구들 프로필 정보
     # class_achievements = class_achievement(user)
-    
     moodtrackers = MoodTracker.objects.filter(username=user) # 현재 사용자와 일치하는 정보만 불러온다
- 
     pos_per, neg_per = pos_neg_percent(moodtrackers) # 긍정 부정 개수 구하기 (날짜 조건 걸어야 함)
     happy, sad, calm, angry, soso = mood_num(moodtrackers) # 감정 개수 구하기
-    create_wordcloud(moodtrackers, user) # 워드 클라우드 생성
+    # create_wordcloud(moodtrackers, user) # 워드 클라우드 생성
     wc = Wordcloud.objects.get(username=user) # 워드 클라우드 객체 가져오기
-
     mate = Mate.objects.get(Q(mate1=profile) | Q(mate2=profile))
+    year = timezone.datetime.now().year
+    month = timezone.datetime.now().month
+    day = timezone.datetime.now().day
 
     item={
         'profile' : profile,
@@ -41,6 +42,9 @@ def test(request):
         'wc' : wc,
         'moodtrackers' : moodtrackers,
         'mate' : mate,
+        'year' : year,
+        'month' : month,
+        'day' : day,
         # 'class_achievements' : class_achievements,
     }
     return render(request, 'home.html', item)

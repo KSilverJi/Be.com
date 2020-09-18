@@ -8,8 +8,10 @@
 <div class="container">
   <div class="col1">
     <div class="my-profile-home row">
-      <div class="profile-title">내 프로필</div>
-      <div style="float:right;"><a href="{% url 'myprofile:detail' my.id %}">더보기</a></div>
+      <div>
+        <div class="profile-title">내 프로필</div>
+        <a href="{% url 'myprofile:detail' my.id %}">더보기</a>
+      </div>
       <div class="my-profile">
         <img src="{{my.profile_image.url}}" width="150" height="150" style="border-radius:75px; border: 0.75px solid #C4C4C4;">
         <!--<div class="mb-1 text-muted">Nov 12</div>-->
@@ -53,11 +55,11 @@
         {% for friend in class_friends.all %}
           <div class="friend-card">
             <a class="friend-card-a" href="{% url 'myprofile:detail' friend.id %}">
-              <img src="{{friend.profile_image.url}}" width="80" height="80" style="border-radius:40px; border: 0.75px solid #C4C4C4;"">
-              <div>{{friend.username}}</div>
+              <img src="{{friend.profile_image.url}}" width="80" height="80" style="border-radius:40px; border: 0.75px solid #C4C4C4;">
+              <div style="font-size:14px; font-weight:500; line-height: 20px; margin-top:8px;">{{friend.username}}</div>
             </a>
             <div style="height: 1px; background-color: #f99b0d; margin:5px;"></div>
-            <div>{{friend.intro}}</div>
+            <div style="font-weight: normal; font-size:12px;">{{friend.intro}}</div>
           </div>
         {% endfor %}
       </div>

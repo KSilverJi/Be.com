@@ -18,14 +18,14 @@
           <div class="mate-profile-img">
             <div class="mate-profile">
               <a href="{% url 'myprofile:detail' mate.mate1.id %}">
-                <img src="{{mate.mate1.profile_image.url}}" width="100" height="100">
+                <img src="{{mate.mate1.profile_image.url}}" width="100" height="100" style="border-radius:50px; border: 0.75px solid #C4C4C4;">
                 <div style="width:100px;">{{mate.mate1.username}}</div>
               </a>
             </div>
             <img src="{% static 'img/mate-zigzag.png' %}" height="50" style="float:left; margin-top:20px;">
             <div class="mate-profile">
               <a href="{% url 'myprofile:detail' mate.mate2.id %}">
-                <img src="{{mate.mate2.profile_image.url}}" width="100" height="100">
+                <img src="{{mate.mate2.profile_image.url}}" width="100" height="100" style="border-radius:75px; border: 0.75px solid #C4C4C4;">
                 <div style="width:100px;">{{mate.mate2.username}}</div>
               </a>
             </div>
@@ -140,40 +140,40 @@
           </div>-->
           <div class="home-mate-quest-list">
             {% if quests.quest1 == 0 %}
-              <div class="home-mate-quest-card">도서관 가기</div>
+              <div class="home-mate-quest-card" style="border: 1px solid #00D2C9; color: #00D2C9; border: 1px solid #00D2C9;">도서관 가기</div>
             {% endif %}
             {% if quests.quest2 == 0 %}
-              <div class="home-mate-quest-card">산책하기</div>
+              <div class="home-mate-quest-card" style="border: 1px solid #f99b0d; color: #f99b0d; border: 2px solid #f99b0d;">산책하기</div>
             {% endif %}
             {% if quests.quest3 == 0 %}
-              <div class="home-mate-quest-card">숙제하기</div>
+              <div class="home-mate-quest-card" style="border: 1px solid #D391FF; color: #D391FF; border: 2px solid #D391FF;">숙제하기</div>
             {% endif %}
             {% if quests.quest4 == 0 %}
-              <div class="home-mate-quest-card">선물 주기</div>
+              <div class="home-mate-quest-card" style="border: 1px solid #0D6BF9; color: #0D6BF9; border: 2px solid #0D6BF9;">선물 주기</div>
             {% endif %}
             {% if quests.quest5 == 0 %}
-              <div class="home-mate-quest-card">봉사활동 가기</div>
+              <div class="home-mate-quest-card" style="border: 1px solid #FF7B55; color: #FF7B55; border: 2px solid #FF7B55;">봉사활동 가기</div>
             {% endif %}
             {% if quests.quest6 == 0 %}
-              <div class="home-mate-quest-card">카페 가기</div>
+              <div class="home-mate-quest-card" style="border: 1px solid #00D2C9; color: #00D2C9; border: 2px solid #00D2C9;">카페 가기</div>
             {% endif %}
             {% if quests.quest7 == 0 %}
-              <div class="home-mate-quest-card">자전거 타기</div>
+              <div class="home-mate-quest-card" style="border: 1px solid #f99b0d; color: #f99b0d; border: 2px solid #f99b0d;">자전거 타기</div>
             {% endif %}
             {% if quests.quest8 == 0 %}
-              <div class="home-mate-quest-card">쇼핑하기</div>
+              <div class="home-mate-quest-card" style="border: 1px solid #D391FF; color: #D391FF; border: 2px solid #D391FF;">쇼핑하기</div>
             {% endif %}
             {% if quests.quest9 == 0 %}
-              <div class="home-mate-quest-card">편지 쓰기</div>
+              <div class="home-mate-quest-card" style="border: 1px solid #0D6BF9; color: #0D6BF9; border: 2px solid #0D6BF9;">편지 쓰기</div>
             {% endif %}
             {% if quests.quest10 == 0 %}
-              <div class="home-mate-quest-card">밥 먹기</div>
+              <div class="home-mate-quest-card" style="border: 1px solid #FF7B55; color: #FF7B55; border: 2px solid #FF7B55;">밥 먹기</div>
             {% endif %}
             {% if quests.quest11 == 0 %}
-              <div class="home-mate-quest-card">영화 보기</div>
+              <div class="home-mate-quest-card" style="border: 1px solid #BBB500; color: #BBB500; border: 2px solid #BBB500;">영화 보기</div>
             {% endif %}
             {% if quests.quest12 == 0 %}
-              <div class="home-mate-quest-card">게임하기</div>
+              <div class="home-mate-quest-card" style="border: 1px solid #F90D6B; color: #F90D6B; border: 2px solid #F90D6B;">게임하기</div>
             {% endif %}
           </div>
         </div>

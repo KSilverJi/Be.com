@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css?family=notosanskr.css');
+
+a {
+    text-decoration: none;
+    color: black;
+  }
+  a:hover{
+    text-decoration: none;
+    color: #f99b0d;
+  }
+  
+.container{
+    font-family: Noto Sans KR;
+}
+
+/* 공통 */
+.moodtracker-title{
+    color: #5B5652;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+.record{
+    font-family: "Noto Sans KR";
+    background: #FFFFFF;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    width: 540px;
+    height: 560px;
+    float: left;
+    padding: 24px;
+  }
+.record-date{
+    width: 100%;
+    height: 50px;  
+    color: #5B5652;
+    font-weight: bold;
+    font-size: 18px;
+}
+.record-write{
+    margin: 0 auto;
+    padding-top: 15px;
+    padding-left: 96px;
+    display: inline-block;
+    text-align: center;
+}
+.mood_input{
+    margin-bottom: 12px;
+}
+/* HIDE RADIO */
+.mood_input label [type=radio] { 
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+/* IMAGE STYLES */
+[type=radio] + img {
+    cursor: pointer;
+}
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+    -webkit-filter: brightness(0.6);/*contrast(3.4)hue-rotate(217deg)saturate(9.9);*/
+    /*filter: brightness(0.6)contrast(3.4)hue-rotate(217deg)saturate(9.9);*/
+}
+.content_input{
+    margin-bottom: 10px;
+}
+.diary_submit_button_wrap{
+    float: right;
+}
+.diary_submit_button{
+    background-color: #f99b0d;
+    border: none;
+    color: white;
+    width: 104px;
+    height: 46px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    border-radius: 10px;
+}
