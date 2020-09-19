@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'myprofile/base.html' %}
 
 {% load static %}
 {% block extra-style %}<link rel="stylesheet" type="text/css" href="{% static 'css/myprofile_style.css' %}">{% endblock %}
@@ -15,7 +15,7 @@
                 <div class="profile-title">{{person.username}}님의 프로필</div>
             {% endif %}
             <div class="my-profile">
-                <img src="{{person.profile_image.url}}" width="150" height="150">
+                <img src="{{person.profile_image.url}}" width="150" height="150" style="border-radius:75px; border: 0.75px solid #C4C4C4;">
                 <!--<div class="mb-1 text-muted">Nov 12</div>-->
                 <div class="my-profile-intro"><br><br>
                     <b>이름</b> &nbsp; {{person.username}}<br>
@@ -57,7 +57,7 @@
                 <div class="profile-images-list">
                     {% for photo in person_images.all%}
                         <div class="profile-image">
-                            <img src="{{photo.image.url}}" height="200" class="image"><br>
+                            <img src="{{photo.image.url}}" height="200" class="image" style="border-radius:10px;"><br>
                             <div class="overlay">
                                 <div class="overlay-text">{{photo.topic}}</div>
                             </div>

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.utils import timezone
+import random
 
 from django.views import generic
 
@@ -8,15 +9,14 @@ from django.contrib.auth.models import User
 
 import pickle
 from konlpy.tag import Okt
+import nltk
 
 from wordcloud import WordCloud
 from wordcloud import STOPWORDS
 import matplotlib.pyplot as plt
 
 # 작성된 감정 일기 보는 화면으로 이동
-def view_record(request, record_id):#request, record_date
-    # 누른 날짜 받아와야 함. (url로)
-    # 날짜와 username 일치하는 일기를 object로 받아와서 render로 전한다.
+def view_record(request, record_id):
     user = request.user
     records = MoodTracker.objects.filter(username=user)
     sp_record = MoodTracker.objects.get(pk=record_id)
@@ -31,10 +31,11 @@ def view_record(request, record_id):#request, record_date
 def analysis(request):
     user = request.user
     moodtrackers = MoodTracker.objects.filter(username=user) # 현재 사용자와 일치하는 정보만 불러온다
- 
+    rec_pos_per = recent_pos_neg(user)
+    recent_mood, saying = recent_mood_text(rec_pos_per, user) # 요즘 기분 text, 명언 text
     pos_per, neg_per = pos_neg_percent(moodtrackers) # 긍정 부정 개수 구하기 (날짜 조건 걸어야 함)
     happy, sad, calm, angry, soso = mood_num(moodtrackers) # 감정 개수 구하기
-    create_wordcloud(moodtrackers, user) # 워드 클라우드 생성
+    mft1, mft2, mft3 = create_wordcloud(moodtrackers, user) # 워드 클라우드 생성, 빈출 높은 단어 가져온다.
     wc = Wordcloud.objects.get(username=user) # 워드 클라우드 객체 가져오기
 
     item = {
@@ -48,6 +49,13 @@ def analysis(request):
         'wc' : wc,
         'moodtrackers' : moodtrackers,
         'user' : user,
+        'mft1' : mft1,
+        'mft2' : mft2,
+        'mft3' : mft3,
+        #'rec_pos_per' : rec_pos_per,
+        'recent_mood' : recent_mood,
+        #'rec_neg_per' : rec_neg_per,
+        'saying' : saying,
     }
 
     return render(request, 'moodtracker/moodtracker_analysis.html', item)
@@ -66,23 +74,53 @@ def write_record(request):
         'month' : month,
         'day' : day,
     }
-    return render(request, 'moodtracker/moodtracker_write.html', item) #, {'records':records}
+    return render(request, 'moodtracker/moodtracker_write.html', item)
 
 
 # Analysis - 긍정, 부정 비율 구하기
 def pos_neg_percent(moodtrackers):
     pos=neg=0
 
-    # 날짜 조건 걸어야 함
     for record in moodtrackers:
         if record.pos_neg == 0:
             neg+=1
         else:
             pos+=1
-    pos_per = round(pos/(pos+neg)*100, 1)
-    neg_per = round(neg/(pos+neg)*100, 1)
+    pos_per = round(pos/(pos+neg)*100, 1) # XX.X% 반환
+    neg_per = round(neg/(pos+neg)*100, 1) # XX.X% 반환
     return pos_per, neg_per
-    
+
+# Analysis - 최근 10개 일기의 긍정, 부정 비율
+def recent_pos_neg(user):
+    recent_ten = MoodTracker.objects.filter(username=user).order_by("-id")[:1]
+    pos=0
+    for record in recent_ten:
+        if record.pos_neg == 1:
+            pos+=1
+    pos_per = round(pos/1*100, 1) # XX.X% 반환
+    return pos_per
+
+# Analysis - 요즘 기분 text, 명언 text
+def recent_mood_text(rec_pos_per, user):
+    if rec_pos_per >= 0 and rec_pos_per <= 20 :
+        text = '요즘 스트레스를 받는 일이 있나요? 혹시 우울감을 느낀다면 선생님이나 전문가에게 도움을 받아보는 건 어떨까요?'
+        saying = '길을 잃는 다는 것은 곧 길을 알게 된다는 것이다. –동아프리카속담'
+    elif rec_pos_per <= 40 :
+        text = '요즘 기분이 상할 만한 일이 있었나 봐요. 친구들과의 대화, 혼자만의 시간, 상담 등을 통해 몸과 마음을 재충전하는 걸 추천해 드려요.'
+        saying = '겨울이 오면 봄이 멀지 않으리. -셸리'
+    elif rec_pos_per <= 60 :
+        text = '기분이 좋았던 날도, 안 좋았던 날도 있었네요. '+str(user)+'님의 하루가 매일매일 즐겁길 바래요!'
+        saying = '만족하게 살고 때때로 웃으며 많은 사람을 사랑한 삶이 성공한다. - 스탠리'
+    elif rec_pos_per <= 80 : 
+        text = str(user)+'님의 요즘은 좋은 일이 많았군요! 앞으로 속상한 일이 생겨도 '+str(user)+'님은 잘 헤쳐나갈 수 있을 거예요. 그렇지만 도움이 필요하다면 언제든지 말해주세요.'
+        saying = '오랫동안 꿈을 그리는 사람은 마침내 그 꿈을 닮아 간다. -앙드레 말로'
+    elif rec_pos_per <= 100 : 
+        text = '긍정의 기운이 가득한 요즘! 만족스러운 일상을 보내고 있나요? '+str(user)+'님의 일상이 더욱 즐거운 일들로 가득했으면 좋겠어요. 도움이 필요하다면 언제든지 말해주세요.'
+        saying = '언제나 현재에 집중할 수 있다면 행복할 것이다. -파울로 코엘료'
+    else:
+        text = '텍스트 불러오기 오류'
+        saying = '명언 불러오기 오류'
+    return text, saying
 
 # Analysis - 감정 개수 구하기
 def mood_num(moodtrackers):
@@ -110,8 +148,17 @@ def create_wordcloud(moodtrackers, user):
     content_text = ''
     for record in moodtrackers:
         content_text = content_text + record.content
+    
+    okt = Okt()
+    tokens_ko = okt.morphs(content_text)
 
-    stopwords = ['나는', '나를', '내가', '너무', '없다', '정말', '것은', '있다.', '자꾸', '싶지', '않다', '같다', '싶다', '했다', '나왔다']
+    stopwords = ['나는', '나를', '내가', '너무', '없다', '정말', '것은', '있다.', '자꾸', '싶지', '않다', '같다', '싶다', '했다', '나왔다', '.', '이', '가', '을', '에', '를', '는', '들', '은', '이다', '것', '거', '에서', '했다', '다', '도', '하는', '만', '한테', '한', '수', '게', '랑', '한다', '하고', '?', '이랑', '싶다', '의', '으로',
+              '요', '로', '으로', ',', ]
+
+    tokens_ko = [each_word for each_word in tokens_ko
+             if each_word not in stopwords]
+    ko = nltk.Text(tokens_ko)
+    most_freq_text = ko.vocab().most_common(3)
 
     wordcloud = WordCloud(font_path='moodtracker/static/fonts/AppleSDGothicNeoSB.ttf', background_color='white', stopwords=stopwords, width=500, height=500).generate_from_text(content_text)
     filename1 = 'media/%s_wc.png' % user
@@ -127,6 +174,11 @@ def create_wordcloud(moodtrackers, user):
     wc.username = user 
     wc.wc_image = filename2 # 변수로 바꿔야 함
     wc.save() # 데이터베이스에 저장
+
+    mft1 = most_freq_text[0][0]
+    mft2 = most_freq_text[1][0]
+    mft3 = most_freq_text[2][0] 
+    return mft1, mft2, mft3
 
 
 def tokenizer(text):
