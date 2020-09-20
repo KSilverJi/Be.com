@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Be.com - 상담신청{% endblock %}
+{% block extra-style %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/counsel_style.css' %}">
+<script type="text/javascript" src="../static/js/calendar.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+<form action="{% url 'therapy:result' %}" method="POST"> {% csrf_token %}
+    <div class="col1">
+        <h1>상담방법</h1>
+            <input type="radio" id="a1" name="who" value="교사"> <label for="a1">교사</label>
+            <input type="radio" id="a2" name="who" value="교내 상담기관"> <label for="a2">교내 상담기관</label>
+            <input type="radio" id="a3" name="who" value="교외 상담기관"> <label for="a3" style="margin-right: 1%;">교외 상담기관</label>
+        
+        <h1>상담형태</h1>
+            <input type="radio" id="b1" name="how" value="온라인상담"> <label for="b1">온라인상담</label>
+            <input type="radio" id="b2" name="how" value="대면상담"> <label for="b2">대면상담</label>
+            <input type="radio" id="b3" name="how" value="전화상담"> <label for="b3" style="margin-right: 1%;">전화상담</label>
+
+        <div class="teacher">
+        <h1>상담자</h1>
+            <input type="radio" id="c1" name="teacher" value="권보아 선생님"> <label for="c1" style="margin-left:1%;">권보아 선생님</label>
+            <input type="radio" id="c2" name="teacher" value="장근석 선생님"> <label for="c2">장근석 선생님</label>
+            <input type="radio" id="c3" name="teacher" value="이승기 선생님"> <label for="c3">이승기 선생님</label>
+            <input type="radio" id="c4" name="teacher" value="배윤정 선생님"> <label for="c4">배윤정 선생님</label>
+            <input type="radio" id="c5" name="teacher" value="이홍기 선생님"> <label for="c5" style="margin-right: 0px;">이홍기 선생님</label>
+        </div>
+        
+        <h1 style="display: inline;">상담주제<span class="topic_detail">최대 3개의 주제를 선택할 수 있어요</span></h1><br>
+            <input type="checkbox" id="d1" name="about[]" value="학업"> <label for="d1">학업</label>
+            <input type="checkbox" id="d2" name="about[]" value="친구"> <label for="d2">친구</label>
+            <input type="checkbox" id="d3" name="about[]" value="스트레스"> <label for="d3">스트레스</label>
+            <input type="checkbox" id="d4" name="about[]" value="우울"> <label for="d4">우울</label>
+            <input type="checkbox" id="d5" name="about[]" value="트라우마"> <label for="d5">트라우마</label>
+            <input type="checkbox" id="d6" name="about[]" value="진로"> <label for="d6">진로</label>
+            <input type="checkbox" id="d7" name="about[]" value="가족"> <label for="d7">가족</label>
+            <input type="checkbox" id="d8" name="about[]" value="콤플렉스"> <label for="d8">콤플렉스</label>
+            <input type="checkbox" id="d9" name="about[]" value="불안"> <label for="d9">불안</label>
+            <input type="checkbox" id="d10" name="about[]" value="대인관계"> <label for="d10">대인관계</label>
+
+        <h1 style="margin-top:3%;">상세내용</h1>
+            <input type="textarea" name="detailtext" class="input-text">
+    </div>
+
+    <!--캘린더/제출버튼-->
+    <div class="col2">
+        <h1>상담날짜</h1>
+        <table class="scriptCalendar" style="width:100%; text-align: center;">
+            <thead>
+                <!--연월 표시-->
+                <tr>
+                    <td onClick="prevCalendar();" style="cursor:pointer;">&#60;</td>
+                    <td colspan="5">
+                        <span id="calYear">YYYY</span>년
+                        <span id="calMonth">MM</span>월
+                    </td>
+                    <td onClick="nextCalendar();" style="cursor:pointer;">&#62;</td>
+                </tr>
+                <tr style="text-align: center;">
+                    <td>S</td><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td>
+                </tr>
+            </thead>
+            <tbody style="text-align: center;"></tbody>
+        </table>
+        <input type="hidden" name="datenum" id="date-pick" value="">
+
+        <div class="timepick">
+            <input type="checkbox" id="e1" name="time-pick[]" value="10:00"> <label for="e1">10:00</label>
+            <input type="checkbox" id="e2" name="time-pick[]" value="10:30"> <label for="e2">10:30</label>
+            <input type="checkbox" id="e3" name="time-pick[]" value="11:00"> <label for="e3">11:00</label>
+            <input type="checkbox" id="e4" name="time-pick[]" value="11:30"> <label for="e4">11:30</label>
+            <input type="checkbox" id="e5" name="time-pick[]" value="13:00"> <label for="e5">13:00</label>
+            <input type="checkbox" id="e6" name="time-pick[]" value="13:30"> <label for="e6">13:00</label>
+            <input type="checkbox" id="e7" name="time-pick[]" value="14:00"> <label for="e7">14:00</label>
+            <input type="checkbox" id="e8" name="time-pick[]" value="14:30"> <label for="e8">14:30</label>
+            <input type="checkbox" id="e9" name="time-pick[]" value="15:00"> <label for="e9">15:00</label>
+            <input type="checkbox" id="e10" name="time-pick[]" value="15:30"> <label for="e10">15:30</label>
+            <input type="checkbox" id="e11" name="time-pick[]" value="16:00"> <label for="e11">16:00</label>
+            <input type="checkbox" id="e12" name="time-pick[]" value="16:30"> <label for="e12">16:30</label>
+        </div>
+    </div>
+
+    <div class="col3">
+        <button class="cancel-btn" value="cancel" onclick="history.back(-1);">취소</button>
+        <input type="submit" class="submit-btn" value="제출하기">
+    </div>
+
+</form>
+</div>
+
+{% endblock %}
+
+
+{% block footer %}
+<footer class="fixed-bottom bg-info">
+    <div class="text-white font-italic text-right mr-5">Copyright &copy; 2020 Be.com by soljik</div>
+</footer>
+{% endblock %}
+
+{% block extra-script %}
+<script>buildCalendar();</script>
+
+{% endblock %}

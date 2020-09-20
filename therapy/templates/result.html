@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block extra-style %}<link rel="stylesheet" type="text/css" href="{% static 'css/counsel_style.css' %}">{% endblock %}
+
+{% block content %}
+
+<div class="container" style="text-align: center; margin-top: 20%;">
+    <p class="result-text">상담 신청이 완료되었습니다. <br>상담자로부터 연락이 올 거예요!</p>
+    <button class="submit-btn" style="width:184px; height: 60px;"  onclick="location.href=''">홈으로 가기</button>
+</div>
+
+{% endblock %}

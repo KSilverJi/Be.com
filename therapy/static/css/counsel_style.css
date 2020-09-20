@@ -1,0 +1,296 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+@import url('https://rsms.me/inter/inter.css');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
+.container{
+    font-family: 'Noto Sans KR', sans-serif;
+    max-width: 1200px;
+}
+
+/*반응형웹*/
+@media screen and ( max-width: 480px ) {
+    .container {
+      width: auto;
+      height: auto;
+    }
+    .container .col1 {
+      float: none;
+      width: auto;
+      height: auto;
+    }
+    .container .col2 {
+      float: none;
+      width: auto;
+      height: auto;
+    }
+
+    .container .col3 {
+        float: none;
+        width: auto;
+        margin-bottom: 10%;
+    }
+
+    input[type=radio] + label { 
+        width: -webkit-fill-available;
+    }
+}
+
+.col1 {
+    /*position: absolute;*/
+    padding: 24px;
+    width: 56%;
+    height: auto;
+    left: 122px;
+    top: 32px;
+
+    background: #FFFFFF;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+
+    float: left;
+    margin-bottom: 5%;
+}
+
+.col2 {
+    /*position: absolute;*/
+    padding: 24px;
+
+    width: 40%;
+    height: 701px;
+    left: 852px;
+    top: 32px;
+
+    background: #FFFFFF;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+
+    float: right;
+}
+
+.col3 {
+    text-align: center;
+    display: flex;
+    float: right;
+    width: 40%;
+    margin-top: 3%;
+}
+
+h1 {
+    height: 32px;
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 32px;
+    /* identical to box height, or 178% */
+
+    color: #504B47;
+}
+
+.topic_detail {
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 14px;
+    align-items: center;
+    text-align: center;
+    margin-left: 5px;
+
+    color: #504B47;
+}
+
+button:active{
+    border: 1px solid #F99B0D;
+}
+
+.answer-btn {
+    width: 169px;
+    height: 57px;
+    display:inline-block;
+
+    background: #FFFFFF;
+    border: 1px solid #D1CCC6;
+    box-sizing: border-box;
+    border-radius: 15px;
+    padding: 5px;
+    margin: 10%;
+    margin-left: 1%;
+    margin-top: 2%;
+    justify-content: center;
+}
+
+.cancel-btn {
+    background: #FFFFFF;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 26px;
+    text-align: center;
+    color: #807C77;
+
+    width: 197px;
+    height: 73px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.submit-btn {
+    background: #F99B0D;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 26px;
+    text-align: center;
+    margin-left: 1%;
+    color: #FFFFFF;
+
+
+    width: 265px;
+    height: 73px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+input[type=radio] { display:none; } 
+
+
+input[type=radio] + label { 
+    width: 169px;
+    height: 57px;
+    display:inline-block;
+
+    background: #FFFFFF;
+    border: 1px solid #D1CCC6;
+    box-sizing: border-box;
+    border-radius: 15px;
+    padding: 5px;
+    margin: 4%;
+    margin-left: 1%;
+    margin-top: 2%;
+    margin-bottom: 4%;
+    justify-content: center;
+
+    cursor: pointer;
+
+    color: #5B5652;
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    text-align: center;
+    padding-top: 2.5%;
+} 
+
+input[type="radio"]:checked + label{
+    background: #FFFFFF;
+    border: 1px solid #F99B0D;
+}
+
+.teacher input[type=radio] + label { 
+    width: 110px;
+    height: 115px;
+    margin-right: 3px;
+    margin-left: 0px;
+    padding-top:11%;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 17px;
+}
+
+input[type=checkbox] { display:none; } 
+
+input[type=checkbox] + label { 
+    width: 100px;
+    height: 42px;
+    display:inline-block;
+
+    background: #FFFFFF;
+    border: 1px solid #D1CCC6;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin: 1.3%;
+    margin-left: 1%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    justify-content: center;
+
+    cursor: pointer;
+
+    color: #5B5652;
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    text-align: center;
+    padding-top: 1.5%;
+}
+
+input[type="checkbox"]:checked + label{
+    background: #FFFFFF;
+    border: 1px solid #F99B0D;
+}
+
+.input-text {
+    width: -webkit-fill-available;
+    height: 120px;
+    border: 1px solid #BDBDBD;
+    box-sizing: border-box;
+    border-radius: 2px;
+    margin: 1%;
+}
+
+.calendar td{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.active{
+    background: #0b0809;
+    border-radius: 50%;
+    color: #ffffff;
+}
+
+
+.timepick {
+    margin-left: 15px;
+    margin-top: 30px;
+}
+
+.timepick input[type=checkbox] + label { 
+    width: 106px;
+    height: 46px;
+    margin: 8px;
+    padding-top: 10px;
+}
+
+/* 결과 페이지 */
+.result-text {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+    margin-bottom: 50px;
+
+    color: #000000;
+
+}
+
