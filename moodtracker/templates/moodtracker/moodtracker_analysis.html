@@ -133,8 +133,8 @@
         </div>
         <div class="word-cloud col-md-5">
             <div class="moodtracker-title">{{user}}님이 자주 쓰는 단어</div>
-            <img src="{{wc.wc_image.url}}" height="250" style="float:left;">
-            <div style="width:150px;float:right; text-align:center; font-size:18px; color:#5B5652; font-weight:500;">
+            <img src="{{wc.wc_image.url}}" height="270" style="float:left;">
+            <div style="width:130px;float:right; text-align:center; font-size:18px; color:#5B5652; font-weight:500;">
                 가장 자주<br>사용한 단어는<br>
                 <span style="font-size:24px; color:black;">"{{mft1}}",<br>"{{mft2}}",<br>"{{mft3}}"</span><br>
                 이에요!
@@ -144,9 +144,3 @@
     <div class="row"></div>
 </div>
 {% endblock content %}
-
-{% block footer %}
-<footer class="fixed-bottom bg-info">
-    <div class="text-white font-italic text-right mr-5">Copyright &copy; 2020 Be.com by soljik</div>
-</footer>
-{% endblock %}

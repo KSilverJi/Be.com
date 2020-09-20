@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import AccessMixin
 from django.views.defaults import permission_denied
 
-from myprofile.models import MyProfile
+from myprofile.models import MyProfile, MyClass
 from moodtracker.models import MoodTracker, Wordcloud
 from mate.models import Mate
 from django.db.models import Q # OR문 추가
@@ -21,6 +21,7 @@ from wordcloud import WordCloud
 from wordcloud import STOPWORDS
 
 from moodtracker.views import pos_neg_percent, mood_num, create_wordcloud
+from myprofile.views import class_achievement
 
 def main(request):
     user = request.user
@@ -37,6 +38,9 @@ def main(request):
     year = timezone.datetime.now().year
     month = timezone.datetime.now().month
     day = timezone.datetime.now().day
+
+    my_class = MyClass.objects.get(myschool=profile.school, hak=profile.school_year, ban=profile.school_class)
+    class_score, class_score_text, class_level = class_achievement(my_class)
 
     item={
         'profile' : profile,
@@ -56,7 +60,9 @@ def main(request):
         'mft2' : mft2,
         'mft3' : mft3,
         'maxMood' : maxMood,
-        # 'class_achievements' : class_achievements,
+        'class_score' : class_score,
+        'class_score_text' : class_score_text,
+        'class_level' : class_level,
     }
     return render(request, 'home.html', item)
 

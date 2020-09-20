@@ -50,7 +50,6 @@ a {
     font-weight: bold;
     font-size: 18px;
     line-height: 26px;
-    display: flex;
     align-items: center;
     margin-bottom: 12px;
 }
@@ -135,6 +134,42 @@ a {
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
+}
+.class-level{
+    float: left;
+    width: 72px;
+    height: 26px;
+    background: #FFFFFF;
+    border: 2px solid #F99B0D;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 3px 6px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    color: #F99B0D;
+    margin-left: 10px;
+}
+.class-score-text{
+    width: 280px;
+    background: #FFFFFF;
+    border: 1px solid #D1CCC6;
+    box-sizing: border-box;
+    border-radius: 33px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    padding: 16px 24px;
+    margin: 12px auto;
+}
+.class-level-img{
+    margin: 0 40%;
+}
+.progress{
+    width: 300px;
+    margin: 16px auto;
 }
 
 /* 최근 감정 분석 */
@@ -305,12 +340,29 @@ a {
             </div>
             <div class="col-md-6" style="margin-bottom: 24px;">
                 <div class="class-act col-xs-3" style="padding-left:24px;">
-                    <div class="home-title">우리반 활성도</div>
-                    <!--<p>우리반의 활성도를 한 눈에 파악하기</p>-->
-                    <p>
-                        <img src="/static/img/active_class.png" width="400px" height="350px" alt="우리 반의 활성도">
-                        
-                    </p>
+                    <div style="overflow: auto;">
+                        <div class="home-title" style="display: inline-block; float:left;">우리반 활성도</div>
+                        <div class="class-level">LEVEL{{class_level}}</div>
+                    </div>
+                    <div class="class-score-text">{{class_score_text}}</div>
+                    <div class="class-level-img">
+                        {% if class_level == 1 %}
+                        <img src="{% static 'img/level1.png' %}" width="100px" alt="우리 반의 활성도">
+                        {% elif class_level == 2 %}
+                        <img src="{% static 'img/level2.png' %}" width="100px" alt="우리 반의 활성도">
+                        {% elif class_level == 3 %}
+                        <img src="{% static 'img/level3.png' %}" width="100px" alt="우리 반의 활성도">
+                        {% elif class_level == 4 %}
+                        <img src="{% static 'img/level4.png' %}" width="100px" alt="우리 반의 활성도">
+                        {% elif class_level == 5 %}
+                        <img src="{% static 'img/level5.png' %}" width="100px" alt="우리 반의 활성도">
+                        {% endif %}
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:{{class_score}}%">
+                        {{class_score}}%
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -432,14 +484,6 @@ a {
             </div>
         </div>
     </div>
-
-
-    {% block footer %}
-    <footer class="fixed-bottom bg-info">
-        <div class="text-white font-italic text-right mr-5">Copyright &copy; 2020 Be.com by soljik</div>
-    </footer>
-    {% endblock %}
-
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

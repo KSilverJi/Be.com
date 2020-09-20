@@ -92,12 +92,14 @@ def pos_neg_percent(moodtrackers):
 
 # Analysis - 최근 10개 일기의 긍정, 부정 비율
 def recent_pos_neg(user):
-    recent_ten = MoodTracker.objects.filter(username=user).order_by("-id")[:1]
-    pos=0
+    recent_ten = MoodTracker.objects.filter(username=user).order_by("-id")[:7]
+    pos=neg=0 # 10개 미만일 때 총 개수 세기 위해 neg도 센다.
     for record in recent_ten:
         if record.pos_neg == 1:
             pos+=1
-    pos_per = round(pos/1*100, 1) # XX.X% 반환
+        else:
+            neg+=1
+    pos_per = round(pos/(pos+neg)*100, 1) # XX.X% 반환
     return pos_per
 
 # Analysis - 요즘 기분 text, 명언 text
@@ -152,7 +154,7 @@ def create_wordcloud(moodtrackers, user):
     okt = Okt()
     tokens_ko = okt.morphs(content_text)
 
-    stopwords = ['나는', '나를', '내가', '너무', '없다', '정말', '것은', '있다.', '자꾸', '싶지', '않다', '같다', '싶다', '했다', '나왔다', '.', '이', '가', '을', '에', '를', '는', '들', '은', '이다', '것', '거', '에서', '했다', '다', '도', '하는', '만', '한테', '한', '수', '게', '랑', '한다', '하고', '?', '이랑', '싶다', '의', '으로',
+    stopwords = ['안', '나', '내', '나는', '나를', '내가', '너무', '없다', '정말', '것은', '있다.', '자꾸', '싶지', '않다', '같다', '싶다', '했다', '나왔다', '.', '이', '가', '을', '에', '를', '는', '들', '은', '이다', '것', '거', '에서', '했다', '다', '도', '하는', '만', '한테', '한', '수', '게', '랑', '한다', '하고', '?', '이랑', '싶다', '의', '으로',
               '요', '로', '으로', ',', ]
 
     tokens_ko = [each_word for each_word in tokens_ko
