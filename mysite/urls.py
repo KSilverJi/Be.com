@@ -23,6 +23,7 @@ import myprofile.views
 import forum.views
 import moodtracker.views
 import mate.views
+import therapy.views
 
 from mysite import views
 from mysite.views import HomeView, UserCreateView, UserCreateDoneTV

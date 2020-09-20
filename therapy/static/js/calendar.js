@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", function() {
 var today = new Date(); 
 var date = new Date(); 
 
+//html로 보낼 변수
+var datenumber;
+
  
 function prevCalendar() {
      this.today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
@@ -45,35 +48,24 @@ function prevCalendar() {
          let column = row.insertCell();
 
          if(Math.sign(day) == 1 && lastDate.getDate() >= day) {
-             // 평일 날짜 데이터 삽입
              column.innerText = autoLeftPad(day, 2);
-             // 일요일인 경우
-             if(dom % 7 == 1) {
-                 column.style.color = "#FF4D4D";
-             }
              if(dom % 7 == 0) {
-                 column.style.color = "#4D4DFF";
-                 row = tbCalendar.insertRow();   // 토요일이 지나면 다시 가로 행을 한줄 추가한다.
+                 row = tbCalendar.insertRow();
              }
 
          }
 
-         // 평일 전월일과 익월일의 데이터 날짜변경
          else {
              let exceptDay = new Date(doMonth.getFullYear(), doMonth.getMonth(), day);
              column.innerText = autoLeftPad(exceptDay.getDate(), 2);
-             column.style.color = "#A9A9A9";
+             column.style.color = "#ffffff";
          }
 
-         // 전월, 명월 음영처리
-         // 현재년과 선택 년도가 같은경우
          if(today.getFullYear() == date.getFullYear()) {
 
-             // 현재월과 선택월이 같은경우
              if(today.getMonth() == date.getMonth()) {
 
-
-                 // 현재일보다 이후이면서 현재월에 포함되는 일인경우
+                 //현재일보다 이후이면서 현재월에 포함되는 일인경우
                  if(date.getDate() < day && lastDate.getDate() >= day) {
                      column.style.backgroundColor = "#FFFFFF";
                      column.style.cursor = "pointer";
@@ -125,30 +117,31 @@ function prevCalendar() {
 
  function calendarChoiceDay(column) {
 
-     // 기존 선택일이 존재하는 경우 기존 선택일의 표시형식을 초기화 한다.
+     // 기존에 선택한 게 있으면 없애기
      if(document.getElementsByClassName("choiceDay")[0]) {
          document.getElementsByClassName("choiceDay")[0].style.backgroundColor = "#FFFFFF";
          document.getElementsByClassName("choiceDay")[0].classList.remove("choiceDay");
 
-         var datenum = document.getElementsByClassName("choiceday")[0];
      }
 
-     // 선택일 체크 표시
      column.style.backgroundColor = "#F99B0D";
 
-     // 선택일 클래스명 변경
+     //선택한 날짜에 클래스 지정해서 css 설정
      column.classList.add("choiceDay");
-
-     if(datenum !==null) {
-        document.getElementByID("date-pick") = datenum;
-     }
+    
+     //선택한 날짜 받아서 html로 넘기기
+     datenumber = document.getElementsByClassName("choiceDay")[0];
+     document.getElementById("date-pick").value = datenumber.innerHTML;
 
  }
 
+
  function autoLeftPad(num, digit) {
+
      if(String(num).length < digit) {
          num = new Array(digit - String(num).length + 1).join(" ") + num;
      }
      return num;
 
  }
+

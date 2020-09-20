@@ -25,11 +25,26 @@
 
         <div class="teacher">
         <h1>상담자</h1>
-            <input type="radio" id="c1" name="teacher" value="권보아 선생님"> <label for="c1" style="margin-left:1%;">권보아 선생님</label>
-            <input type="radio" id="c2" name="teacher" value="장근석 선생님"> <label for="c2">장근석 선생님</label>
-            <input type="radio" id="c3" name="teacher" value="이승기 선생님"> <label for="c3">이승기 선생님</label>
-            <input type="radio" id="c4" name="teacher" value="배윤정 선생님"> <label for="c4">배윤정 선생님</label>
-            <input type="radio" id="c5" name="teacher" value="이홍기 선생님"> <label for="c5" style="margin-right: 0px;">이홍기 선생님</label>
+            <input type="radio" id="c1" name="teacher" value="권보아 선생님">
+            <label for="c1" style="margin-left:1%;">
+                <img src="{% static 'img/권보아.jpg' %}" width="60px" height="60px" class="teacher-img"><br>
+                권보아 선생님</label>
+            <input type="radio" id="c2" name="teacher" value="장근석 선생님">
+            <label for="c2">
+                <img src="{% static 'img/장근석.jpg' %}" width="60px" height="60px" class="teacher-img"><br>
+                장근석 선생님</label>
+            <input type="radio" id="c3" name="teacher" value="이승기 선생님">
+            <label for="c3">
+                <img src="{% static 'img/이승기.jpeg' %}" width="60px" height="60px" class="teacher-img"><br>
+                이승기 선생님</label>
+            <input type="radio" id="c4" name="teacher" value="배윤정 선생님">
+            <label for="c4">
+                <img src="{% static 'img/배윤정.jpg' %}" width="60px" height="60px" class="teacher-img"><br>
+                배윤정 선생님</label>
+            <input type="radio" id="c5" name="teacher" value="이홍기 선생님">
+            <label for="c5" style="margin-right: 0px;">
+                <img src="{% static 'img/이홍기.png' %}" width="60px" height="60px" class="teacher-img"><br>
+                이홍기 선생님</label>
         </div>
         
         <h1 style="display: inline;">상담주제<span class="topic_detail">최대 3개의 주제를 선택할 수 있어요</span></h1><br>
@@ -51,25 +66,26 @@
     <!--캘린더/제출버튼-->
     <div class="col2">
         <h1>상담날짜</h1>
-        <table class="scriptCalendar" style="width:100%; text-align: center;">
+        <table class="scriptCalendar">
             <thead>
                 <!--연월 표시-->
                 <tr>
-                    <td onClick="prevCalendar();" style="cursor:pointer;">&#60;</td>
+                    <td onClick="prevCalendar();"></td>
                     <td colspan="5">
                         <span id="calYear">YYYY</span>년
                         <span id="calMonth">MM</span>월
                     </td>
-                    <td onClick="nextCalendar();" style="cursor:pointer;">&#62;</td>
+                    <td onClick="nextCalendar();"></td>
                 </tr>
-                <tr style="text-align: center;">
+                <tr style="font-weight: bold;">
                     <td>S</td><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td>
                 </tr>
             </thead>
             <tbody style="text-align: center;"></tbody>
         </table>
         <input type="hidden" name="datenum" id="date-pick" value="">
-
+        
+        <!-- 상담시간 선택 -->
         <div class="timepick">
             <input type="checkbox" id="e1" name="time-pick[]" value="10:00"> <label for="e1">10:00</label>
             <input type="checkbox" id="e2" name="time-pick[]" value="10:30"> <label for="e2">10:30</label>
@@ -96,14 +112,21 @@
 
 {% endblock %}
 
-
-{% block footer %}
-<footer class="fixed-bottom bg-info">
-    <div class="text-white font-italic text-right mr-5">Copyright &copy; 2020 Be.com by soljik</div>
-</footer>
-{% endblock %}
-
 {% block extra-script %}
-<script>buildCalendar();</script>
+<script>
+//달력 출력
+buildCalendar();
+//체크박스 최대 3개 제한
+$(document).ready(function(){
+    $("input[name='about[]'").on("click" , function(){
+    var count = $("input:checked[name='about[]']").length;
+    
+    if(count > 3){
+    $(this).attr("checked" , false);
+    alert("3개까지만 선택할 수 있습니다.");
+    }
+    });
+});
+</script>
 
 {% endblock %}

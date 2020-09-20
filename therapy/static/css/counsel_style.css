@@ -8,6 +8,22 @@
     max-width: 1200px;
 }
 
+.nav-link, .becom-nav {
+    color: #5B5652;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+a:hover {
+    color: #F99B0D;
+}
+
 /*반응형웹*/
 @media screen and ( max-width: 480px ) {
     .container {
@@ -198,6 +214,7 @@ input[type=radio] + label {
 input[type="radio"]:checked + label{
     background: #FFFFFF;
     border: 1px solid #F99B0D;
+    color: #F99B0D;
 }
 
 .teacher input[type=radio] + label { 
@@ -205,10 +222,19 @@ input[type="radio"]:checked + label{
     height: 115px;
     margin-right: 3px;
     margin-left: 0px;
-    padding-top:11%;
+    font-family: Noto Sans KR;
+    font-style: normal;
     font-weight: 500;
     font-size: 12px;
     line-height: 17px;
+}
+
+.teacher-img {
+    border-radius:50%;
+    border: 0.75px solid #C4C4C4;
+    box-sizing: border-box;
+    object-fit: cover;
+    margin-bottom: 6px;
 }
 
 input[type=checkbox] { display:none; } 
@@ -242,6 +268,7 @@ input[type=checkbox] + label {
 input[type="checkbox"]:checked + label{
     background: #FFFFFF;
     border: 1px solid #F99B0D;
+    color: #F99B0D;
 }
 
 .input-text {
@@ -253,13 +280,34 @@ input[type="checkbox"]:checked + label{
     margin: 1%;
 }
 
-.calendar td{
+/*달력 스타일*/
+.scriptCalendar{
     font-family: Inter;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 600;
     font-size: 12px;
-    line-height: 16px;
+    line-height: 15px;
+
+    color: rgba(0, 0, 0, 0.56);
+
+    width: -webkit-fill-available;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-spacing: 15px 5px;
+    border-collapse: inherit;
+
 }
+
+.choiceDay {
+    border-radius: 50%;
+    color: #ffffff;
+}
+
+.scriptCalendar tr{
+    height: 40px;
+}
+
 
 .active{
     background: #0b0809;
