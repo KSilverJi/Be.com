@@ -110,14 +110,11 @@ a {
     font-weight: normal;
     font-size: 14px;
     line-height: 17px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    padding-left: 24px;
-    padding-right: 24px;
+    padding: 16px 24px;
     margin: 12px auto;
 }
 .class-level-img{
-    margin: 0 auto;
+    padding: 0 auto;
 }
 .progress{
     width: 300px;
