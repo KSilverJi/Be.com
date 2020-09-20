@@ -43,13 +43,13 @@ INSTALLED_APPS = [
     'taggit_templatetags2',
     'widget_tweaks',
 
-    'bookmark.apps.BookmarkConfig',
+    
     'blog.apps.BlogConfig',
-    'photo.apps.PhotoConfig',
     'mate.apps.MateConfig',
     'myprofile.apps.MyprofileConfig',
     'forum.apps.ForumConfig',
     'moodtracker.apps.MoodtrackerConfig',
+    'therapy.apps.TherapyConfig',
 ]
 
 MIDDLEWARE = [

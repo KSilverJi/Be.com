@@ -36,13 +36,13 @@ urlpatterns = [
     path('accounts/register/done/', UserCreateDoneTV.as_view(), name='register_done'),
 
     path('', views.test, name='main'),
-    path('bookmark/', include('bookmark.urls')),
+    
     path('blog/', include('blog.urls')),
-    path('photo/', include('photo.urls')),
     path('forum/',include('forum.urls')),
     path('myprofile/',include('myprofile.urls'), name='myprofile'),
     path('moodtracker/', include('moodtracker.urls'), name='moodtracker'),
     path('mate/',include('mate.urls'), name='mate'),
+    path('therapy/', include('therapy.urls'), name='therapy'),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
