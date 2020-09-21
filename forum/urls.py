@@ -2,9 +2,9 @@ from django.urls import path
 from . import views
 import forum.views
 
+app_name='forum'
 urlpatterns = [
-    path('', forum.views.home, name='home'),
-    #path('list/',views.home,name='home'),
+    path('', views.forum_home, name='home'),
     path('new/', views.new, name='new'),
     path('detail/<int:forum_id>/', views.detail, name='detail'),
     path('create/', views.create, name='create'),

@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css?family=notosanskr.css');
+/* navigation bar */
+.nav-link.becom-nav.link-active{
+    border-bottom: 3px solid #f99b0d;
+    box-shadow: inset 0 -4px 0 #f99b0d;
+    pointer-events: none;
+    cursor: default;
+}
+.nav-link.becom-nav{
+    font-family: Noto Sans KR; 
+    font-style: normal; 
+    font-weight: 500; 
+    font-size:20px; 
+    color: #504B47;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+ a:hover{
+    text-decoration: none;
+    color: #f99b0d;
+}
+
+.container{
+    font-family: Noto Sans KR;
+}
+.forum-title{
+    color: #5B5652;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 26px;
+    margin-bottom: 12px;
+    display: inline-block;
+}
+
+/* 갤러리, 퀘스트 화면 공통 */
+.go-home-button{
+    margin-bottom:12px;
+    font-size:16px;
+    font-style:normal;
+    font-weight:bold;
+}
+.mate-detail{
+    padding: 24px;
+    background: #FFFFFF;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+.mate-detail-title{
+    color: #5B5652;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
+    align-items: center;
+    margin-bottom: 24px;
+    display: inline-block;
+}
+
+/* HOME */
+.mate-home-profile{
+    width: 100%;
+    background: #FFFFFF;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin-bottom: 24px;
+}
+.mate-profile-img{
+    margin: 0 auto;
+}
+.mate-profile{
+    float: left;
+    text-align: center;
+}
+.mate-home-percent{
+    width: 100%;
+    background: #FFFFFF;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin-left: 24px;
+    margin-bottom: 24px;
+}
+.intimacy{
+    padding-left: 12px;
+    padding-right: 12px;
+}
+.intimacy-text{
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    color: #5B5652;
+    text-align: center;
+    margin-bottom: 12px;
+}
+.mate-home-message{
+    width: 100%;
+    background: #FFFFFF;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin-bottom: 24px;
+}
+.message{
+    background-color: white;
+    margin:0 auto; 
+    width:100%;
+    padding:5px;
+}
+.message-list{
+    display:block; 
+    margin-bottom:12px;
+    overflow: auto;
+    height: 360px;
+}
+.msg-mine{
+    margin-bottom: 12px;
+    overflow: auto;
+}
+.msg-mine-content{
+    width: 70%; 
+    float: right; 
+    background-color: #f99b0d; 
+    color: white; 
+    border-radius: 10px; 
+    padding: 10px;
+}
+.msg-mine-date{
+    float: right;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #BDBDBD;
+    margin-right: 10px;
+}
+.msg-mate{
+    margin-bottom: 12px; 
+    overflow: auto;
+}
+.msg-mate-content{
+    width: 70%; 
+    float: left; 
+    background-color: #F6F6F6; 
+    border: 1px solid #E8E8E8;
+    border-radius: 10px; 
+    padding: 10px;
+}
+.msg-mate-date{
+    float: left;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #BDBDBD;
+    margin-left: 10px;
+}
+.message-send-button{
+    position: relative;
+    vertical-align: middle;
+    margin-bottom: 5px;
+}
+.mate-home-gallery{
+    width: 100%;
+    background: #FFFFFF;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin-left: 24px;
+    margin-bottom: 24px;
+}
+.mate-home-quest{
+    width: 100%;
+    background: #FFFFFF;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin-left: 24px;
+    margin-bottom: 24px;
+}
+.home-mate-quest-list{
+    margin: 0 auto;
+}
+.home-mate-quest-card{
+    width: 170px;
+    height: 80px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 18px;
+    text-align: center;
+    float: left;
+    padding: 30px 5px;
+    background-color: white;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin: 5px 1%;
+}
+
+/* 갤러리 */
+.mate-gallery-img{
+    border-radius:10px;
+    margin: 12px;
+}
+
+/* 태스크 */
+.mate-quest-percent{
+    width: 80%;
+    padding: 12px;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 12px;
+}
+.progress-bar {
+    border-radius: 7px;
+    background-color: #f99b0d;
+}
+.mate-quest-card-row{
+    width: 100%;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+.mate-quest-card{
+    width: 20%;
+    height: 100px;
+    font-size: 18px;
+    line-height: 36px;
+    text-align: center;
+}
+.yet{
+    width: 100%;
+    height: 100%;
+    padding-top: 30px;
+    background-color: #f99b0d;
+    color: white;
+    border-radius: 10px;
+}
+.yet:hover{
+    width: 100%;
+    height: 100%;
+    padding-top: 30px;
+    background-color: #f99b0da9;
+    color: white;
+    border-radius: 10px;
+}
+.done{
+    width: 100%;
+    height: 100%;
+    padding-top: 30px;
+    background: #D1CCC6;
+    border: 1px solid #D1CCC6;
+    box-sizing: border-box;
+    color: #5B5652;
+    border-radius: 10px;
+    text-decoration: line-through;
+}

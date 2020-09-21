@@ -1,0 +1,30 @@
+{% extends 'forum/base.html' %}
+
+{%load static%}
+
+{% block extra-style %}<link rel="stylesheet" type="text/css" href="{% static 'css/forum_style.css' %}">{% endblock %}
+
+{% block content %}
+
+<br>
+<div class="container">
+	<div class="forum-title">게시글 작성하기</div>
+	<form action="{% url 'forum:postcreate' %}" enctype="multipart/form-data" method="POST" style="margin-bottom:48px;">
+	  {% csrf_token %}
+	  <div class="forum-title">제목: </div>
+	  <input type="text" size=125 maxlength=20  name="title">
+	  <br>
+	  <br>
+	  <div class="forum-title">본문: </div>
+	  <textarea cols=130 rows=20 name="body"></textarea>
+	  <br>
+	  <br>
+	  <div class="forum-title">사진: </div>
+	  <input type="file" name="images" accept="image/*">
+	  <br>
+	  <br>
+	  <input type="submit" value="글쓰기" style="background:#f99b0d; color:white; border:none; border-radius:5px; padding:5px 12px;">
+	</form>
+</div>
+
+{% endblock %}

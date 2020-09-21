@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'forum/base.html' %}
 
 {% block content %}
 
@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <h1>{{ forum.title }}</h1>
                     <p>{{ forum.pub_date | date:"Y-m-d" }}</p>
-                    <p>{{ forum.summary }}<a href="{% url 'detail' forum.id %}"> ...자세히 보기</a></p> 
+                    <p>{{ forum.summary }}<a href="{% url 'forum:detail' forum.id %}"> ...자세히 보기</a></p> 
                 </div>
             </div>
         </div>

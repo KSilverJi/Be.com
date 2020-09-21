@@ -1,0 +1,105 @@
+{% extends 'forum/base.html' %}
+
+{%load static%}
+
+{% block extra-style %}<link rel="stylesheet" type="text/css" href="{% static 'css/forum_style.css' %}">{% endblock %}
+
+
+{% block content %}
+  <style>
+  /* 본문 내 이미지 요소의 'position' 속성을 'relative'로 지정 */
+    img.write_b { 
+      position: relative;
+      left: 1045px;
+      top: 3 px;
+    }
+  
+    .write{
+     
+      padding-top: 10px;
+      left: 1040px;
+      top: 3px;
+    }
+  </style>
+
+
+
+  <div class="write" style="padding-top:10px">
+    <!--<input type="submit" value="글쓰기" style="background:#f99b0d; color:white; border:none; border-radius:5px; padding:5px 12px;">-->
+    <a href="{% url 'forum:create' %}" style="background:#f99b0d; color:white; font-weight:bold; float:right;  border:none; border-radius:5px; padding:5px 12px;  font-size:14px;">글쓰기</a>
+
+  </div>
+
+  <!--<a href="{% url 'forum:create' %}">
+    <img src="{%static 'button_write.png'%}" class="write_b" height="30" alt="글쓰기 버튼" > 
+  </a>-->
+
+  <div class="container">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th  width="30%">제목</th>
+          <th  width="40%">내용</th>
+          <th width="15%">날짜</th>
+          <th  width="25%">작성자</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%for forum in posts%}
+        <tr>
+          
+          <th>{{forum.title}}</th>
+          <th><a href="{% url 'forum:detail' forum.id %}">{{ forum.summary }}</a> </th>
+          <th>{{ forum.pub_date | date:"Y-m-d" }}</th>
+          <th><img src="{{forum.writer.profile_image.url}}" width="32" height="32" style="border-radius:16px; border: 0.5px solid #C4C4C4; margin-right:12px;">{{forum.writer}}</th>
+        </tr>
+        {% endfor %} 
+      </tbody>
+    </table>
+<!--
+    {%if posts.has_previous%}
+    <a href="?page=1"><First></a>
+    <a href="?page={{posts.previous_page_number}}">Previous</a>
+    {%endif%}
+
+    <span>{{posts.number}}</span>
+    <span>of</span>
+    <span>{{posts.paginator.num_pages}}</span>
+
+    {%if posts.has_next%}
+    <a href="?page={{posts.next_page_number}}">Next</a>
+    <a href="?page={{posts.paginator.num_pages}}">Last</a>
+    {%endif%}-->
+
+    <div class="row mt-2">
+      <div class="col-12">
+          <nav>
+              <ul class="pagination justify-content-center">
+                {%if posts.has_previous%}                        
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{posts.previous_page_number}}">이전으로</a>
+                  </li>
+                  {% else %}
+                  <li class="page-item disabled">
+                      <a class="page-link" href="#">이전으로</a>
+                  </li>
+                  {% endif %}
+                  <li class="page-item">
+                      <a class="page-link" href="#">{{posts.number}}/{{posts.paginator.num_pages}}</a>
+                  </li>
+                  {% if products.has_next %}
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{posts.next_page_number}}">다음으로</a>
+                  </li>
+                  {% else %}
+                  <li class="page-item disabled">
+                      <a class="page-link" href="#">다음으로</a>
+                  </li>
+                  {% endif %}
+              </ul>
+          </nav>
+      </div>
+  </div>
+  </div>
+
+{% endblock %}

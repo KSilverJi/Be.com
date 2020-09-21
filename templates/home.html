@@ -258,7 +258,7 @@ a {
                 <li class="nav-item mx-1 btn">
                     <a class="nav-link becom-nav" href="{% url 'mate:home' %}">짝꿍</a></li>
                 <li class="nav-item mx-1 btn">
-                    <a class="nav-link becom-nav" href="#">게시판</a></li>
+                    <a class="nav-link becom-nav" href="{% url 'forum:home' %}">게시판</a></li>
 
                 
             </ul>
@@ -478,8 +478,24 @@ a {
             </div>
             <div class="col-md-6">
                 <div class="class-hot col-xs-3">
-                    <div class="home-title">우리반 인기글</div>
-                    <p>인기순으로 나열해보기?</p>
+                    <div class="home-title" style="display:inline-block;">우리반 게시판</div>
+                    <a href="{% url 'forum:home' %}" style="font-weight:bold; float:right; color:#7A7A7A; font-size:14px;">더보기</a>
+                    <table class="" style="">
+                        <thead>
+                            <th width="300"></th>
+                            <th width="150"></th>
+                            <th width="100"></th>
+                        </thead>
+                        <tbody>
+                            {% for forums in forums %}
+                            <tr height="50">
+                                <td><a href="{% url 'forum:detail' forums.id %}"></a>{{ forums.title }}</td>
+                                <td align="center"><p style="margin:1px;">{{forums.pub_date | date:"Y-m-d"}}</p></td>
+                                <td align="center"><p style="margin:1px;"><img src="{{forums.writer.profile_image.url}}" width="32" height="32" style="border-radius:16px; border: 0.5px solid #C4C4C4; margin-right:12px;">{{forums.writer}}</p></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

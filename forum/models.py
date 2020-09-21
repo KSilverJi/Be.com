@@ -9,7 +9,8 @@ class Forum(models.Model):
     body = models.TextField()
     images = models.ImageField(blank=True, upload_to="images", null=True)
     #추가
-    #writer = models.ForeignKey(User, verbose_name = "작성자", on_delete = models.CASCADE)
+    writer = models.ForeignKey(MyProfile, on_delete=models.CASCADE, verbose_name='USERNAME', blank=True, null=True, related_name='writer')
+    #ForeignKey(User, verbose_name = "작성자", on_delete = models.CASCADE)
 
 
     def __str__(self):
