@@ -27,7 +27,7 @@
             <div class="moodtracker-title">{{user}}님의 요즘 기분</div>
             <div style="font-weight: 500; padding:12px;">{{recent_mood}}</div>
             <div style="font-size:14px; font-weight: 500; padding: 5px 12px; color: #807C77;"><i>{{saying}}</i></div>
-            <a href="#" class="therapy-button">
+            <a href="{% url 'therapy:therapy' %}" class="therapy-button">
                 <div class="therapy-button-wrap">
                     상담 신청하기
                 </div>

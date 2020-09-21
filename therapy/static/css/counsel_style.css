@@ -9,15 +9,11 @@
 }
 
 .nav-link, .becom-nav {
-    color: #5B5652;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 26px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 12px;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: Noto Sans KR; 
+    font-style: normal; 
+    font-weight: 500;
+    font-size: 20px; 
+    color: #504B47;
 }
 
 a:hover {
