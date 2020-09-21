@@ -8,6 +8,7 @@ from django.views.defaults import permission_denied
 
 from myprofile.models import MyProfile, MyClass
 from moodtracker.models import MoodTracker, Wordcloud
+from forum.models import Forum
 from mate.models import Mate
 from django.db.models import Q # OR문 추가
 
@@ -42,6 +43,12 @@ def main(request):
     my_class = MyClass.objects.get(myschool=profile.school, hak=profile.school_year, ban=profile.school_class)
     class_score, class_score_text, class_level = class_achievement(my_class)
 
+    forums = Forum.objects.order_by('-id')[:3]
+    #forum_list = Forum.objects.all().order_by('-id')
+    
+    #page = request.GET.get('page')
+    #posts = paginator.get_page(page)
+
     item={
         'profile' : profile,
         'class_friends' : class_friends,
@@ -63,6 +70,7 @@ def main(request):
         'class_score' : class_score,
         'class_score_text' : class_score_text,
         'class_level' : class_level,
+        'forums':forums,
     }
     return render(request, 'home.html', item)
 

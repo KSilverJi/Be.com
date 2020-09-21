@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% block title %}Be.com - 감정일기{% endblock %}</title>
+    <title>{% block title %}Be.com - 게시판{% endblock %}</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
@@ -19,7 +19,7 @@
 
 <body style="padding-top:90px;">
     <nav class="navbar navbar-expand-lg fixed-top" style="background-color: white;">
-        <a class="navbar-brand mx-5 mb-0" href="{% url 'main' %}"><img src="{% static 'img/becom_logo.png' %}" width="140"></a>
+        <a class="navbar-brand mx-5 mb-0" href="{% url 'main' %}"><img src="{% static 'becom_logo.png' %}" width="140"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -31,11 +31,11 @@
                 <li class="nav-item mx-1 btn">
                     <a class="nav-link becom-nav" href="{% url 'myprofile:home' %}">프로필</a></li>
                 <li class="nav-item mx-1 btn">
-                    <a class="nav-link becom-nav nav-link-active" href="{% url 'moodtracker:home' %}">감정 일기</a></li>
+                    <a class="nav-link becom-nav" href="{% url 'moodtracker:home' %}">감정 일기</a></li>
                 <li class="nav-item mx-1 btn">
                     <a class="nav-link becom-nav" href="{% url 'mate:home' %}">짝꿍</a></li>
                 <li class="nav-item mx-1 btn">
-                    <a class="nav-link becom-nav" href="{% url 'forum:home' %}">게시판</a></li>
+                    <a class="nav-link becom-nav link-active" href="{% url 'forum:home' %}">게시판</a></li>
 
                 
             </ul>
