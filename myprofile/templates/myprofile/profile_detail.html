@@ -1,12 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'myprofile/base.html' %}
 
 {% load static %}
 {% block extra-style %}<link rel="stylesheet" type="text/css" href="{% static 'css/myprofile_style.css' %}">{% endblock %}
-{% block title %}home.html{% endblock %}
+{% block title %}Be.com - 프로필{% endblock %}
 
 {% block content %}
 <div class="container">
-    <div style="margin-bottom:12px;"><a href="{% url 'myprofile:home' %}">< 프로필 홈</a></div>
+    <div class="go-home-button"><a href="{% url 'myprofile:home' %}" style="color:#5B5652;"><img src="{% static 'img/left_arrow.png' %}" height="16" style="float:left; margin-top:4px;">프로필 홈</a></div>
     <div class="col1">
         <div class="my-profile-detail">
             {% if detail == 'my' %}
@@ -15,7 +15,7 @@
                 <div class="profile-title">{{person.username}}님의 프로필</div>
             {% endif %}
             <div class="my-profile">
-                <img src="{{person.profile_image.url}}" width="150" height="150">
+                <img src="{{person.profile_image.url}}" width="150" height="150" style="border-radius:75px; border: 0.75px solid #C4C4C4;">
                 <!--<div class="mb-1 text-muted">Nov 12</div>-->
                 <div class="my-profile-intro"><br><br>
                     <b>이름</b> &nbsp; {{person.username}}<br>
@@ -57,7 +57,7 @@
                 <div class="profile-images-list">
                     {% for photo in person_images.all%}
                         <div class="profile-image">
-                            <img src="{{photo.image.url}}" height="200" class="image"><br>
+                            <img src="{{photo.image.url}}" height="200" class="image" style="border-radius:10px;"><br>
                             <div class="overlay">
                                 <div class="overlay-text">{{photo.topic}}</div>
                             </div>
@@ -73,9 +73,4 @@
 </div>
    
 {% endblock content %}
-
-{% block footer %}
-<footer class="fixed-bottom bg-info">
-    <div class="text-white font-italic text-right mr-5">Copyright &copy; 2020 Be.com by soljik</div>
-</footer>
-{% endblock %}
+}

@@ -19,3 +19,11 @@ class ProfilePhoto(models.Model):
 
     def __str__(self):
         return "%s - %s" % (self.myprofile, self.id)
+
+
+class MyClass(models.Model):
+    #myprofile = models.ForeignKey(MyProfile, on_delete=models.CASCADE, null=True)
+    myschool=models.CharField(max_length=20)
+    hak = models.IntegerField(default=2)
+    ban = models.IntegerField(default=6)
+    class_intimacy=models.IntegerField(default=0)

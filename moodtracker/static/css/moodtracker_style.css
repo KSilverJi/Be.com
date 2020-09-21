@@ -1,4 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=notosanskr.css');
+.nav-link.becom-nav.nav-link-active{
+  border-bottom: 3px solid #f99b0d;
+  box-shadow: inset 0 -4px 0 #f99b0d;
+  pointer-events: none;
+  cursor: default;
+}
+.nav-link.becom-nav{
+  font-family: Noto Sans KR; 
+  font-style: normal; 
+  font-weight: 500; 
+  font-size:20px; 
+  color: #504B47;
+}
 
 a {
   text-decoration: none;
@@ -129,16 +142,6 @@ a:hover{
   padding: 24px;
   margin-bottom: 48px;
 }
-.title {
-  color: #c80;
-  font-weight: bold;
-}
-.powered {
-  position: relative;
-  top: 77%;
-  color: #cc0;
-  font-style: italic;
-}
 
 /* 작성된 감정 일기 리스트 */
 .main_wrap{
@@ -171,101 +174,7 @@ a:hover{
 .record-list{
   line-height: 200%;
 }
-/*
-.calendar_prev{
-  text-align: center;
-  background-color: white;
-}
-.calendar_year_month{
-  text-align: center;
-  height: 150px;
-  background-color: white;
-  font-size: 18px;
-}
-.calendar_next{
-  text-align: center;
-  background-color: white;
-}
-.main_calendar {
-  border-collapse: collapse;
-  width:100%;
-}
-.calendar_weekday{
-  text-align: center;
-}
-.main_calendar tr:nth-child(1){
 
-}
-.main_calendar tr:nth-child(2){
-  height: 60px;
-  font-size: 18px;
-}
-.main_calendar tr:nth-child(3){
-  text-align: center;
-  font-size: 18px;
-  height: 60px;
-  vertical-align: top;
-}
-.main_calendar tr:nth-child(4){
-  text-align: center;
-  font-size: 18px;
-  height: 60px;
-  vertical-align: top;
-}
-.main_calendar tr:nth-child(5){
-  text-align: center;
-  font-size: 18px;
-  height: 60px;
-  vertical-align: top;
-}
-.main_calendar tr:nth-child(6){
-  text-align: center;
-  font-size: 18px;
-  height: 60px;
-  vertical-align: top;
-}
-.main_calendar tr:nth-child(7){
-  text-align: center;
-  font-size: 18px;
-  height: 60px;
-  vertical-align: top;
-}
-.main_calendar tr:nth-child(8){
-  text-align: center;
-  font-size: 18px;
-  height: 60px;
-  vertical-align: top;
-}
-
-td{
-  width: 80px;
-}
-.main_calendar td:nth-child(1){
-  border-left: double white;
-}
-.main_calendar td:nth-child(7){
-  border-right: double white;
-}
-.calendar_today{
-  background-color: #B90000;
-  width: 20%;
-  margin: auto;
-  border-radius: 20px;
-  color: white;
-}
-.calendar_label{
-  font-size: 40px;
-}
-.calendar_a_tag_example{
-  font-size: 18px;
-}
-.calendar-record-day{
-  background-color: black;
-  width: 20%;
-  margin: auto;
-  border-radius: 20px;
-  color: white;
-}*/
 .write-link-div{
   float: right;
 }

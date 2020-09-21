@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.56.101', 'localhost', '127.0.0.1']
 
+#추가
+SITE_ID=1
 
 # Application definition
 
@@ -145,8 +147,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 TAGGIT_CASE_INSENSITIVE = True
 TAGGIT_LIMIT = 50
 
-DISQUS_SHORTNAME = 'pydjango-web-programming'
-DISQUS_MY_DOMAIN = 'http://192.168.56.101:8000'
+DISQUS_SHORTNAME = 'be-com'#'pydjango-web-programming'
+DISQUS_MY_DOMAIN = 'http://http://127.0.0.1:8000/'#http://192.168.56.101:8000'
 
 LOGIN_REDIRECT_URL = '/'
 
