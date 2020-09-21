@@ -36,7 +36,7 @@ urlpatterns = [
     path('accounts/register/', UserCreateView.as_view(), name='register'), 
     path('accounts/register/done/', UserCreateDoneTV.as_view(), name='register_done'),
 
-    path('', views.test, name='main'),
+    path('', views.main, name='main'),
     
     path('blog/', include('blog.urls')),
     path('forum/',include('forum.urls')),
