@@ -227,7 +227,7 @@ a:hover{
   margin-top: 24px;
   width: 400px;
   overflow: auto;
-  height: 350px;
+  margin-bottom: 24px;
 }
 
 /* WRITE */

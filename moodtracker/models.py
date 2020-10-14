@@ -10,6 +10,7 @@ class MoodTracker(models.Model):
     pub_date_day = models.CharField(max_length=10, default=0)
     mood = models.CharField(max_length=15)
     pos_neg = models.IntegerField(default=0)
+    images = models.ImageField(blank=True, upload_to="images", null=True)
     #timeout = models.IntegerField(default=0)
 
     def __str__(self):

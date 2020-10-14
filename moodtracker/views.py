@@ -209,17 +209,19 @@ def use_model(content):
 
 # MoodTracker 일기 내용 저장 & 긍정부정 모델 돌려서 결과 같이 저장
 def create_record(request):
-    content = request.GET['content']
+    content = request.POST['content']
 
     mood_record = MoodTracker()
     mood_record.username = request.user
     mood_record.content = content
-    mood_record.mood = request.GET['mood'] 
+    mood_record.mood = request.POST['mood'] 
     mood_record.pub_date = timezone.datetime.now()
     mood_record.pub_date_year = timezone.datetime.now().year
     mood_record.pub_date_month = timezone.datetime.now().month
     mood_record.pub_date_day = timezone.datetime.now().day
-    
+
+    mood_record.images = request.FILES['images']
+
     pos_neg = use_model(content)
     mood_record.pos_neg = pos_neg    
 

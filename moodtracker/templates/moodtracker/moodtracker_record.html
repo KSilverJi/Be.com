@@ -53,6 +53,11 @@
             <div class="view-record-content">
                 {{sp_record.content}}<!--저장된 일기 content 표기-->
             </div>
+            <div>
+                {% if sp_record.images %}
+                <img src="{{ sp_record.images.url }}" height="200" style="border-radius:10px;">
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>
