@@ -54,9 +54,23 @@
                 {{sp_record.content}}<!--저장된 일기 content 표기-->
             </div>
             <div>
-                {% if sp_record.images %}
-                <img src="{{ sp_record.images.url }}" height="200" style="border-radius:10px;">
-                {% endif %}
+                <div>
+                    {% if sp_record.images %}
+                    <img src="{{ sp_record.images.url }}" height="200" style="border-radius:10px;">
+                    <div>
+                        분노: {{sp_record.anger}}<br>
+                        경멸: {{sp_record.contempt}}<br>
+                        혐오: {{sp_record.disgust}}<br>
+                        공포: {{sp_record.fear}}<br>
+                    </div>
+                    <div>
+                        기쁨: {{sp_record.happiness}}<br>
+                        중립: {{sp_record.neutral}}<br>
+                        슬픔: {{sp_record.sadness}}<br>
+                        놀람: {{sp_record.surprise}}
+                    </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
