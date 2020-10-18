@@ -1,0 +1,26 @@
+{% extends 'forum/base.html' %}
+
+{% block content %}
+
+    {% if not forums %}
+
+        <h1>검색 결과가 없습니다</h1>
+
+    {% else %}
+
+        {% for forum in forums.all %}
+        <div class="container"> 
+            <div class="card">
+                <div class="card-body">
+                    <h1>{{ forum.title }}</h1>
+                    <p>{{ forum.pub_date | date:"Y-m-d" }}</p>
+                    <p>{{ forum.summary }}<a href="{% url 'forum:detail' forum.id %}"> ...자세히 보기</a></p> 
+                </div>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock %}

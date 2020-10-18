@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Be.com - 게시판{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    {% block extra-style %}{% endblock %}
+</head>
+
+
+
+<body style="padding-top:90px;">
+    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: white;">
+        <a class="navbar-brand mx-5 mb-0" href="{% url 'main' %}"><img src="{% static 'becom_logo.png' %}" width="140"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item mx-1 btn">
+                    <a class="nav-link becom-nav" href="{% url 'main' %}">홈</a></li>
+                <li class="nav-item mx-1 btn">
+                    <a class="nav-link becom-nav" href="{% url 'myprofile:home' %}">프로필</a></li>
+                <li class="nav-item mx-1 btn">
+                    <a class="nav-link becom-nav" href="{% url 'moodtracker:home' %}">감정 일기</a></li>
+                <li class="nav-item mx-1 btn">
+                    <a class="nav-link becom-nav" href="{% url 'mate:home' %}">짝꿍</a></li>
+                <li class="nav-item mx-1 btn">
+                    <a class="nav-link becom-nav link-active" href="{% url 'forum:home' %}">게시판</a></li>
+
+                
+            </ul>
+
+           
+            <ul class="navbar-nav">
+                <li class="nav-item" style="border: 2px solid #F99B0D;box-sizing:border-box;border-radius:10px;padding:12px 26px;">
+                    <a class="register-therapy" href="{% url 'therapy:therapy' %}" style="text-decoration:none;color:#f99b0d;font-family: Noto Sans KR;font-weight: 500;font-size: 16px;">상담 신청하기</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-5 mr-5">
+                <li class="nav-item dropdown mx-1 btn " style="background-color: #ffffff;">
+                    {% if user.is_active %}
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" style="font-family: Noto Sans KR;font-size: 16px;color: #000000;">
+                        <i class="fas fa-user"></i>&ensp;{% firstof user.get_short_name user.get_username %}님 환영합니다!&ensp;</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'logout' %}">로그아웃</a>
+                        <a class="dropdown-item" href="{% url 'password_change' %}">비밀번호 변경</a>
+                    </div>
+                    {% else %}
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                        <i class="fas fa-user"></i>&ensp;로그인 하세요&ensp;</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'login' %}">로그인</a>
+                        <a class="dropdown-item" href="{% url 'register' %}">회원가입</a>
+                    </div>
+                    {% endif %}
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+
+    {% block footer %}{% endblock %}
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/c998a172fe.js"></script>
+
+    {% block extra-script %}{% endblock %}
+
+</body>
+</html>
+

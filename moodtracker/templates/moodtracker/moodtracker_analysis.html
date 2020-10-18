@@ -1,0 +1,146 @@
+{% extends 'moodtracker/base.html' %}
+
+{% load static %}
+
+{% block extra-style %}<link rel="stylesheet" type="text/css" href="{% static 'css/moodtracker_style.css' %}">{% endblock %}
+{% block title %}Be.com - 감정일기{% endblock %}
+
+{% block script %}
+    
+{% endblock %}
+
+
+{% block content %}
+<div class="moodtracker-nav">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link link-disabled" href="{% url 'moodtracker:write' %}">쓰기</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link link-active" href="#">분석</a>
+        </li>
+    </ul>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="recent-mood col-xs-5 col-md-6">
+            <div class="moodtracker-title">{{user}}님의 요즘 기분</div>
+            <div style="font-weight: 500; padding:12px;">{{recent_mood}}</div>
+            <div style="font-size:14px; font-weight: 500; padding: 5px 12px; color: #807C77;"><i>{{saying}}</i></div>
+            <a href="{% url 'therapy:therapy' %}" class="therapy-button">
+                <div class="therapy-button-wrap">
+                    상담 신청하기
+                </div>
+            </a>
+        </div>
+        <div class="pos-neg-percent col-xs-3 col-md-5">
+            <div class="moodtracker-title">일기 속 감정 분석</div>
+            <div class="pos-neg-graph">
+                <canvas id="pos_neg_barChart" width="300"></canvas>
+                <script>
+                    var ctx = document.getElementById('pos_neg_barChart');
+                    var pos_neg_barChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['', ''],
+                            datasets: [{
+                                label: '',
+                                data: ["{{neg_per}}", "{{pos_per}}"],
+                                backgroundColor: [
+                                    'rgba(255, 123, 85, 1)',
+                                    'rgba(57, 215, 208, 1)'
+                                ],
+                            }]
+                        },
+                        options: {
+                            legend:{
+                                display: false
+                            },
+                            responsive: false
+                        }
+                    });
+                </script>
+            </div>
+            <div class="pos-neg-description">
+                <div style="width:24px;height:24px; background:#39D7D0; border-radius:5px; float:left; margin-right:5px;"></div><div style="float:left; margin-right:15px;">긍정</div>
+                <div style="width:24px;height:24px; background:#FF7B55; border-radius:5px; float:left; margin-right:5px;"></div><div style="float:left; margin-right:15px;">부정</div>
+            </div>
+        </div>
+    </div>
+    <!--
+    <div class="row">
+        <div class="my_mind col-xs-5 col-md-12">
+            <h3>나의 감정분석</h3>
+            <p>나의 감정 분석은 어떻게 나올지</p>
+        </div>
+    </div>
+    -->
+    <div class="row">
+        <div class="mood-freqent col-md-6">
+            <div class="moodtracker-title">어떤 감정을 자주 느꼈을까요?</div>
+            <div class="mood-frequent-img">
+                <div class="mood-img"><img src="{% static 'img/happy_emoji.png' %}" height=50></div>
+                <div class="mood-img"><img src="{% static 'img/sad_emoji.png' %}" height=50></div>
+                <div class="mood-img"><img src="{% static 'img/calm_emoji.png' %}" height=50></div>
+                <div class="mood-img"><img src="{% static 'img/angry_emoji.png' %}" height=50></div>
+                <div class="mood-img"><img src="{% static 'img/soso_emoji.png' %}" height=50></div>
+            </div>
+            <div>
+                <canvas id="mood_barChart" height="300"></canvas>
+                <script>
+                    var ctx = document.getElementById('mood_barChart');
+                    var mood_barChart = new Chart(ctx, {
+                        type: 'horizontalBar',
+                        data: {
+                            labels: ['', '', '', '', ''],
+                            datasets: [{
+                                label: '',
+                                data: ["{{happy}}", "{{sad}}", "{{calm}}", "{{angry}}", "{{soso}}"],
+                                backgroundColor: [
+                                    'rgba(57, 215, 208, 1)',
+                                    'rgba(13, 107, 249, 1)',
+                                    'rgba(249, 155, 13, 1)',
+                                    'rgba(255, 123, 85, 1)',
+                                    'rgba(211, 145, 255, 1)'
+                                ]
+                            }]
+                        },
+                        options: {
+                            legend:{
+                                display: false 
+                            },
+                            responsive: false, 
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        beginAtZero: true,
+                                        stepSize: 1
+                                    },
+                                    gridLines: {
+                                        color: "rgba(0, 0, 0, 0)",
+                                    }
+                                }],
+                                yAxes: [{
+                                    gridLines: {
+                                        color: "rgba(0, 0, 0, 0)",
+                                    }   
+                                }]
+                            }
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+        <div class="word-cloud col-md-5">
+            <div class="moodtracker-title">{{user}}님이 자주 쓰는 단어</div>
+            <img src="{{wc.wc_image.url}}" height="270" style="float:left;">
+            <div style="width:130px;float:right; text-align:center; font-size:18px; color:#5B5652; font-weight:500;">
+                가장 자주<br>사용한 단어는<br>
+                <span style="font-size:24px; color:black;">"{{mft1}}",<br>"{{mft2}}",<br>"{{mft3}}"</span><br>
+                이에요!
+            </div>
+        </div>
+    </div>
+    <div class="row"></div>
+</div>
+{% endblock content %}
