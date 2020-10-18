@@ -251,14 +251,14 @@ def create_record(request):
 
     emotion = find_emotion(images, user, year, month, day) # 해당 감정 일기
     emotion = emotion[0]
-    mood_record.anger = emotion['emotion']['anger']
-    mood_record.contempt = emotion['emotion']['contempt']
-    mood_record.disgust = emotion['emotion']['disgust']
-    mood_record.fear = emotion['emotion']['fear']
-    mood_record.happiness = emotion['emotion']['happiness']
-    mood_record.neutral = emotion['emotion']['neutral']
-    mood_record.sadness = emotion['emotion']['sadness']
-    mood_record.surprise = emotion['emotion']['surprise']
+    mood_record.anger = round(emotion['emotion']['anger']*100, 1)
+    mood_record.contempt = round(emotion['emotion']['contempt']*100, 1)
+    mood_record.disgust = round(emotion['emotion']['disgust']*100, 1)
+    mood_record.fear = round(emotion['emotion']['fear']*100, 1)
+    mood_record.happiness = round(emotion['emotion']['happiness']*100, 1)
+    mood_record.neutral = round(emotion['emotion']['neutral']*100, 1)
+    mood_record.sadness = round(emotion['emotion']['sadness']*100, 1)
+    mood_record.surprise = round(emotion['emotion']['surprise']*100, 1)
     
     filename2 = '%s_face_%s_%s_%s.png' % (user, year, month, day)
 
@@ -291,7 +291,7 @@ def find_emotion(images, user, year, month, day):
     img = Image.open(img_url) # img 변수에 이미지 파일을 넣어준다.
     draw = ImageDraw.Draw(img)
     for face in faces:
-        draw.rectangle(getRectangle(face), outline='red') # 인식된 얼굴들에 네모 박스 쳐주기
+        draw.rectangle(getRectangle(face), outline='red', width=2) # 인식된 얼굴들에 네모 박스 쳐주기
     
     filename1 = 'media/%s_face_%s_%s_%s.png' % (user, year, month, day)
     img.save(filename1)
