@@ -50,6 +50,8 @@ def main(request):
     #page = request.GET.get('page')
     #posts = paginator.get_page(page)
 
+    counsel = Counsel.objects.all()
+
     item={
         'profile' : profile,
         'class_friends' : class_friends,
@@ -72,6 +74,7 @@ def main(request):
         'class_score_text' : class_score_text,
         'class_level' : class_level,
         'forums':forums,
+        'counsel':counsel,
     }
     return render(request, 'home.html', item)
 

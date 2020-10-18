@@ -10,5 +10,5 @@ class Counsel(models.Model):
     teacher = models.CharField(max_length=10)
     about = models.CharField(max_length=20)
     detailtext = models.TextField()
-    datenum = models.CharField(max_length=10)
+    datenum = models.CharField(max_length=20)
     timepick = models.CharField(max_length=20)

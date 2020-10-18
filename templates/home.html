@@ -326,11 +326,11 @@ a {
             <div class = "col-box">
                 <div class = "student-list">상담 신청 내역</div>
                 <div class = "cousel-list">
-                {% for cousel in Counsel.all %}
+                {% for cousel_detail in counsel.all %}
                 <div class="counsel-card">
-                    <div style="font-size:14px; font-weight:500; line-height: 20px; margin-top:8px;">{{Counsel.username}}</div>
-                    <div style="height: 1px; background-color: #f99b0d; margin:5px;">{{counsel.timepick}}</div>
-                    <div style="font-weight: normal; font-size:12px;">{{Counsel.datenum}}</div>
+                    <div style="font-size:14px; font-weight:500; line-height: 20px; margin-top:8px;">{{counsel_detail.username}}</div>
+                    <div style="height: 1px; background-color: #f99b0d; margin:5px;">{{counsel_detail.timepick}}</div>
+                    <div style="font-weight: normal; font-size:12px;">{{counsel_detail.datenum}}</div>
                 </div>
                 {% endfor%}
                 </div> 
