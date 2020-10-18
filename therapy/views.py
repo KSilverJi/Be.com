@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Counsel
 
 import datetime
+from django.contrib.auth.models import User
 
 # Create your views here.
 def therapy(request):
@@ -9,11 +10,12 @@ def therapy(request):
 
 
 def result(request):
-
     today = datetime.datetime.today()
 
     if request.method == "POST":
         counsel=Counsel()
+        counsel.username = User.objects.get(username=request.user.username)
+
         counsel.who = request.POST.get('who')
         counsel.how = request.POST.get('how')
         counsel.teacher = request.POST.get('teacher')

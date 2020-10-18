@@ -11,6 +11,7 @@ from moodtracker.models import MoodTracker, Wordcloud
 from forum.models import Forum
 from mate.models import Mate
 from django.db.models import Q # OR문 추가
+from therapy.models import Counsel
 
 from django.shortcuts import render, redirect
 from django.utils import timezone

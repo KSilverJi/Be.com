@@ -236,6 +236,57 @@ a {
     border-radius: 7px;
     background-color: #f99b0d;
 }
+
+/*선생님 화면 css*/
+.col1{
+    width: 50%;
+    height: 1000px;
+    float: left;
+}
+.col2{
+    width: 50%;
+    height: 1000px;
+    float: left;
+}
+
+.col-box{
+    background: #FFFFFF;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin-right: 24px;
+    margin-bottom: 48px;
+}
+.friends-list{
+    height: auto;
+    padding: 12px;
+    overflow: auto;
+}
+.friend-card{
+    width: 125px;
+    height: 170px;
+    margin: 12px;
+    padding: 6px;
+    float: left;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 10px;
+    text-align: center;
+}
+.counsel-card {
+    width: 600px;
+    height: 220px;
+}
+
+.student-list {
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    color: #504B47;
+    margin:24px;
+}
 </style>
 {% endblock %}
 </head>
@@ -269,9 +320,43 @@ a {
             </li>
         </ul>
     </nav>
-    <div class="container">
-    <p> 선생님만 볼 수 있지롱 </p>
+    <div class="container" style="max-width: 95%;">
+        <!--상담신청 내역-->
+        <div class = "col1">
+            <div class = "col-box">
+                <div class = "student-list">상담 신청 내역</div>
+                <div class = "cousel-list">
+                {% for cousel in Counsel.all %}
+                <div class="counsel-card">
+                    <div style="font-size:14px; font-weight:500; line-height: 20px; margin-top:8px;">{{Counsel.username}}</div>
+                    <div style="height: 1px; background-color: #f99b0d; margin:5px;">{{counsel.timepick}}</div>
+                    <div style="font-weight: normal; font-size:12px;">{{Counsel.datenum}}</div>
+                </div>
+                {% endfor%}
+                </div> 
+            </div>
+        </div>
+
+        <div class="col2"> <!--학생 목록-->
+            <div class="col-box">
+                <div class="student-list">반 학생들</div>
+                <div class="friends-list">
+                    {% for friend in class_friends.all %}
+                    <div class="friend-card">
+                        <a class="friend-card-a" href="{% url 'myprofile:detail' friend.id %}">
+                            <img src="{{friend.profile_image.url}}" width="80" height="80" style="border-radius:40px; border: 0.75px solid #C4C4C4;">
+                            <div style="font-size:14px; font-weight:500; line-height: 20px; margin-top:8px;">{{friend.username}}</div>
+                        </a>
+                        <div style="height: 1px; background-color: #f99b0d; margin:5px;"></div>
+                        <div style="font-weight: normal; font-size:12px;">{{friend.intro}}</div>
+                    </div>
+                    {% endfor %}
+            </div>
+        </div>
     </div>
+
+
+
 
     <!--기본 화면(선생님 X)-->
     {% else %}
