@@ -31,7 +31,7 @@
     </div>
     <div class="record">
         <div class="moodtracker-title">그날의 감정 일기</div>
-        <div class="record-content">
+        <div class="record-content" style="float:left;">
             <div class="record-date">
                 <div class="view-record-date">
                     {{sp_record.pub_date_year}}년 {{sp_record.pub_date_month}}월 {{sp_record.pub_date_day}}일
@@ -53,6 +53,39 @@
             <div class="view-record-content">
                 {{sp_record.content}}<!--저장된 일기 content 표기-->
             </div>
+        </div>
+        <div style="float:left;">
+            {% if sp_record.images %}
+            <div style="width:200px; max-height:250px;">
+                <img src="{{ sp_record.images.url }}" style="width:100%; vertical-align:middle; border-radius:10px; padding-bottom: 10px;">
+            </div>
+            <div style="background-color:#FEF3E1; padding:10px; overflow:auto;">
+                <div style="float:left; margin-left:30px; margin-right:20px;">
+                    분노<br>
+                    경멸<br>
+                    혐오<br>
+                    공포<br>
+                    기쁨<br>
+                    중립<br>
+                    슬픔<br>
+                    놀람<br>
+                </div>
+                <div style="float:left; text-align:right;">
+                    {{sp_record.anger}} %<br>
+                    {{sp_record.contempt}} %<br>
+                    {{sp_record.disgust}} %<br>
+                    {{sp_record.fear}} %<br>
+                    {{sp_record.happiness}} %<br>
+                    {{sp_record.neutral}} %<br>
+                    {{sp_record.sadness}} %<br>
+                    {{sp_record.surprise}} %
+                </div>
+            </div>
+            {% else %}
+            <div style="padding: 104px 20px; color:#807C77;">
+                등록된 사진이 없습니다.
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>

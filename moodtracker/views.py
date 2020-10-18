@@ -15,16 +15,35 @@ from wordcloud import WordCloud
 from wordcloud import STOPWORDS
 import matplotlib.pyplot as plt
 
+import requests
+from io import BytesIO
+from PIL import Image, ImageDraw
+import cognitive_face as CF
+
 # 작성된 감정 일기 보는 화면으로 이동
 def view_record(request, record_id):
     user = request.user
-    records = MoodTracker.objects.filter(username=user)
-    sp_record = MoodTracker.objects.get(pk=record_id)
+    records = MoodTracker.objects.filter(username=user) # 유저의 모든 감정 일기 기록
+    sp_record = MoodTracker.objects.get(pk=record_id) # 요청받은 감정 일기 1개
+
+    
+
     item = {
         'records': records,
         'sp_record': sp_record,
     }
     return render(request, 'moodtracker/moodtracker_record.html', item)
+
+
+# 인식된 얼굴에 네모 박스 그리는 함수 작성
+def getRectangle(faceDictionary):
+    rect = faceDictionary['faceRectangle']
+    left = rect['left']
+    top = rect['top']
+    bottom = left + rect['height']
+    right = top + rect['width']
+    return ((left, top), (bottom, right))
+
 
 
 # 감정 일기 분석 화면으로 이동
@@ -164,8 +183,8 @@ def create_wordcloud(moodtrackers, user):
 
     wordcloud = WordCloud(font_path='moodtracker/static/fonts/AppleSDGothicNeoSB.ttf', background_color='white', stopwords=stopwords, width=500, height=500).generate_from_text(content_text)
     filename1 = 'media/%s_wc.png' % user
-    filename2 = '%s_wc.png' % user
-    wordcloud.to_file(filename1) # 변수로 바꿔야 함
+    filename2 = '%s_wc.png' % user 
+    wordcloud.to_file(filename1)
     '''
     plt.figure(figsize=(400,400)) #이미지 사이즈 지정
     plt.imshow(wordcloud)
@@ -174,7 +193,7 @@ def create_wordcloud(moodtrackers, user):
     '''
     wc = Wordcloud() # 워드클라우드 객체 하나 생성
     wc.username = user 
-    wc.wc_image = filename2 # 변수로 바꿔야 함
+    wc.wc_image = filename2 
     wc.save() # 데이터베이스에 저장
 
     mft1 = most_freq_text[0][0]
@@ -209,19 +228,72 @@ def use_model(content):
 
 # MoodTracker 일기 내용 저장 & 긍정부정 모델 돌려서 결과 같이 저장
 def create_record(request):
-    content = request.GET['content']
+    user = request.user
+
+    year = timezone.datetime.now().year
+    month = timezone.datetime.now().month
+    day = timezone.datetime.now().day
+
+    content = request.POST['content']
 
     mood_record = MoodTracker()
-    mood_record.username = request.user
+    mood_record.username = user
     mood_record.content = content
-    mood_record.mood = request.GET['mood'] 
+    mood_record.mood = request.POST['mood'] 
     mood_record.pub_date = timezone.datetime.now()
-    mood_record.pub_date_year = timezone.datetime.now().year
-    mood_record.pub_date_month = timezone.datetime.now().month
-    mood_record.pub_date_day = timezone.datetime.now().day
+    mood_record.pub_date_year = year
+    mood_record.pub_date_month = month
+    mood_record.pub_date_day = day
+
+    images = request.FILES['images']
     
+    emotion = {}
+
+    emotion = find_emotion(images, user, year, month, day) # 해당 감정 일기
+    emotion = emotion[0]
+    mood_record.anger = round(emotion['emotion']['anger']*100, 1)
+    mood_record.contempt = round(emotion['emotion']['contempt']*100, 1)
+    mood_record.disgust = round(emotion['emotion']['disgust']*100, 1)
+    mood_record.fear = round(emotion['emotion']['fear']*100, 1)
+    mood_record.happiness = round(emotion['emotion']['happiness']*100, 1)
+    mood_record.neutral = round(emotion['emotion']['neutral']*100, 1)
+    mood_record.sadness = round(emotion['emotion']['sadness']*100, 1)
+    mood_record.surprise = round(emotion['emotion']['surprise']*100, 1)
+    
+    filename2 = '%s_face_%s_%s_%s.png' % (user, year, month, day)
+
+    mood_record.images = filename2
+
     pos_neg = use_model(content)
     mood_record.pos_neg = pos_neg    
 
     mood_record.save()
     return redirect('/moodtracker/record/'+str(mood_record.id)) # '/moodtracker/' + +str(mood_record.id)
+
+def find_emotion(images, user, year, month, day):
+    KEY = '66b40727db3b42b2a07497598b032d19' # 자신의 Cognitive Services API KEY
+    CF.Key.set(KEY)
+
+    BASE_URL = 'https://eastus.api.cognitive.microsoft.com/face/v1.0/' # 자신의 지역에 해당하는 URL
+    CF.BaseUrl.set(BASE_URL)
+
+    img_url = images #'face_image.jpg' # 이미지 파일의 경로
+    faces = CF.face.detect(img_url,True,False,'emotion') # 중요!
+    # detect 함수는 4가지의 매개변수를 갖는다.
+    # 첫 번째 인자 : 이미지파일
+    # 두 번째 인자 : face_id의 반환 여부
+    # 세 번째 인자 : landmarks(눈,코,입 등의 위치)의 반환 여부
+    # 네 번째 인자 : 반환할 속성(연령,성별 등)
+    emotion = []
+    for face in faces:
+        emotion.append(face['faceAttributes']) # 터미널 창에 속성값들을 출력
+
+    img = Image.open(img_url) # img 변수에 이미지 파일을 넣어준다.
+    draw = ImageDraw.Draw(img)
+    for face in faces:
+        draw.rectangle(getRectangle(face), outline='red', width=2) # 인식된 얼굴들에 네모 박스 쳐주기
+    
+    filename1 = 'media/%s_face_%s_%s_%s.png' % (user, year, month, day)
+    img.save(filename1)
+
+    return emotion

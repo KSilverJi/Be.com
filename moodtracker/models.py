@@ -10,6 +10,16 @@ class MoodTracker(models.Model):
     pub_date_day = models.CharField(max_length=10, default=0)
     mood = models.CharField(max_length=15)
     pos_neg = models.IntegerField(default=0)
+    
+    images = models.ImageField(blank=True, upload_to="images", null=True)
+    anger = models.FloatField(default=0)
+    contempt = models.FloatField(default=0)
+    disgust = models.FloatField(default=0)
+    fear = models.FloatField(default=0)
+    happiness = models.FloatField(default=0)
+    neutral = models.FloatField(default=0)
+    sadness = models.FloatField(default=0)
+    surprise = models.FloatField(default=0)
     #timeout = models.IntegerField(default=0)
 
     def __str__(self):
