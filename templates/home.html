@@ -1,4 +1,6 @@
+{% load group_tag %}
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -238,15 +240,46 @@ a {
 {% endblock %}
 </head>
 
-
-
 <body style="padding-top:90px;">
+        
+    <!--선생님 화면(teacher group에 있을 때)-->
+    {% if request.user|has_group:"teacher" %} 
+    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: white; justify-content: space-between;">
+        <a class="navbar-brand mx-5 mb-0" href="{% url 'main' %}"><img src="{% static 'img/becom_logo.png' %}" width="140"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav ml-5 mr-5">
+            <li class="nav-item dropdown mx-1 btn " style="background-color: #ffffff;">
+                {% if user.is_active %}
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" style="font-family: Noto Sans KR;font-size: 16px;color: #000000;">
+                    <i class="fas fa-user"></i>&ensp;{% firstof user.get_short_name user.get_username %} 선생님 환영합니다!&ensp;</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'logout' %}">로그아웃</a>
+                    <a class="dropdown-item" href="{% url 'password_change' %}">비밀번호 변경</a>
+                </div>
+                {% else %}
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                    <i class="fas fa-user"></i>&ensp;로그인 하세요&ensp;</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'login' %}">로그인</a>
+                    <a class="dropdown-item" href="{% url 'register' %}">회원가입</a>
+                </div>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+    <p> 선생님만 볼 수 있지롱 </p>
+    </div>
+
+    <!--기본 화면(선생님 X)-->
+    {% else %}
     <nav class="navbar navbar-expand-lg fixed-top" style="background-color: white;">
         <a class="navbar-brand mx-5 mb-0" href="{% url 'main' %}"><img src="{% static 'img/becom_logo.png' %}" width="140"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item mx-1 btn">
@@ -501,6 +534,8 @@ a {
         </div>
     </div>
 
+{% endif %}
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -509,6 +544,7 @@ a {
     {% block extra-script %}{% endblock %}
 
 </body>
+
 </html>
 
 
