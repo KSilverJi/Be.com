@@ -3,6 +3,7 @@ from .models import Counsel
 
 import datetime
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 @login_required
 def therapy(request):
@@ -10,11 +11,12 @@ def therapy(request):
 
 @login_required
 def result(request):
-
     today = datetime.datetime.today()
 
     if request.method == "POST":
         counsel=Counsel()
+        counsel.username = User.objects.get(username=request.user.username)
+
         counsel.who = request.POST.get('who')
         counsel.how = request.POST.get('how')
         counsel.teacher = request.POST.get('teacher')

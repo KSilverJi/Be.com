@@ -1,4 +1,6 @@
+{% load group_tag %}
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -234,18 +236,139 @@ a {
     border-radius: 7px;
     background-color: #f99b0d;
 }
+
+/*선생님 화면 css*/
+.col1{
+    width: 50%;
+    height: 1000px;
+    float: left;
+}
+.col2{
+    width: 50%;
+    height: 1000px;
+    float: left;
+}
+
+.col-box{
+    background: #FFFFFF;
+    border: 0.5px solid #D1CCC6;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin-right: 24px;
+    margin-bottom: 48px;
+}
+.friends-list{
+    height: auto;
+    padding: 12px;
+    overflow: auto;
+}
+.friend-card{
+    width: 125px;
+    height: 170px;
+    margin: 12px;
+    padding: 6px;
+    float: left;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 10px;
+    text-align: center;
+}
+.counsel-card {
+    width: 600px;
+    height: 220px;
+}
+
+.student-list {
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    color: #504B47;
+    margin:24px;
+}
 </style>
 {% endblock %}
 </head>
 
-
 <body style="padding-top:90px;">
+        
+    <!--선생님 화면(teacher group에 있을 때)-->
+    {% if request.user|has_group:"teacher" %} 
+    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: white; justify-content: space-between;">
+        <a class="navbar-brand mx-5 mb-0" href="{% url 'main' %}"><img src="{% static 'img/becom_logo.png' %}" width="140"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav ml-5 mr-5">
+            <li class="nav-item dropdown mx-1 btn " style="background-color: #ffffff;">
+                {% if user.is_active %}
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" style="font-family: Noto Sans KR;font-size: 16px;color: #000000;">
+                    <i class="fas fa-user"></i>&ensp;{% firstof user.get_short_name user.get_username %} 선생님 환영합니다!&ensp;</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'logout' %}">로그아웃</a>
+                    <a class="dropdown-item" href="{% url 'password_change' %}">비밀번호 변경</a>
+                </div>
+                {% else %}
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                    <i class="fas fa-user"></i>&ensp;로그인 하세요&ensp;</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'login' %}">로그인</a>
+                    <a class="dropdown-item" href="{% url 'register' %}">회원가입</a>
+                </div>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
+    <div class="container" style="max-width: 95%;">
+        <!--상담신청 내역-->
+        <div class = "col1">
+            <div class = "col-box">
+                <div class = "student-list">상담 신청 내역</div>
+                <div class = "cousel-list">
+                {% for cousel_detail in counsel.all %}
+                <div class="counsel-card">
+                    <div style="font-size:14px; font-weight:500; line-height: 20px; margin-top:8px;">{{counsel_detail.username}}</div>
+                    <div style="height: 1px; background-color: #f99b0d; margin:5px;">{{counsel_detail.timepick}}</div>
+                    <div style="font-weight: normal; font-size:12px;">{{counsel_detail.datenum}}</div>
+                </div>
+                {% endfor%}
+                </div> 
+            </div>
+        </div>
+
+        <div class="col2"> <!--학생 목록-->
+            <div class="col-box">
+                <div class="student-list">반 학생들</div>
+                <div class="friends-list">
+                    {% for friend in class_friends.all %}
+                    <div class="friend-card">
+                        <a class="friend-card-a" href="{% url 'myprofile:detail' friend.id %}">
+                            <img src="{{friend.profile_image.url}}" width="80" height="80" style="border-radius:40px; border: 0.75px solid #C4C4C4;">
+                            <div style="font-size:14px; font-weight:500; line-height: 20px; margin-top:8px;">{{friend.username}}</div>
+                        </a>
+                        <div style="height: 1px; background-color: #f99b0d; margin:5px;"></div>
+                        <div style="font-weight: normal; font-size:12px;">{{friend.intro}}</div>
+                    </div>
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
+
+<<<<<<< HEAD
+<body style="padding-top:90px;">
+=======
+
+
+
+    <!--기본 화면(선생님 X)-->
+    {% else %}
+>>>>>>> 3131a772a104652e8c95518ff4178997d1b7355b
     <nav class="navbar navbar-expand-lg fixed-top" style="background-color: white;">
         <a class="navbar-brand mx-5 mb-0" href="{% url 'main' %}"><img src="{% static 'img/becom_logo.png' %}" width="140"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item mx-1 btn">
@@ -500,6 +623,8 @@ a {
         </div>
     </div>
 
+{% endif %}
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -508,6 +633,7 @@ a {
     {% block extra-script %}{% endblock %}
 
 </body>
+
 </html>
 
 
