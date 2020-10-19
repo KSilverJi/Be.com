@@ -2,13 +2,14 @@ from django.shortcuts import render, redirect
 from .models import Counsel
 
 import datetime
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-# Create your views here.
+@login_required
 def therapy(request):
     return render(request, 'counsel.html')
 
-
+@login_required
 def result(request):
     today = datetime.datetime.today()
 

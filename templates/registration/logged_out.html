@@ -1,19 +1,19 @@
-{% extends "base.html" %}
+{% extends "registration/base.html" %}
 
-{% block title %}logged_out.html{% endblock %}
+{% block title %}로그아웃{% endblock %}
 
 {% block content %}
 
-    <h1>Logged out</h1>
+    <h1>로그아웃되었습니다.</h1>
     <br>
 
     <div>
         <i class="fas fa-quote-left"></i>
-        <span class="h6">&ensp;Thanks for spending your quality time with this web site today.&ensp;</span>
+        <span class="h6">&ensp;이용해주셔서 감사합니다.&ensp;</span>
         <i class="fas fa-quote-right"></i>
     </div>
 
-    <p class="font-italic"><a href="{% url 'login' %}">Log in again</a></p>
+    <p class="font-italic"><a href="{% url 'login' %}">로그인하기</a></p>
 
 {% endblock %}
 

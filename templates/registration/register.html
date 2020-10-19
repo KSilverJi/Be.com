@@ -1,16 +1,17 @@
-{% extends "base.html" %}
+{% extends "registration/base.html" %}
 {% load widget_tweaks %}
 
-{% block title %}register.html{% endblock %}
+{% block title %}회원가입{% endblock %}
 
 {% block content %}
 
-    <h1>New User Registration</h1>
-    <p class="font-italic">Please enter your username and password twice.</p>
+    <h1>회원가입</h1>
+    <span class="font-italic">아이디와 패스워드를 입력해주세요.</span>
+    &nbsp;&nbsp;<span><a href="{% url 'login' %}">로그인하기</a></span>
 
     {% if form.errors %}
     <div class="alert alert-danger">
-        <div class="font-weight-bold">Wrong! Please correct the error(s) below.</div>
+        <div class="font-weight-bold">잘못 입력되었습니다. 아래를 확인해주세요.</div>
         {{ form.errors }}
     </div>
     {% endif %}
@@ -38,7 +39,7 @@
 
         <div class="form-group">
             <div class="offset-sm-3 col-sm-5">
-                <input type="submit" value="Register" class="btn btn-info"/>
+                <input type="submit" value="회원가입" class="btn btn-info"/>
             </div>
         </div>
 

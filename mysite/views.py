@@ -24,7 +24,9 @@ from wordcloud import STOPWORDS
 
 from moodtracker.views import pos_neg_percent, mood_num, create_wordcloud
 from myprofile.views import class_achievement
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def main(request):
     user = request.user
     profile = MyProfile.objects.get(username=user)
