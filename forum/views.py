@@ -7,6 +7,9 @@ from .forms import ForumUpdate
 from .models import MyProfile,MyClass
 from django.contrib.auth.models import User
 
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def forum_home(request):
     user = request.user   
     #print(user)  
@@ -28,6 +31,7 @@ def forum_home(request):
     }
     return render(request,'forum/forumhome.html', item)
 
+@login_required
 def detail(request, forum_id):
     user = request.user # 현재 로그인한 사용자
     forum_detail = get_object_or_404(Forum, pk=forum_id)
@@ -46,10 +50,11 @@ def detail(request, forum_id):
     }
     return render(request, 'forum/detail.html', item)
 
+@login_required
 def create(request):
-    
     return render(request, 'forum/create.html')
 
+@login_required
 def postcreate(request):
     user = request.user    
     my = MyProfile.objects.get(username=user)
@@ -69,6 +74,7 @@ def postcreate(request):
 
     return redirect('/forum/detail/' + str(forum.id))
 
+@login_required
 def update(request, forum_id):
     forum = Forum.objects.get(id=forum_id)
 
@@ -85,12 +91,13 @@ def update(request, forum_id):
  
         return render(request,'forum/update.html', {'form':form})
 
-
+@login_required
 def delete(request, forum_id):
     forum = Forum.objects.get(id=forum_id)
     forum.delete()
     return redirect('/')
 
+@login_required
 def new(request):
     full_text = request.GET['fulltext']
 
@@ -108,6 +115,7 @@ def new(request):
 
     return render(request, 'forum/new.html', {'fulltext': full_text, 'total': len(word_list), 'dictionary': word_dictionary.items()} )
 
+@login_required
 def search(request):
     forums = Forum.objects.all().order_by('-id')
 

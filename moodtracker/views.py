@@ -20,7 +20,10 @@ from io import BytesIO
 from PIL import Image, ImageDraw
 import cognitive_face as CF
 
+from django.contrib.auth.decorators import login_required
+
 # 작성된 감정 일기 보는 화면으로 이동
+@login_required
 def view_record(request, record_id):
     user = request.user
     records = MoodTracker.objects.filter(username=user) # 유저의 모든 감정 일기 기록
@@ -47,6 +50,7 @@ def getRectangle(faceDictionary):
 
 
 # 감정 일기 분석 화면으로 이동
+@login_required
 def analysis(request):
     user = request.user
     moodtrackers = MoodTracker.objects.filter(username=user) # 현재 사용자와 일치하는 정보만 불러온다
@@ -81,6 +85,7 @@ def analysis(request):
 
 
 # 감정 일기 쓰는 페이지로 이동
+@login_required
 def write_record(request):
     user = request.user
     records = MoodTracker.objects.filter(username=user)

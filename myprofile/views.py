@@ -4,7 +4,9 @@ from django.http import HttpResponse
 from .models import MyProfile, ProfilePhoto, MyClass
 from django.contrib.auth.models import User
 
-# Create your views here.
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def profile_home(request):
     user = request.user
     my = MyProfile.objects.get(username=user) # 현재 사용자의 프로필 정보를 불러온다.
@@ -40,6 +42,7 @@ def class_achievement(my_class): # user가 속한 학교/학년/반이 작성한
         class_level = 5 
     return a, class_score_text, class_level
 
+@login_required
 def profile_detail(request, profile_id):
     user = request.user # 현재 로그인한 사용자
     person = MyProfile.objects.get(pk=profile_id) # 보여줄 프로필의 주인

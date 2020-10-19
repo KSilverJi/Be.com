@@ -8,7 +8,9 @@ from .models import Mate, MatePhoto, MateQuest, MateMsg
 from myprofile.models import MyProfile
 from django.contrib.auth.models import User
 
-# Create your views here.
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def mate_home(request):
     user = request.user
     profile = MyProfile.objects.get(username=user)
@@ -47,6 +49,7 @@ def send_message(request):
 
     return redirect('/mate')
 
+@login_required
 def gallery(request):
     user = request.user
     profile = MyProfile.objects.get(username=user)
@@ -72,6 +75,7 @@ def upload(request):
     else:
         return render(request, 'mate/mate.html')
 
+@login_required
 def quest(request):
     user = request.user
     profile = MyProfile.objects.get(username=user)
