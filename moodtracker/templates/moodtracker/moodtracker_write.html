@@ -44,7 +44,7 @@
     </div>
     <div class="record">
         <div class="moodtracker-title">감정 일기 작성</div>
-        <div class="record-write">
+        <div class="record-write" style="float:left;">
             <div class="record-date">{{year}}년 {{month}}월 {{day}}일</div>
             <form action="{% url 'moodtracker:create' %}" enctype="multipart/form-data" method="POST">
                 {% csrf_token %}
@@ -81,6 +81,14 @@
                     <input type="submit" class="diary_submit_button" value="저장" name="submit"/>
                 </div>
             </form>
+        </div>
+        <div style="float:left; padding-top: 15px;">
+            <div style="margin-top: 120px; font-size: 14px; background-color:#FEF3E1; padding:10px; overflow:auto; width: 250px;">
+                작성된 감정일기는 다른 사용자에게 절대 공개되지 않으니 안심하세요!
+            </div>
+            <div style="margin-top: 185px; font-size: 14px; background-color:#FEF3E1; padding:10px; overflow:auto; width: 250px;">
+                얼굴이 나온 사진을 업로드하고 감정을 분석해보세요!
+            </div>
         </div>
     </div>
 </div>
