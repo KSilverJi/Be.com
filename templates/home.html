@@ -275,10 +275,18 @@ a {
     text-align: center;
 }
 .counsel-card {
-    width: 600px;
+    width: auto;
     height: 220px;
-}
+    border: 1px solid #DEDEDE;
+    box-sizing: border-box;
+    border-radius: 15px;
+    margin: 20px;
+    display: flex;
+    background: rgba(249, 155, 13, 0.05);
 
+    font-family: Noto Sans KR;
+    font-style: normal;
+}
 .student-list {
     font-family: Noto Sans KR;
     font-style: normal;
@@ -286,6 +294,40 @@ a {
     font-size: 18px;
     color: #504B47;
     margin:24px;
+}
+
+.counsel-index {
+    width:40%;
+    margin: 16px;
+}
+.counsel-content {
+    background: rgba(249, 155, 13, 0.05);
+    border-radius: 15px;
+    width: 60%;
+    padding: 23px;
+}
+.how-box{
+    background: rgba(0, 210, 201, 0.2);
+    border-radius: 10px;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    align-items: center;
+    width: 94px;
+    height: 32px;
+    display: inline-block;
+}
+.about-box{
+    background: rgba(255, 123, 85, 0.2);
+    border-radius: 10px;
+    font-size: 12px;
+    line-height: 167%;
+    display: inline-grid;
+    align-items: center;
+    text-align: center;
+    color: #FF7B55;
+    width: 70px;
+    height: 30px;
 }
 </style>
 {% endblock %}
@@ -326,13 +368,31 @@ a {
             <div class = "col-box">
                 <div class = "student-list">상담 신청 내역</div>
                 <div class = "cousel-list">
-                {% for cousel_detail in counsel.all %}
-                <div class="counsel-card">
-                    <div style="font-size:14px; font-weight:500; line-height: 20px; margin-top:8px;">{{counsel_detail.username}}</div>
-                    <div style="height: 1px; background-color: #f99b0d; margin:5px;">{{counsel_detail.timepick}}</div>
-                    <div style="font-weight: normal; font-size:12px;">{{counsel_detail.datenum}}</div>
-                </div>
-                {% endfor%}
+                {% for counsel_detail in counsel.all %}
+                    <div class="counsel-card">
+                        <div class="counsel-index">
+                            <span style="font-weight: bold; font-size: 16px;">{{counsel_detail.datenum}} {{counsel_detail.timepick}}</span>
+                            <br>
+                            <span style="font-weight: bold; font-size: 15px; line-height: 17px; color: #5B5652;">{{counsel_detail.username}}</span>
+                            <span style="font-size: 12px; line-height: 16px; color: #5B5652;">2학년 6반</span>
+                            <br>
+                            <span style="font-size: 12px; line-height: 32px; color: #504B47;">상담방법</span>
+                            <br>
+                            <div class="how-box">{{counsel_detail.how}}</div>
+                            <br>
+                            <span style="font-size: 12px; line-height: 32px; color: #504B47;">상담주제</span>
+                            <br>
+                            {% for about_item in counsel_detail.about.split %}
+                                <div class="about-box">{{about_item}}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="counsel-content">
+                            <div style="color: #5B5652; font-weight: bold; font-size: 12px;">상세내용</div>
+                        <div style="margin-top: 15px; font-family: Inter; font-style: normal; font-weight: normal; font-size: 12px; line-height: 20px;">
+                        {{counsel_detail.detailtext}}</div>
+                    </div>
+                    </div>
+                {% endfor %}
                 </div> 
             </div>
         </div>
@@ -354,6 +414,9 @@ a {
             </div>
         </div>
     </div>
+
+
+
 
     <!--기본 화면(선생님 X)-->
     {% else %}
