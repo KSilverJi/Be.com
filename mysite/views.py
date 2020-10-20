@@ -116,9 +116,6 @@ def find_max(happy, sad, calm, angry, soso):
     elif maxValue <= soso :
         maxValue = soso
         text = '그저 그래'
-    else :
-        maxValue = 0
-        text = '오류'
     return text
 
 #--- Homepage
