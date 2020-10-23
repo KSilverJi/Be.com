@@ -1,0 +1,212 @@
+{% load group_tag %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Be.com{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+   
+{% block extra-style %}
+<style>
+    @import url('https://fonts.googleapis.com/css?family=notosanskr.css');
+
+.nav-link.becom-nav.link-active{
+  border-bottom: 3px solid #f99b0d;
+  box-shadow: inset 0 -4px 0 #f99b0d;
+  pointer-events: none;
+  cursor: default;
+}
+.nav-link.becom-nav{
+  font-family: Noto Sans KR; 
+  font-style: normal; 
+  font-weight: 500; 
+  font-size:20px; 
+  color: #504B47;
+}
+a {
+    text-decoration: none;
+    color: black;
+  }
+  a:hover{
+    text-decoration: none;
+    color: #f99b0d;
+  }
+  
+.container{
+    font-family: Noto Sans KR;
+}
+
+/* 공통 */
+.home-title{
+    color: #5B5652;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 26px;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+</style>
+{% endblock %}
+
+</head>
+
+<body style="padding-top:90px;">
+
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: white; justify-content: space-between;">
+        <a class="navbar-brand mx-5 mb-0" href="{% url 'main' %}"><img src="{% static 'img/becom_logo.png' %}" width="140"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav ml-5 mr-5">
+            <li class="nav-item dropdown mx-1 btn " style="background-color: #ffffff;">
+                {% if user.is_active %}
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" style="font-family: Noto Sans KR;font-size: 16px;color: #000000;">
+                    <i class="fas fa-user"></i>&ensp;{% firstof user.get_short_name user.get_username %} 선생님 환영합니다!&ensp;</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'logout' %}">로그아웃</a>
+                    <a class="dropdown-item" href="{% url 'password_change' %}">비밀번호 변경</a>
+                </div>
+                {% else %}
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                    <i class="fas fa-user"></i>&ensp;로그인 하세요&ensp;</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'login' %}">로그인</a>
+                    <a class="dropdown-item" href="{% url 'register' %}">회원가입</a>
+                </div>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
+<div class="container">
+    <div class="row">
+        <div class="recent-mood col-xs-5 col-md-6">
+            <div class="moodtracker-title">{{student.username}}님의 요즘 기분</div>
+            <div style="font-weight: 500; padding:12px;">{{recent_mood}}</div>
+            <div style="font-size:14px; font-weight: 500; padding: 5px 12px; color: #807C77;"><i>{{saying}}</i></div>
+            <a href="{% url 'therapy:therapy' %}" class="therapy-button">
+                <div class="therapy-button-wrap">
+                    상담 신청하기
+                </div>
+            </a>
+        </div>
+        <div class="pos-neg-percent col-xs-3 col-md-5">
+            <div class="moodtracker-title">일기 속 감정 분석</div>
+            <div class="pos-neg-graph">
+                <canvas id="pos_neg_barChart" width="300"></canvas>
+                <script>
+                    var ctx = document.getElementById('pos_neg_barChart');
+                    var pos_neg_barChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['', ''],
+                            datasets: [{
+                                label: '',
+                                data: ["{{neg_per}}", "{{pos_per}}"],
+                                backgroundColor: [
+                                    'rgba(255, 123, 85, 1)',
+                                    'rgba(57, 215, 208, 1)'
+                                ],
+                            }]
+                        },
+                        options: {
+                            legend:{
+                                display: false
+                            },
+                            responsive: false
+                        }
+                    });
+                </script>
+            </div>
+            <div class="pos-neg-description">
+                <div style="width:24px;height:24px; background:#39D7D0; border-radius:5px; float:left; margin-right:5px;"></div><div style="float:left; margin-right:15px;">긍정</div>
+                <div style="width:24px;height:24px; background:#FF7B55; border-radius:5px; float:left; margin-right:5px;"></div><div style="float:left; margin-right:15px;">부정</div>
+            </div>
+        </div>
+    </div>
+    <!--
+    <div class="row">
+        <div class="my_mind col-xs-5 col-md-12">
+            <h3>나의 감정분석</h3>
+            <p>나의 감정 분석은 어떻게 나올지</p>
+        </div>
+    </div>
+    -->
+    <div class="row">
+        <div class="mood-freqent col-md-6">
+            <div class="moodtracker-title">어떤 감정을 자주 느꼈을까요?</div>
+            <div class="mood-frequent-img">
+                <div class="mood-img"><img src="{% static 'img/happy_emoji.png' %}" height=50></div>
+                <div class="mood-img"><img src="{% static 'img/sad_emoji.png' %}" height=50></div>
+                <div class="mood-img"><img src="{% static 'img/calm_emoji.png' %}" height=50></div>
+                <div class="mood-img"><img src="{% static 'img/angry_emoji.png' %}" height=50></div>
+                <div class="mood-img"><img src="{% static 'img/soso_emoji.png' %}" height=50></div>
+            </div>
+            <div>
+                <canvas id="mood_barChart" height="300"></canvas>
+                <script>
+                    var ctx = document.getElementById('mood_barChart');
+                    var mood_barChart = new Chart(ctx, {
+                        type: 'horizontalBar',
+                        data: {
+                            labels: ['', '', '', '', ''],
+                            datasets: [{
+                                label: '',
+                                data: ["{{happy}}", "{{sad}}", "{{calm}}", "{{angry}}", "{{soso}}"],
+                                backgroundColor: [
+                                    'rgba(57, 215, 208, 1)',
+                                    'rgba(13, 107, 249, 1)',
+                                    'rgba(249, 155, 13, 1)',
+                                    'rgba(255, 123, 85, 1)',
+                                    'rgba(211, 145, 255, 1)'
+                                ]
+                            }]
+                        },
+                        options: {
+                            legend:{
+                                display: false 
+                            },
+                            responsive: false, 
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        beginAtZero: true,
+                                        stepSize: 1
+                                    },
+                                    gridLines: {
+                                        color: "rgba(0, 0, 0, 0)",
+                                    }
+                                }],
+                                yAxes: [{
+                                    gridLines: {
+                                        color: "rgba(0, 0, 0, 0)",
+                                    }   
+                                }]
+                            }
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+        <div class="word-cloud col-md-5">
+            <div class="moodtracker-title">{{student.username}}님이 자주 쓰는 단어</div>
+            <img src="{{wc.wc_image.url}}" height="270" style="float:left;">
+            <div style="width:130px;float:right; text-align:center; font-size:18px; color:#5B5652; font-weight:500;">
+                가장 자주<br>사용한 단어는<br>
+                <span style="font-size:24px; color:black;">"{{mft1}}",<br>"{{mft2}}",<br>"{{mft3}}"</span><br>
+                이에요!
+            </div>
+        </div>
+    </div>
+    <div class="row"></div>
+</div>

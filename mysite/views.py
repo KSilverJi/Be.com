@@ -52,7 +52,7 @@ def main(request):
     #page = request.GET.get('page')
     #posts = paginator.get_page(page)
 
-    counsel = Counsel.objects.all()
+    counsel = Counsel.objects.filter(teacher=user) #담당선생님이 현재 유저(선생님)와 같아야 한다.
 
     item={
         'profile' : profile,
@@ -117,6 +117,17 @@ def find_max(happy, sad, calm, angry, soso):
         maxValue = soso
         text = '그저 그래'
     return text
+
+@login_required
+def student_analysis(request, pk):
+    class_friends = MyProfile.objects.filter(school=person.school, school_year=person.school_year, school_class=person.school_class).exclude(username=user) # 같은 학교, 학년, 반인 친구들 프로필 정보
+    student = MoodTracker.objects.filter(id=pk) #무드트레커 모델에서 클릭한 학생의 pk에 맞게 받아옴
+
+    item = {
+        'student' : student,
+        'class_friends' : class_friends,
+    }
+    return render(request, 'student_detail.html', item)
 
 #--- Homepage
 class HomeView(TemplateView):
