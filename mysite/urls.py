@@ -37,7 +37,7 @@ urlpatterns = [
     path('accounts/register/done/', UserCreateDoneTV.as_view(), name='register_done'),
 
     path('', views.main, name='main'),
-    path('student_analysis/<int:pk>', views.student_analysis, name='student_analysis'),
+    path('student_analysis/<int:person_id>', views.student_analysis, name='student_analysis'),
     
     path('blog/', include('blog.urls')),
     path('forum/',include('forum.urls')),

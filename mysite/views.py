@@ -119,14 +119,38 @@ def find_max(happy, sad, calm, angry, soso):
     return text
 
 @login_required
-def student_analysis(request, pk):
-    class_friends = MyProfile.objects.filter(school=person.school, school_year=person.school_year, school_class=person.school_class).exclude(username=user) # 같은 학교, 학년, 반인 친구들 프로필 정보
-    student = MoodTracker.objects.filter(id=pk) #무드트레커 모델에서 클릭한 학생의 pk에 맞게 받아옴
+def student_analysis(request, person_id):
+    user = User.objects.get(id=person_id)
+    moodtrackers = MoodTracker.objects.filter(username_id=person_id)
+
+    pos_per, neg_per = pos_neg_percent(moodtrackers) # 긍정 부정 개수 구하기 (날짜 조건 걸어야 함)
+    happy, sad, calm, angry, soso = mood_num(moodtrackers) # 감정 개수 구하기
+    maxMood = find_max(happy, sad, calm, angry, soso)
+    mft1, mft2, mft3 = create_wordcloud(moodtrackers, user) # 빈출 높은 단어 가져온다.
+    wc = Wordcloud.objects.get(username=user) # 워드 클라우드 객체 가져오기
+    year = timezone.datetime.now().year
+    month = timezone.datetime.now().month
+    day = timezone.datetime.now().day
 
     item = {
-        'student' : student,
-        'class_friends' : class_friends,
+        'moodtrackers' : moodtrackers,
+        'user': user,
+        'happy' : happy,
+        'sad' : sad,
+        'calm' : calm,
+        'angry' : angry,
+        'soso' : soso,
+        'wc' : wc,
+        'moodtrackers' : moodtrackers,
+        'year' : year,
+        'month' : month,
+        'day' : day,
+        'mft1' : mft1,
+        'mft2' : mft2,
+        'mft3' : mft3,
+        'maxMood' : maxMood,
     }
+
     return render(request, 'student_detail.html', item)
 
 #--- Homepage
