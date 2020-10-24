@@ -26,6 +26,8 @@ from moodtracker.views import pos_neg_percent, mood_num, create_wordcloud
 from myprofile.views import class_achievement
 from django.contrib.auth.decorators import login_required
 
+from django.contrib.auth.models import User
+
 @login_required
 def main(request):
     user = request.user
