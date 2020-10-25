@@ -76,8 +76,8 @@ def analysis(request):
         'mft2' : mft2,
         'mft3' : mft3,
         #'rec_pos_per' : rec_pos_per,
-        'recent_mood' : recent_mood,
         #'rec_neg_per' : rec_neg_per,
+        'recent_mood' : recent_mood,
         'saying' : saying,
     }
 
@@ -110,8 +110,17 @@ def pos_neg_percent(moodtrackers):
             neg+=1
         else:
             pos+=1
-    pos_per = round(pos/(pos+neg)*100, 1) # XX.X% 반환
-    neg_per = round(neg/(pos+neg)*100, 1) # XX.X% 반환
+    
+    if pos == 0:
+        pos_per = 0 # 0일 경우 zero division error 방지
+    else:
+        pos_per = round(pos/(pos+neg)*100, 1) # XX.X% 반환
+    
+    if neg == 0:
+        neg_per = 0 # 0일 경우 zero division error 방지
+    else:
+        neg_per = round(neg/(pos+neg)*100, 1) # XX.X% 반환
+
     return pos_per, neg_per
 
 # Analysis - 최근 10개 일기의 긍정, 부정 비율
@@ -123,7 +132,12 @@ def recent_pos_neg(user):
             pos+=1
         else:
             neg+=1
-    pos_per = round(pos/(pos+neg)*100, 1) # XX.X% 반환
+    
+    if pos == 0:
+        pos_per = 0 # 0일 경우 zero division error 방지
+    else:
+        pos_per = round(pos/(pos+neg)*100, 1) # XX.X% 반환
+    
     return pos_per
 
 # Analysis - 요즘 기분 text, 명언 text
