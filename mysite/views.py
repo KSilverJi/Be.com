@@ -22,7 +22,7 @@ import nltk
 from wordcloud import WordCloud
 from wordcloud import STOPWORDS
 
-from moodtracker.views import pos_neg_percent, mood_num, create_wordcloud
+from moodtracker.views import pos_neg_percent, mood_num, create_wordcloud, recent_mood_text, recent_pos_neg
 from myprofile.views import class_achievement
 from django.contrib.auth.decorators import login_required
 
@@ -125,18 +125,16 @@ def student_analysis(request, person_id):
     user = User.objects.get(id=person_id)
     moodtrackers = MoodTracker.objects.filter(username_id=person_id)
 
+    rec_pos_per = recent_pos_neg(user)
+    recent_mood, saying = recent_mood_text(rec_pos_per, user) # 요즘 기분 text, 명언 text
     pos_per, neg_per = pos_neg_percent(moodtrackers) # 긍정 부정 개수 구하기 (날짜 조건 걸어야 함)
     happy, sad, calm, angry, soso = mood_num(moodtrackers) # 감정 개수 구하기
-    maxMood = find_max(happy, sad, calm, angry, soso)
-    mft1, mft2, mft3 = create_wordcloud(moodtrackers, user) # 빈출 높은 단어 가져온다.
+    mft1, mft2, mft3 = create_wordcloud(moodtrackers, user) # 워드 클라우드 생성, 빈출 높은 단어 가져온다.
     wc = Wordcloud.objects.get(username=user) # 워드 클라우드 객체 가져오기
-    year = timezone.datetime.now().year
-    month = timezone.datetime.now().month
-    day = timezone.datetime.now().day
 
     item = {
-        'moodtrackers' : moodtrackers,
-        'user': user,
+        'pos_per' : pos_per,
+        'neg_per' : neg_per,
         'happy' : happy,
         'sad' : sad,
         'calm' : calm,
@@ -144,13 +142,14 @@ def student_analysis(request, person_id):
         'soso' : soso,
         'wc' : wc,
         'moodtrackers' : moodtrackers,
-        'year' : year,
-        'month' : month,
-        'day' : day,
+        'user' : user,
         'mft1' : mft1,
         'mft2' : mft2,
         'mft3' : mft3,
-        'maxMood' : maxMood,
+        #'rec_pos_per' : rec_pos_per,
+        'recent_mood' : recent_mood,
+        #'rec_neg_per' : rec_neg_per,
+        'saying' : saying,
     }
 
     return render(request, 'student_detail.html', item)
