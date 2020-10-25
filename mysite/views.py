@@ -28,6 +28,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.models import User
 
+
 @login_required
 def main(request):
     user = request.user
@@ -39,8 +40,9 @@ def main(request):
     happy, sad, calm, angry, soso = mood_num(moodtrackers) # 감정 개수 구하기
     maxMood = find_max(happy, sad, calm, angry, soso)
     mft1, mft2, mft3 = create_wordcloud(moodtrackers, user) # 빈출 높은 단어 가져온다.
-    wc = Wordcloud.objects.get(username=user) # 워드 클라우드 객체 가져오기
-    mate = Mate.objects.get(Q(mate1=profile) | Q(mate2=profile))
+    wc = list_wordcloud(user)
+    
+    mate = list_mate(profile)
     year = timezone.datetime.now().year
     month = timezone.datetime.now().month
     day = timezone.datetime.now().day
@@ -82,6 +84,18 @@ def main(request):
     }
     return render(request, 'home.html', item)
 
+def list_wordcloud(user):
+    try:
+        return Wordcloud.objects.get(username=user) # 워드 클라우드 객체 가져오기
+    except Wordcloud.DoesNotExist:
+        return None
+
+def list_mate(profile):
+    try:
+        return Mate.objects.get(Q(mate1=profile) | Q(mate2=profile))
+    except Mate.DoesNotExist:
+        return None
+
 def create_wordcloud(moodtrackers, user):  
     content_text = ''
     for record in moodtrackers:
@@ -98,9 +112,16 @@ def create_wordcloud(moodtrackers, user):
     ko = nltk.Text(tokens_ko)
     most_freq_text = ko.vocab().most_common(3)
 
-    mft1 = most_freq_text[0][0]
-    mft2 = most_freq_text[1][0]
-    mft3 = most_freq_text[2][0] 
+    if not most_freq_text:
+        mft1 = '아직 없어요'
+        mft2 = '감정일기를' 
+        mft3 = '작성해주세요'
+    else:
+        mft1 = most_freq_text[0][0]
+        mft2 = most_freq_text[1][0]
+        mft3 = most_freq_text[2][0] 
+
+
     return mft1, mft2, mft3
     
 def find_max(happy, sad, calm, angry, soso):
@@ -118,6 +139,10 @@ def find_max(happy, sad, calm, angry, soso):
     elif maxValue <= soso :
         maxValue = soso
         text = '그저 그래'
+    
+    if maxValue==0:
+        text = '아직 없어요'
+
     return text
 
 @login_required

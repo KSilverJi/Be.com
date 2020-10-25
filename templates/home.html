@@ -485,7 +485,8 @@ a {
                     {% endfor %}-->
                     <div class="record-write">
                         <div class="record-date">{{year}}년 {{month}}월 {{day}}일</div>
-                        <form action="{% url 'moodtracker:create' %}">
+                        <form action="{% url 'moodtracker:create' %}" enctype="multipart/form-data" method="POST">
+                            {% csrf_token %}
                             <div class="mood_input">
                                 <label>
                                     <input type="radio" name="mood" value="happy" checked="checked"><!--<label for="happy">&nbsp;</label>-->
@@ -511,6 +512,9 @@ a {
                             <div class="content_input">
                                 <textarea placeholder=" 감정 일기 작성" onkeyup="autoTextarea(this,100)" id="text" name="content" rows="3" style="word-wrap: break-word; resize: none; width: 300px; "></textarea>  
                                 <br>
+                            </div>
+                            <div>
+                                <input type="file" name="images" accept="image/*">
                             </div>
                             <div class="diary_submit_button_wrap">
                                 <input type="submit" class="diary_submit_button" value="저장" name="submit"/>
