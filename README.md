@@ -1,6 +1,9 @@
 # Be.com
 포스트코로나시대 교육 플랫폼
 
+## 개발환경
+Python Django Javascript
+
 
 ![비컴 최종발표자료-01](https://user-images.githubusercontent.com/37402252/110214380-a70b1a80-7ee7-11eb-9214-e7f6c792397c.jpg)
 ![비컴 최종발표자료-02](https://user-images.githubusercontent.com/37402252/110214381-a83c4780-7ee7-11eb-9ef0-beb51b4e4c7c.jpg)
